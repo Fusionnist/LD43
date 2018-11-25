@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Entities>
+  <Entity type="BLANK" name="BLANK">
+    <Textures name="tex">
+      //placeholder texture
+      <Texture name="BLANK" id="entity1" sheetName="sheet1"></Texture>
+    </Textures>
+    <Body type="rect" density="1" static="false" fixedR="true" free="false" collisionCategory="1" collidesWith="2">
+      <Center x="16" y="16"></Center>
+      <Body x="0" y="0" w="32" h="32"></Body>
+    </Body>
+  </Entity>
+</Entities>

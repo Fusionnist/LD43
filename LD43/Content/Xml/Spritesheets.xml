@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Spritesheets>
+  <Spritesheet name="BLANK" source="BLANK">
+    <Texture name="BLANK" id="BLANK">
+      <Frameset amt="2" x="16" y="0" w="32" h="32" cx="16" cy="16" delay="0.2"></Frameset>
+    </Texture>
+  </Spritesheet>
+</Spritesheets>
