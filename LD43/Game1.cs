@@ -167,8 +167,8 @@ namespace LD43
                 new DrawerCollection(
                     new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "church"),
-                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "church"),
-                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "church") },
+                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "church"),
+                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "church") },
                     "church"),
                     new PositionManager(new Vector2(278, 75)),
                     new List<Property>(),
@@ -180,8 +180,8 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "farm"),
-                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "field"),
-                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "field") },
+                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "farm"),
+                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "farm") },
                    "church"),
                    new PositionManager(new Vector2(43, 132)),
                    new List<Property>(),
@@ -193,8 +193,8 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "mine"),
-                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "mine"),
-                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "mine") },
+                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "mine"),
+                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "mine") },
                    "mine"),
                    new PositionManager(new Vector2(100, 50)),
                    new List<Property>(),
@@ -206,8 +206,8 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "forest"),
-                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
-                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
+                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "forest"),
+                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "forest") },
                    "forest"),
                    new PositionManager(new Vector2(0, 123)),
                    new List<Property>(),
@@ -219,8 +219,8 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "city"),
-                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
-                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
+                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "city"),
+                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "city") },
                    "city"),
                    new PositionManager(new Vector2(217, 124)),
                    new List<Property>(),
@@ -232,8 +232,8 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "bridge"),
-                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
-                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
+                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "bridge"),
+                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "bridge") },
                    "bridge"),
                    new PositionManager(new Vector2(117, 158)),
                    new List<Property>(),
