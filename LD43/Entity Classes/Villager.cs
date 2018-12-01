@@ -30,7 +30,7 @@ namespace LD43
             if(state == VillagerState.walkingLeft)
             {
                 posman.mov.X = -1;
-                if(posman.pos.X < 32)
+                if(posman.pos.X < -32)
                     state = VillagerState.walkingBack;
             }
             if (state == VillagerState.walkingBack)

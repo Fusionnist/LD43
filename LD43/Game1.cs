@@ -434,7 +434,7 @@ namespace LD43
 
                         case GameSubState.Pause: //GAME-MAIN
                             currentUI = pauseUI;
-                            currentBG = pauseBG;
+                            
                             break;
                     }
                     break;
@@ -686,6 +686,10 @@ namespace LD43
             scenes.SelectScene("menu");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
+            if(currentSubState == GameSubState.Pause)
+            {
+                pauseBG.Draw(spriteBatch, Vector2.Zero);
+            }
             //DRAW
             if (tooltipText != "")
                 tooltipTex.Draw(spriteBatch, tooltipPos);
