@@ -132,6 +132,7 @@
     <Content Include="Content\Placeholder\city.png" />
     <Content Include="Content\Placeholder\food.png" />
     <Content Include="Content\Placeholder\mine.png" />
+    <Content Include="Content\Placeholder\moreBuildings.png" />
     <Content Include="Content\Placeholder\phbgs.png" />
     <Content Include="Content\Placeholder\placeholderPause.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

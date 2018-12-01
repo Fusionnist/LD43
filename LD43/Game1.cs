@@ -170,7 +170,7 @@ namespace LD43
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "church"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "church") },
                     "church"),
-                    new PositionManager(new Vector2(200, 100)),
+                    new PositionManager(new Vector2(278, 75)),
                     new List<Property>(),
                     5,
                     "church",
@@ -183,7 +183,7 @@ namespace LD43
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "field"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "field") },
                    "church"),
-                   new PositionManager(new Vector2(100, 100)),
+                   new PositionManager(new Vector2(43, 132)),
                    new List<Property>(),
                    5,
                    "field",
@@ -195,7 +195,7 @@ namespace LD43
                         SpriteSheetCollection.GetTex("idle", "buildingStuff", "mine"),
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "mine"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "mine") },
-                   "church"),
+                   "mine"),
                    new PositionManager(new Vector2(100, 50)),
                    new List<Property>(),
                    5,
@@ -205,20 +205,46 @@ namespace LD43
             Building forest = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "forest"),
+                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "forest"),
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
-                   "church"),
-                   new PositionManager(new Vector2(250, 100)),
+                   "forest"),
+                   new PositionManager(new Vector2(0, 123)),
                    new List<Property>(),
                    5,
                    "forest",
                    "this is a building"
                );
+            Building city = new Building(
+               new DrawerCollection(
+                   new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "city"),
+                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
+                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
+                   "city"),
+                   new PositionManager(new Vector2(217, 124)),
+                   new List<Property>(),
+                   5,
+                   "city",
+                   "this is a building"
+               );
+            Building bridge = new Building(
+               new DrawerCollection(
+                   new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "bridge"),
+                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
+                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
+                   "bridge"),
+                   new PositionManager(new Vector2(117, 158)),
+                   new List<Property>(),
+                   5,
+                   "bridge",
+                   "this is a building"
+               );
 
             EntityCollection.Flush();
             EntityCollection.CreateGroup("building", "buildings");
-            EntityCollection.AddEntities(new List<Entity>() { church, field, mine, forest });
+            EntityCollection.AddEntities(new List<Entity>() { church, field, mine, forest, city, bridge });
 
             SoundManager.PlaySong("main");
         } //create whatever's needed to start a new game
@@ -509,9 +535,10 @@ namespace LD43
             UpdateHoveredLocation();
 
             changeTooltipText = true;
+            bool x = false;
             foreach (Building building in EntityCollection.GetGroup("buildings"))
             {
-                if (new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+                if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked())
                     {
@@ -537,6 +564,7 @@ namespace LD43
                         }
                         building.isHovered = true;
                     }
+                    x = true;
                 }
                 else
                     building.isHovered = false;
