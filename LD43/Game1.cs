@@ -38,9 +38,7 @@ namespace LD43
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
         TextureDrawer cursorTex, currentBG;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
-        TextureDrawer cursorTex, currentBG, tooltipTex;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, tooltipTex;
 
         FontDrawer fdrawer;
 
