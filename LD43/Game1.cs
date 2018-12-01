@@ -13,7 +13,8 @@ using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
 
 using System;
-using System.Threading;using System.Collections.Generic;
+using System.Threading;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 
@@ -48,11 +49,12 @@ namespace LD43
         bool showData;
 
         //Data
-        Point wDims, vDims, mousePos;
+        Point wDims, vDims;
         GameState currentState, nextState;
         GameSubState currentSubState, nextSubState;
-        bool switchedState, changeCursorText;
-        string tooltipText; // if changing this in UpdateGame, set "changeCursorText" to false
+        bool switchedState, changeTooltipText; // set this to false if you want to have a tooltip triggered in UpdateGame
+        string tooltipText;
+        Vector2 tooltipPos;
         
         public Game1()
         {
@@ -99,7 +101,8 @@ namespace LD43
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
-            changeCursorText = true;
+            changeTooltipText = true;
+            tooltipPos = new Vector2(vDims.X - 96, 0);
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -153,6 +156,25 @@ namespace LD43
         void CreateNewGame()
         {
             GameData.Initialize();
+
+            Building church = new Building(
+                new DrawerCollection(
+                    new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "church"),
+                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "church"),
+                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "church") },
+                    "church"),
+                    new PositionManager(new Vector2(200, 100)),
+                    new List<Property>(),
+                    5,
+                    "church",
+                    "this is a building"
+                );
+
+            EntityCollection.Flush();
+            EntityCollection.CreateGroup("building", "buildings");
+            EntityCollection.AddEntity(church);
+
         } //create whatever's needed to start a new game
         void CreateUI()
         {
@@ -259,7 +281,7 @@ namespace LD43
 
         protected override void UnloadContent()
         {
-
+            Content.Unload();
         }
 
         protected override void Update(GameTime gameTime)
@@ -428,6 +450,22 @@ namespace LD43
         void UpdateGame(float es_)
         {
             UpdateHoveredLocation();
+
+            changeTooltipText = true;
+            foreach (Building building in EntityCollection.GetGroup("buildings"))
+            {
+                if (new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+                {
+                    if (building.hoveredText != null)
+                    {
+                        tooltipText = building.hoveredText; changeTooltipText = false;
+                    }
+                    building.isHovered = true;
+                }
+                else
+                    building.isHovered = false;
+                building.Update(es_);
+            }
         } //update the movey things
         void UpdateHoveredLocation()
         {
@@ -445,7 +483,7 @@ namespace LD43
                 HandleButtonTooltips();
             else
             {
-                if (changeCursorText)
+                if (changeTooltipText)
                 { tooltipText = ""; }
             }
         } //update the clicky things
@@ -552,6 +590,9 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
+            foreach (var building in EntityCollection.GetGroup("buildings"))
+                building.Draw(spriteBatch);
+
             spriteBatch.End();
         } //draw to game scene
         void DrawMenu() 
@@ -561,9 +602,9 @@ namespace LD43
 
             //DRAW
             if (tooltipText != "")
-                tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
+                tooltipTex.Draw(spriteBatch, tooltipPos);
             currentUI.Draw(spriteBatch);
-            fdrawer.DrawText("font", tooltipText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
+            fdrawer.DrawText("font", tooltipText, new Rectangle((int)tooltipPos.X + 5, (int)tooltipPos.Y + 5, 86, 54), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
