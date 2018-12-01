@@ -105,6 +105,33 @@
     <Texture name="clicked" id="church">
       <Frameset amt="1" x="96" y="112" w="48" h="48" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
+    <Texture name="idle" id="field">
+      <Frameset amt="1" x="0" y="48" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="field">
+      <Frameset amt="1" x="0" y="80" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="field">
+      <Frameset amt="1" x="32" y="80" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="mine">
+      <Frameset amt="1" x="64" y="80" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="mine">
+      <Frameset amt="1" x="96" y="80" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="mine">
+      <Frameset amt="1" x="128" y="80" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="forest">
+      <Frameset amt="1" x="64" y="48" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="forest">
+      <Frameset amt="1" x="96" y="48" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="forest">
+      <Frameset amt="1" x="128" y="48" w="32" h="32" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
   </Spritesheet>
 
   <Spritesheet name="PlaceholderBGs" source="Placeholder/phbgs">
