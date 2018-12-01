@@ -49,6 +49,7 @@ namespace LD43
         bool transitioning, shouldReset;
         bool transitionIN; //as opposed to transition OUT
         bool showData;
+        Random rng;
 
         //Data
         Point wDims, vDims;
@@ -93,6 +94,8 @@ namespace LD43
             PhysicsManager.SetupDebugview(GraphicsDevice, Content);
 
             cursor = new CursorManager();
+
+            rng = new Random();
 
             fdrawer = new FontDrawer();
             List<TextureDrawer> font = new List<TextureDrawer>();
@@ -244,6 +247,7 @@ namespace LD43
 
             EntityCollection.Flush();
             EntityCollection.CreateGroup("building", "buildings");
+            EntityCollection.CreateGroup("cunt", "villagers");
             EntityCollection.AddEntities(new List<Entity>() { church, field, mine, forest, city, bridge });
 
             SoundManager.PlaySong("main");
@@ -554,6 +558,15 @@ namespace LD43
                             case "forest":
                                 CreateVillager("lumberjack");
                                 break;
+                            case "city":
+                                if (EntityCollection.GetGroup("villagers").Count > 2)
+                                {
+                                    int r = rng.Next(EntityCollection.GetGroup("villagers").Count);
+                                    EntityCollection.GetGroup("villagers")[r].exists = false;
+                                    r = rng.Next(EntityCollection.GetGroup("villagers").Count);
+                                    EntityCollection.GetGroup("villagers")[r].exists = false;
+                                }
+                                break;
                         }
                     }
                     else
@@ -568,6 +581,11 @@ namespace LD43
                 }
                 else
                     building.isHovered = false;
+                if (building.Name == "city" && building.release)
+                {
+                    building.release = false;
+                    GameData.citizens += 3;
+                }
             }
         } //update the movey things
         void UpdateHoveredLocation()
