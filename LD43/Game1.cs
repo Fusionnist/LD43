@@ -39,6 +39,8 @@ namespace LD43
 
         TextureDrawer cursorTex, currentBG;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
+        TextureDrawer cursorTex, currentBG, tooltipTex;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
 
         FontDrawer fdrawer;
 
@@ -48,10 +50,11 @@ namespace LD43
         bool showData;
 
         //Data
-        Point wDims, vDims;
+        Point wDims, vDims, mousePos;
         GameState currentState, nextState;
         GameSubState currentSubState, nextSubState;
-        bool switchedState;
+        bool switchedState, changeCursorText;
+        string cursorText;
         
         public Game1()
         {
@@ -97,6 +100,7 @@ namespace LD43
                 font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
+            cursorText = "ass";
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -139,6 +143,7 @@ namespace LD43
             SpriteSheetCollection.LoadFromElementCollection(Content);
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
+            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
             icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
 
             LoadBGs();
@@ -436,13 +441,28 @@ namespace LD43
         void UpdateMenu(float es_)
         {
             currentUI.UpdateWithMouse(es_, cursor, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
+
+            if (currentUI.HoveredButton != null)
+                HandleButtonTooltips();
+            else
+                changeCursorText = true;
         } //update the clicky things
+
+        void HandleButtonTooltips()
+        {
+            switch(currentUI.HoveredButton.Command)
+            {
+                default:
+                    cursorText = "this is a button";
+                    break;
+            }
+        }
         void ToggleState(GameState newState_, GameSubState newSubState_)
         {
             nextState = newState_;
             nextSubState = newSubState_;
 
-            if(nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game))
+            if (nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game))
             {
                 SetTransition();
             }
@@ -450,7 +470,7 @@ namespace LD43
             {
                 switchedState = true;
             }
-        } //set new nextstate and data based on old and new state
+        } //set new nextstate and data based on old and new state           
         void SetTransition()
         {
             transitioning = true;
@@ -459,7 +479,7 @@ namespace LD43
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue); 
             DrawScenes();
             DrawSwitch();
             //draw to buffer
@@ -487,10 +507,12 @@ namespace LD43
                     {
                         case GameSubState.Game:
                             scenes.DrawScene(spriteBatch, "menu");
+                            scenes.DrawScene(spriteBatch, "game");
                             break;
 
                         case GameSubState.Pause:
                             scenes.DrawScene(spriteBatch, "menu");
+                            scenes.DrawScene(spriteBatch, "game");
                             break;
                     }
                     break;
@@ -536,8 +558,9 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
+            tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
             currentUI.Draw(spriteBatch);
-            fdrawer.DrawText("font", "ur mom gay", new Rectangle(0, 0, 20, 20), spriteBatch);
+            fdrawer.DrawText("font", cursorText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
