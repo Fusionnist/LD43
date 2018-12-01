@@ -43,10 +43,11 @@ namespace LD43
         FontDrawer fdrawer;
 
         //Data
-        Point wDims, vDims;
+        Point wDims, vDims, mousePos;
         GameState currentState, nextState;
         GameSubState currentSubState, nextSubState;
-        bool switchedState;
+        bool switchedState, changeCursorText;
+        string cursorText;
         
         public Game1()
         {
@@ -88,6 +89,7 @@ namespace LD43
                 font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
+            cursorText = "ass";
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -367,7 +369,22 @@ namespace LD43
         void UpdateMenu(float es_)
         {
             currentUI.UpdateWithMouse(es_, cursor, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
+
+            if (currentUI.HoveredButton != null)
+                HandleButtonTooltips();
+            else
+                changeCursorText = true;
         } //update the clicky things
+
+        void HandleButtonTooltips()
+        {
+            switch(currentUI.HoveredButton.Command)
+            {
+                default:
+                    cursorText = "this is a button";
+                    break;
+            }
+        }
         void ToggleState(GameState newState_)
         {
             nextState = newState_;
@@ -409,10 +426,12 @@ namespace LD43
                     {
                         case GameSubState.Game:
                             scenes.DrawScene(spriteBatch, "menu");
+                            scenes.DrawScene(spriteBatch, "game");
                             break;
 
                         case GameSubState.Pause:
                             scenes.DrawScene(spriteBatch, "menu");
+                            scenes.DrawScene(spriteBatch, "game");
                             break;
                     }
                     break;
@@ -457,8 +476,8 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
+            fdrawer.DrawText("font", cursorText, new Rectangle(new Point(0, 0), new Point(40, 180)), spriteBatch);
             currentUI.Draw(spriteBatch);
-            fdrawer.DrawText("font", "ur mom gay", new Rectangle(0, 0, 20, 20), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
