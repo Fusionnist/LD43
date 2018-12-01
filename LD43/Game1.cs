@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
@@ -148,11 +150,14 @@ namespace LD43
             LoadBGs();
             CreateUI();
 
+            SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "main");
+
             CreateNewGame();
         }
         void CreateNewGame()
         {
             GameData.Initialize();
+            SoundManager.PlaySong("main");
         } //create whatever's needed to start a new game
         void CreateUI()
         {

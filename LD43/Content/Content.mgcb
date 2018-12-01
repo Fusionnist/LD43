@@ -49,18 +49,6 @@
 /processorParam:TextureFormat=Color
 /build:Placeholder/placeholderPause.png
 
-#begin Placeholder/shittyfont.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Placeholder/shittyfont.png
-
 #begin Placeholder/phbgs.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -73,6 +61,12 @@
 /processorParam:TextureFormat=Color
 /build:Placeholder/phbgs.png
 
+#begin Audio/PrototypeMusic3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/PrototypeMusic3.mp3
+
 #begin Placeholder/tooltips.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,4 +78,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Placeholder/tooltips.png
+
+#begin Placeholder/shittyfont.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Placeholder/shittyfont.png
 
