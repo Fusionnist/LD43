@@ -153,7 +153,8 @@ namespace LD43
             LoadBGs();
             CreateUI();
 
-            SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "main");
+            SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "game");
+            SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
 
             CreateNewGame();
         }
@@ -332,6 +333,7 @@ namespace LD43
         {
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            SoundManager.Update(es);
             UpdateState(es);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -422,6 +424,7 @@ namespace LD43
             switch (currentState)
             {
                 case GameState.Game:
+                    SoundManager.QueueSong("game", true);
                     switch (currentSubState)
                     {
                         case GameSubState.Game: //GAME-GAME
@@ -436,6 +439,7 @@ namespace LD43
                     }
                     break;
                 case GameState.Menu:
+                    SoundManager.PlaySong("main");
                     switch (currentSubState)
                     {
                         case GameSubState.Main: //MENU-MAIN
@@ -561,7 +565,7 @@ namespace LD43
                 EntityCollection.AddEntity(new Villager(
                new DrawerCollection(new List<TextureDrawer>()
                {
-                   SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "player")
+                   SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "villager")
                }, "texes"),
                new PositionManager(new Vector2(360, 100)),
                new List<Property>(),
@@ -723,7 +727,7 @@ namespace LD43
         void DrawData()
         {
             fdrawer.DrawText("font", "health: " + GameData.villageHealth,new Rectangle(16,16,100,100),spriteBatch);
-            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 16, 100, 100), spriteBatch);
+            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 32, 100, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {

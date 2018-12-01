@@ -121,6 +121,7 @@
     <Folder Include="Content\Sprites\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\MenuTrack.mp3" />
     <Content Include="Content\Audio\PrototypeMusic3.mp3" />
     <Content Include="Content\Placeholder\buttons.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
