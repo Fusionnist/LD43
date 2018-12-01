@@ -121,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Placeholder\buttons.png" />
+    <Content Include="Content\Placeholder\placeholderPause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Placeholder\placeholderSheet.png" />
     <Content Include="Content\Xml\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
