@@ -197,7 +197,7 @@ namespace LD43
                    new PositionManager(new Vector2(100, 50)),
                    new List<Property>(),
                    5,
-                   "field",
+                   "mine",
                    "this is a building"
                );
             Building forest = new Building(
@@ -210,7 +210,7 @@ namespace LD43
                    new PositionManager(new Vector2(250, 100)),
                    new List<Property>(),
                    5,
-                   "field",
+                   "forest",
                    "this is a building"
                );
 
