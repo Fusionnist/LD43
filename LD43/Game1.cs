@@ -38,8 +38,6 @@ namespace LD43
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
         TextureDrawer cursorTex, currentBG, tooltipTex;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
-        TextureDrawer cursorTex, currentBG;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
 
         FontDrawer fdrawer;
@@ -434,7 +432,7 @@ namespace LD43
         {
             showData = false;
             Rectangle showDataBounds = new Rectangle(0, 0, 16, 32);
-            if (showDataBounds.Contains(scenes.CurrentScene.ToVirtualPos(cursor.RawPos())){
+            if (showDataBounds.Contains(scenes.CurrentScene.ToVirtualPos(cursor.RawPos()))){
                 showData = true;
             }
         }
