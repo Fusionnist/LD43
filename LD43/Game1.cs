@@ -37,8 +37,8 @@ namespace LD43
         UISystem currentUI;
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
-        TextureDrawer cursorTex, currentBG;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, tooltipTex;
+        TextureDrawer cursorTex, currentBG, tooltipTex;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
 
         FontDrawer fdrawer;
 
@@ -142,8 +142,8 @@ namespace LD43
             SpriteSheetCollection.LoadFromElementCollection(Content);
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
-            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
             icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
+            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
 
             LoadBGs();
             CreateUI();
@@ -397,7 +397,6 @@ namespace LD43
                     switch (currentSubState)
                     {
                         case GameSubState.Game: //GAME-GAME
-                            UpdateGame(es_);
                             UpdateMenu(es_);
                             UpdateGame(es_);
                             break;
@@ -428,7 +427,6 @@ namespace LD43
         } //update things based on game state
         void UpdateGame(float es_)
         {
-            changeCursorText = true;
             UpdateHoveredLocation();
         } //update the movey things
         void UpdateHoveredLocation()
