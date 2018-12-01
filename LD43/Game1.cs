@@ -333,6 +333,7 @@ namespace LD43
         {
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            SoundManager.Update(es);
             UpdateState(es);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -423,7 +424,7 @@ namespace LD43
             switch (currentState)
             {
                 case GameState.Game:
-                    SoundManager.PlaySong("game");
+                    SoundManager.QueueSong("game", true);
                     switch (currentSubState)
                     {
                         case GameSubState.Game: //GAME-GAME
@@ -564,7 +565,7 @@ namespace LD43
                 EntityCollection.AddEntity(new Villager(
                new DrawerCollection(new List<TextureDrawer>()
                {
-                   SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "player")
+                   SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "villager")
                }, "texes"),
                new PositionManager(new Vector2(360, 100)),
                new List<Property>(),
