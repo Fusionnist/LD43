@@ -92,6 +92,15 @@
     <Texture name="pressed" id="menu">
       <Frameset amt="1" x="128" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
+    <Texture name="idle" id="church">
+      <Frameset amt="1" x="0" y="112" w="48" h="48" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="church">
+      <Frameset amt="1" x="48" y="112" w="48" h="48" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="church">
+      <Frameset amt="1" x="96" y="112" w="48" h="48" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
   </Spritesheet>
 
   <Spritesheet name="PlaceholderBGs" source="Placeholder/phbgs">

@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Building.cs" />
     <Compile Include="Entity Classes\Villager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -145,6 +146,7 @@
     </Content>
     <Content Include="Content\Xml\Spritesheets.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

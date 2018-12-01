@@ -13,7 +13,7 @@ namespace LD43
     public class CustomEntityBuilder : EntityBuilder
     {
         public CustomEntityBuilder() { }
-        public override Entity CreateEntity(string type_, DrawerCollection dc_, PositionManager pos_, List<Property> props_, string name_)
+        public override Entity CreateEntity(string type_, DrawerCollection dc_ = null, PositionManager pos_ = null, List<Property> props_ = null, string name_ = null)
         {
             //Create the default entity
             if (type_ == "entity")
