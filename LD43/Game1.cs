@@ -439,7 +439,7 @@ namespace LD43
                     }
                     break;
                 case GameState.Menu:
-                    SoundManager.PlaySong("main");
+                    SoundManager.QueueSong("main", true);
                     switch (currentSubState)
                     {
                         case GameSubState.Main: //MENU-MAIN
