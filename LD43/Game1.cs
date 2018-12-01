@@ -474,7 +474,6 @@ namespace LD43
 
                         case GameSubState.Pause: //GAME-MAIN
                             UpdateMenu(es_);
-                            UpdateGame(es_);
                             break;
                     }
                     break;
@@ -638,8 +637,8 @@ namespace LD43
                             break;
 
                         case GameSubState.Pause:
-                            scenes.DrawScene(spriteBatch, "menu");
                             scenes.DrawScene(spriteBatch, "game");
+                            scenes.DrawScene(spriteBatch, "menu");
                             break;
                     }
                     break;
