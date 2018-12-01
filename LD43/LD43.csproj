@@ -116,12 +116,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Audio\" />
     <Folder Include="Content\Screens\" />
     <Folder Include="Content\Sprites\" />
     <Folder Include="Entity Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\PrototypeMusic3.mp3" />
     <Content Include="Content\Placeholder\buttons.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
