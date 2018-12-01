@@ -496,6 +496,24 @@ namespace LD43
                 { tooltipText = ""; }
             }
         } //update the clicky things
+        void CreateVillager(string type_)
+        {
+            if(GameData.citizens > 0)
+            {
+                GameData.citizens--;
+
+                EntityCollection.AddEntity(new Villager(
+               new DrawerCollection(new List<TextureDrawer>()
+               {
+
+               }, "texes"),
+               new PositionManager(new Vector2(360, 100)),
+               new List<Property>(),
+               "cunt",
+               type_
+               ));
+            }
+        }
 
         void HandleButtonTooltips()
         {
@@ -649,6 +667,7 @@ namespace LD43
         void DrawData()
         {
             fdrawer.DrawText("font", "health: " + GameData.villageHealth,new Rectangle(16,16,100,100),spriteBatch);
+            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 16, 100, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {

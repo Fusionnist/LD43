@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="Entity Classes\Villager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,7 +119,6 @@
   <ItemGroup>
     <Folder Include="Content\Screens\" />
     <Folder Include="Content\Sprites\" />
-    <Folder Include="Entity Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Audio\PrototypeMusic3.mp3" />

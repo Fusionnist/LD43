@@ -11,6 +11,7 @@ namespace LD43
         public static int miners, lumberjacks, priests, farmers, citizens;
         public static int ores, wood, godpower, food;
         public static int godAnger, villageHealth;
+        public static bool pitOpen;
 
         public static void Initialize()
         {
