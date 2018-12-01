@@ -458,6 +458,7 @@ namespace LD43
 
             //DRAW
             currentUI.Draw(spriteBatch);
+            fdrawer.DrawText("font", "ur mom gay", new Rectangle(0, 0, 20, 20), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
