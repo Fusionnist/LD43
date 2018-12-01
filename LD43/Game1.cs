@@ -37,8 +37,10 @@ namespace LD43
         UISystem currentUI;
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
+        TextureDrawer cursorTex, currentBG, tooltipTex;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
         TextureDrawer cursorTex, currentBG;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, tooltipTex;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
 
         FontDrawer fdrawer;
 
@@ -98,8 +100,7 @@ namespace LD43
                 font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
-            cursorText = "";
-            changeCursorText = true;
+            cursorText = "ass";
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -142,8 +143,8 @@ namespace LD43
             SpriteSheetCollection.LoadFromElementCollection(Content);
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
-            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
             icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
+            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
 
             LoadBGs();
             CreateUI();
@@ -397,7 +398,6 @@ namespace LD43
                     switch (currentSubState)
                     {
                         case GameSubState.Game: //GAME-GAME
-                            UpdateGame(es_);
                             UpdateMenu(es_);
                             UpdateGame(es_);
                             break;
@@ -428,7 +428,6 @@ namespace LD43
         } //update things based on game state
         void UpdateGame(float es_)
         {
-            changeCursorText = true;
             UpdateHoveredLocation();
         } //update the movey things
         void UpdateHoveredLocation()
@@ -446,10 +445,7 @@ namespace LD43
             if (currentUI.HoveredButton != null)
                 HandleButtonTooltips();
             else
-            {
-                if (changeCursorText)
-                { cursorText = ""; }
-            }
+                changeCursorText = true;
         } //update the clicky things
 
         void HandleButtonTooltips()
@@ -562,8 +558,7 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            if (cursorText != "")
-                tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
+            tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
             currentUI.Draw(spriteBatch);
             fdrawer.DrawText("font", cursorText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
 
