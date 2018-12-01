@@ -174,10 +174,49 @@ namespace LD43
                     "church",
                     "this is a building"
                 );
+            Building field = new Building(
+               new DrawerCollection(
+                   new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "field"),
+                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "field"),
+                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "field") },
+                   "church"),
+                   new PositionManager(new Vector2(100, 100)),
+                   new List<Property>(),
+                   5,
+                   "field",
+                   "this is a building"
+               );
+            Building mine = new Building(
+               new DrawerCollection(
+                   new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "mine"),
+                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "mine"),
+                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "mine") },
+                   "church"),
+                   new PositionManager(new Vector2(100, 50)),
+                   new List<Property>(),
+                   5,
+                   "field",
+                   "this is a building"
+               );
+            Building forest = new Building(
+               new DrawerCollection(
+                   new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "forest"),
+                        SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "forest"),
+                        SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "forest") },
+                   "church"),
+                   new PositionManager(new Vector2(250, 100)),
+                   new List<Property>(),
+                   5,
+                   "field",
+                   "this is a building"
+               );
 
             EntityCollection.Flush();
             EntityCollection.CreateGroup("building", "buildings");
-            EntityCollection.AddEntity(church);
+            EntityCollection.AddEntities(new List<Entity>() { church, field, mine, forest });
 
             SoundManager.PlaySong("main");
         } //create whatever's needed to start a new game
@@ -465,7 +504,21 @@ namespace LD43
                 if (new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked())
+                    {
                         building.Click();
+                        switch (building.Name)
+                        {
+                            case "field":
+                                CreateVillager("farmer");
+                                break;
+                            case "mine":
+                                CreateVillager("miner");
+                                break;
+                            case "forest":
+                                CreateVillager("lumberjack");
+                                break;
+                        }
+                    }
                     else
                     {
                         if (building.hoveredText != null)
@@ -620,8 +673,8 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            foreach (var building in EntityCollection.GetGroup("buildings"))
-                building.Draw(spriteBatch);
+            foreach (var ent in EntityCollection.GetAllEnts())
+                ent.Draw(spriteBatch);
 
             spriteBatch.End();
         } //draw to game scene
