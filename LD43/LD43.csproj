@@ -112,12 +112,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Audio\" />
-    <Folder Include="Content\Placeholder\" />
     <Folder Include="Content\Screens\" />
     <Folder Include="Content\Sprites\" />
     <Folder Include="Entity Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Placeholder\placeholderPause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Xml\Entities.xml" />
     <Content Include="Content\Xml\Registry.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
