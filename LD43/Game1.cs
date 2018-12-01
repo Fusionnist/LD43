@@ -166,7 +166,7 @@ namespace LD43
             Building church = new Building(
                 new DrawerCollection(
                     new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "church"),
+                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "church"),
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "church"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "church") },
                     "church"),
@@ -179,7 +179,7 @@ namespace LD43
             Building field = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "field"),
+                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "farm"),
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "field"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "field") },
                    "church"),
@@ -192,7 +192,7 @@ namespace LD43
             Building mine = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "PlaceholderSheet", "mine"),
+                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "mine"),
                         SpriteSheetCollection.GetTex("hovered", "PlaceholderSheet", "mine"),
                         SpriteSheetCollection.GetTex("clicked", "PlaceholderSheet", "mine") },
                    "church"),

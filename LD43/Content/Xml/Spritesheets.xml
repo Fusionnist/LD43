@@ -153,5 +153,25 @@
     </Texture>
 
   </Spritesheet>
+  <Spritesheet name="buildingStuff" source="Placeholder/buildingStuff">
+
+    <Texture name="idle" id="mine">
+      <Frameset amt="1" x="0" y="0" w="41" h="37" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="farm">
+      <Frameset amt="1" x="0" y="38" w="86" h="28" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="bridge">
+      <Frameset amt="1" x="0" y="66" w="97" h="22" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="city">
+      <Frameset amt="1" x="0" y="90" w="92" h="33" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="church">
+      <Frameset amt="1" x="0" y="125" w="27" h="38" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+
+  </Spritesheet>
+  
   
 </Spritesheets>
