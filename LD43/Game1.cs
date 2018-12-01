@@ -45,7 +45,7 @@ namespace LD43
 
         FontDrawer fdrawer;
 
-        MonoGame.FZT.Assets.Timer transitionTimer;
+        MonoGame.FZT.Assets.Timer transitionTimer, gameTick;
         bool transitioning, shouldReset;
         bool transitionIN; //as opposed to transition OUT
         bool showData;
@@ -86,6 +86,7 @@ namespace LD43
             CreateScenes();
 
             transitionTimer = new MonoGame.FZT.Assets.Timer(1f);
+            gameTick = new MonoGame.FZT.Assets.Timer(12f);
 
             PhysicsManager.CreateWorld();
             PhysicsManager.SetUnitRatio(64);
@@ -498,6 +499,12 @@ namespace LD43
         void UpdateGame(float es_)
         {
             EntityCollection.UpdateAll(es_);
+            gameTick.Update(es_);
+            if (gameTick.Complete())
+            {
+                GameData.Tick();
+                gameTick.Reset();
+            }
             
             UpdateHoveredLocation();
 
@@ -729,8 +736,12 @@ namespace LD43
         } //draw to overlay scene
         void DrawData()
         {
-            fdrawer.DrawText("font", "health: " + GameData.villageHealth,new Rectangle(16,16,100,100),spriteBatch);
-            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 32, 100, 100), spriteBatch);
+            fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(16,16,100,100),spriteBatch);
+            fdrawer.DrawText("font", "anger: " + GameData.food, new Rectangle(16, 32, 100, 100), spriteBatch);
+
+            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 48, 100, 100), spriteBatch);
+            fdrawer.DrawText("font", "wood: " + GameData.wood, new Rectangle(16, 64, 100, 100), spriteBatch);
+            fdrawer.DrawText("font", "ores: " + GameData.ores, new Rectangle(16, 80, 100, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {

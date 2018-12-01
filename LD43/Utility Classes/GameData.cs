@@ -21,5 +21,10 @@ namespace LD43
             godAnger = 0;
             villageHealth = 100;
         }
+
+        public static void Tick()
+        {
+
+        }
     }
 }

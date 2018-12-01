@@ -52,9 +52,9 @@ namespace LD43
             if(type == "farmer")
                 GameData.food++;
             if (type == "miner")
-                GameData.wood++;
-            if (type == "lumberjack")
                 GameData.ores++;
+            if (type == "lumberjack")
+                GameData.wood++;
         }
 
         void CheckDeath()
