@@ -454,6 +454,7 @@ namespace LD43
         } //update things based on game state
         void UpdateGame(float es_)
         {
+            EntityCollection.UpdateAll(es_);
             UpdateHoveredLocation();
 
             changeTooltipText = true;

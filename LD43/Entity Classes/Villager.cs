@@ -15,7 +15,7 @@ namespace LD43
     public class Villager : Entity
     {
         VillagerState state;
-        public Villager(DrawerCollection textures_, PositionManager pos_, List<Property> properties_, string name_, string type_) : base(textures_, pos_, properties_, name_ type_)
+        public Villager(DrawerCollection textures_, PositionManager pos_, List<Property> properties_, string name_, string type_) : base(textures_, pos_, properties_, name_, type_)
         {
             state = VillagerState.walkingLeft;
         }
