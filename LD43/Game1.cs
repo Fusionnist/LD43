@@ -20,7 +20,7 @@ using System.Xml.Linq;
 namespace LD43
 {
     enum GameState { Game, Menu }
-    enum GameSubState { Game, Main }
+    enum GameSubState { Game, Main, End, Pause, Tutorial }
 
     public class Game1 : Game
     {
@@ -29,9 +29,16 @@ namespace LD43
         SpriteBatch spriteBatch;
         SceneCollection scenes;
         CustomEntityBuilder eBuilder;
+        CursorManager cursor;
 
         //Objects
         InputProfile ipp;
+
+        UISystem currentUI;
+        UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
+
+        TextureDrawer cursorTex, currentBG;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
 
         //Data
         Point wDims, vDims;
@@ -47,7 +54,7 @@ namespace LD43
             Content.RootDirectory = "Content";
 
             wDims = new Point(1920 / 3 * 2, 1080 / 3 * 2);
-            vDims = new Point(640, 360);
+            vDims = new Point(320, 180);
 
             //set dat up
             graphics.PreferredBackBufferWidth = wDims.X;
@@ -61,9 +68,16 @@ namespace LD43
             currentState = GameState.Menu;
             currentSubState = GameSubState.Main;
 
+            CreateInputProfile();
+            CreateScenes();
+
             PhysicsManager.CreateWorld();
             PhysicsManager.SetUnitRatio(64);
             PhysicsManager.SetupDebugview(GraphicsDevice, Content);
+
+            cursor = new CursorManager();
+
+            currentUI = mainUI;
         }
         void CreateScenes()
         {
@@ -104,6 +118,104 @@ namespace LD43
 
             ElementCollection.ReadDocument(XDocument.Load("Content/Xml/Registry.xml"));
             SpriteSheetCollection.LoadFromElementCollection(Content);
+
+            cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
+
+
+            CreateUI();
+        }
+        void CreateUI()
+        {
+            //NOTE: CREATE BUTTON VARIANTS
+            mainUI = new UISystem(new List<Button>()
+            {
+                new Button("startGame", new Rectangle(100,100,32,16), 
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                new Button("tutorial", new Rectangle(100,100,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                )
+            }
+            );
+
+            endgameUI = new UISystem(new List<Button>()
+            {
+                new Button("mainMenu", new Rectangle(100,0,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                new Button("restartGame", new Rectangle(100,32,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                  new Button("exitGame", new Rectangle(100,64,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+            }
+            );
+
+            tutorialUI = new UISystem(new List<Button>()
+            {
+                new Button("startGame", new Rectangle(100,100,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                 new Button("mainMenu", new Rectangle(100,0,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                )
+            }
+           );
+
+            pauseUI = new UISystem(new List<Button>()
+            {
+                new Button("resumeGame", new Rectangle(100,0,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                 new Button("endGame", new Rectangle(100,32,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                  new Button("exitGame", new Rectangle(100,64,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                   new Button("mainMenu", new Rectangle(100,96,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                ),
+                 new Button("restartGame", new Rectangle(100,128,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                )
+            }
+           );
+
+            gameUI = new UISystem(new List<Button>()
+            {
+                new Button("pauseGame", new Rectangle(100,0,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                )
+            }
+           );
         }
 
         protected override void UnloadContent()
@@ -113,12 +225,70 @@ namespace LD43
 
         protected override void Update(GameTime gameTime)
         {
+            UpdateState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             ipp.Update(Keyboard.GetState(), GamePad.GetState(0));
+            cursor.Update();
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
             UpdateSwitch(es);
+            ReadCommandQueue();
             base.Update(gameTime);
+        }
+        void ReadCommandQueue()
+        {
+            if (currentUI.IssuedCommand("startGame"))
+            {
+                ToggleState(GameState.Game);
+                ToggleSubState(GameSubState.Game);
+
+                currentUI = gameUI;
+            }
+
+            if (currentUI.IssuedCommand("endGame"))
+            {
+                ToggleState(GameState.Menu);
+                ToggleSubState(GameSubState.End);
+
+                currentUI = endgameUI;
+            }
+
+            if (currentUI.IssuedCommand("restartGame"))
+            {
+                ToggleState(GameState.Game);
+                ToggleSubState(GameSubState.Game);
+
+                currentUI = gameUI;
+            }
+
+            if (currentUI.IssuedCommand("mainMenu"))
+            {
+                ToggleState(GameState.Menu);
+                ToggleSubState(GameSubState.Main);
+
+                currentUI = mainUI;
+            }
+
+            if (currentUI.IssuedCommand("pauseGame"))
+            {
+                ToggleState(GameState.Game);
+                ToggleSubState(GameSubState.Pause);
+
+                currentUI = pauseUI;
+            }
+
+            if (currentUI.IssuedCommand("tutorial"))
+            {
+                ToggleState(GameState.Menu);
+                ToggleSubState(GameSubState.Tutorial);
+
+                currentUI = tutorialUI;
+            }
+
+            if (currentUI.IssuedCommand("exitGame"))
+            {
+                Exit();
+            }
         }
         void UpdateState()
         {
@@ -136,19 +306,27 @@ namespace LD43
                     switch (currentSubState)
                     {
                         case GameSubState.Game: //GAME-GAME
+                            UpdateMenu(es_);
                             break;
 
-                        case GameSubState.Main: //GAME-MAIN
+                        case GameSubState.Pause: //GAME-MAIN
+                            UpdateMenu(es_);
                             break;
                     }
                     break;
                 case GameState.Menu:
                     switch (currentSubState)
                     {
-                        case GameSubState.Game: //MENU-GAME
+                        case GameSubState.Main: //MENU-MAIN
+                            UpdateMenu(es_);
                             break;
 
-                        case GameSubState.Main: //MENU-MAIN
+                        case GameSubState.Tutorial: //MENU-TUT
+                            UpdateMenu(es_);
+                            break;
+
+                        case GameSubState.End: //MENU-MAIN
+                            UpdateMenu(es_);
                             break;
                     }
                     break;
@@ -160,48 +338,76 @@ namespace LD43
         } //update the movey things
         void UpdateMenu(float es_)
         {
-
+            currentUI.UpdateWithMouse(es_, cursor, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
         } //update the clicky things
         void ToggleState(GameState newState_)
         {
-
+            nextState = newState_;
+            switchedState = true;
         } //set new nextstate and data based on old and new state
         void ToggleSubState(GameSubState newSubState_)
         {
-
+            nextSubState = newSubState_;
+            switchedState = true;
         } //set new nextsubstate and data based on old and new sub state
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             DrawScenes();
+            DrawSwitch();
+            //draw to buffer
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            GraphicsDevice.SetRenderTarget(null);
+
+            scenes.DrawScene(spriteBatch, "base");
+
+            spriteBatch.End();
             base.Draw(gameTime);
         } //draw main scene to null target
         void DrawSwitch()
         {
+            //draw BG
+            scenes.SetupScene(spriteBatch, GraphicsDevice, "base");
+            if(currentBG != null)
+            {
+                currentBG.Draw(spriteBatch, Vector2.Zero);
+            }
+
             switch (currentState)
             {
                 case GameState.Game:
                     switch (currentSubState)
                     {
                         case GameSubState.Game:
+                            scenes.DrawScene(spriteBatch, "menu");
                             break;
 
-                        case GameSubState.Main:
+                        case GameSubState.Pause:
+                            scenes.DrawScene(spriteBatch, "menu");
                             break;
                     }
                     break;
                 case GameState.Menu:
                     switch (currentSubState)
                     {
-                        case GameSubState.Game:
+                        case GameSubState.Tutorial:
+                            scenes.DrawScene(spriteBatch, "menu");
+                            break;
+
+                        case GameSubState.End:
+                            scenes.DrawScene(spriteBatch, "menu");
                             break;
 
                         case GameSubState.Main:
+                            scenes.DrawScene(spriteBatch, "menu");
                             break;
                     }
                     break;
             }
+            cursorTex.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
+            spriteBatch.End();
+
         } //draw sub scenes to main scene based on states
         void DrawScenes() 
         {
@@ -215,7 +421,6 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-
             spriteBatch.End();
         } //draw to game scene
         void DrawMenu() 
@@ -224,6 +429,7 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
+            currentUI.Draw(spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene

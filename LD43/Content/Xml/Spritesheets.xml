@@ -1,8 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Spritesheets>
-  <Spritesheet name="BLANK" source="BLANK">
-    <Texture name="BLANK" id="BLANK">
-      <Frameset amt="2" x="16" y="0" w="32" h="32" cx="16" cy="16" delay="0.2"></Frameset>
+  
+  <Spritesheet name="PlaceholderSheet" source="Placeholder/placeholderSheet">
+    <Texture name="static" id="button">
+      <Frameset amt="1" x="0" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="button">
+      <Frameset amt="1" x="0" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="button">
+      <Frameset amt="1" x="0" y="32" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="cursor">
+      <Frameset amt="1" x="32" y="0" w="16" h="16" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
   </Spritesheet>
 </Spritesheets>
