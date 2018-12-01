@@ -95,7 +95,7 @@ namespace LD43
 
             fdrawer = new FontDrawer();
             List<TextureDrawer> font = new List<TextureDrawer>();
-            string junk = "abcdefghijklmnopqrstuvwxyz.,!?'";
+            string junk = "abcdefghijklmnopqrstuvwxyz.,!?'0123456789";
             Texture2D tex = Content.Load<Texture2D>("Placeholder/shittyfont");
             for (int i = 0; i < 31; i++)
             {
