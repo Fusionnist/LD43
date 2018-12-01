@@ -40,6 +40,8 @@ namespace LD43
         TextureDrawer cursorTex, currentBG;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
 
+        FontDrawer fdrawer;
+
         //Data
         Point wDims, vDims;
         GameState currentState, nextState;
@@ -76,6 +78,16 @@ namespace LD43
             PhysicsManager.SetupDebugview(GraphicsDevice, Content);
 
             cursor = new CursorManager();
+
+            fdrawer = new FontDrawer();
+            List<TextureDrawer> font = new List<TextureDrawer>();
+            string junk = "abcdefghijklmnopqrstuvwxyz.,!?'";
+            Texture2D tex = Content.Load<Texture2D>("Placeholder/shittyfont");
+            for (int i = 0; i < 31; i++)
+            {
+                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
+            }
+            fdrawer.fonts.Add(new DrawerCollection(font, "font"));
 
             currentUI = mainUI;
         }
