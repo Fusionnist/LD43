@@ -99,7 +99,7 @@ namespace LD43
             Texture2D tex = Content.Load<Texture2D>("Placeholder/shittyfont");
             for (int i = 0; i < 31; i++)
             {
-                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
+                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null, null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
@@ -461,15 +461,19 @@ namespace LD43
             {
                 if (new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
-                    if (building.hoveredText != null)
+                    if (cursor.GetClicked())
+                        building.Click();
+                    else
                     {
-                        tooltipText = building.hoveredText; changeTooltipText = false;
+                        if (building.hoveredText != null)
+                        {
+                            tooltipText = building.hoveredText; changeTooltipText = false;
+                        }
+                        building.isHovered = true;
                     }
-                    building.isHovered = true;
                 }
                 else
                     building.isHovered = false;
-                building.Update(es_);
             }
         } //update the movey things
         void UpdateHoveredLocation()
