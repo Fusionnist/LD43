@@ -43,7 +43,7 @@ namespace LD43
         FontDrawer fdrawer;
 
         MonoGame.FZT.Assets.Timer transitionTimer;
-        bool transitioning;
+        bool transitioning, shouldReset;
         bool transitionIN; //as opposed to transition OUT
 
         //Data
@@ -128,10 +128,7 @@ namespace LD43
                 new KeyManager(Keys.Down, "down")
             });
         } //check whatever is plugged in to create input settings
-        void CreateNewGame()
-        {
-
-        } //create whatever's needed to start a new game
+        
 
         protected override void LoadContent()
         {
@@ -144,7 +141,13 @@ namespace LD43
 
             LoadBGs();
             CreateUI();
+
+            CreateNewGame();
         }
+        void CreateNewGame()
+        {
+            GameData.Initialize();
+        } //create whatever's needed to start a new game
         void CreateUI()
         {
             //NOTE: CREATE BUTTON VARIANTS
@@ -333,6 +336,11 @@ namespace LD43
                 currentState = nextState;
                 currentSubState = nextSubState;
                 switchedState = false;
+                if (shouldReset)
+                {
+                    shouldReset = false;
+                    CreateNewGame();
+                }
                 StateChangeSwitch();
             }
         } //set the next state and substate to the current one at the start of the update
@@ -491,6 +499,7 @@ namespace LD43
                     }
                     break;
             }
+            scenes.DrawScene(spriteBatch, "overlay");
             cursorTex.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
             spriteBatch.End();
 
@@ -526,7 +535,15 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-
+            if(transitioning)
+            if (transitionIN)
+            {
+                GraphicsDevice.Clear(new Color(0, 0, 0, (1 - transitionTimer.timer)));
+            }
+            else
+            {
+                GraphicsDevice.Clear(new Color(0, 0, 0, transitionTimer.timer));
+            }
             spriteBatch.End();
         } //draw to overlay scene
         void DrawPhysicsDebug()
