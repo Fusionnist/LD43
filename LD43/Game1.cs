@@ -129,15 +129,15 @@ namespace LD43
             //NOTE: CREATE BUTTON VARIANTS
             mainUI = new UISystem(new List<Button>()
             {
-                new Button("startGame", new Rectangle(100,100,32,16), 
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                new Button("startGame", new Rectangle(100,50,32,16), 
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","start"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","start"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","start")
                 ),
                 new Button("tutorial", new Rectangle(100,100,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","tutorial"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","tutorial"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","tutorial")
                 )
             }
             );
@@ -145,19 +145,19 @@ namespace LD43
             endgameUI = new UISystem(new List<Button>()
             {
                 new Button("mainMenu", new Rectangle(100,0,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
                 ),
                 new Button("restartGame", new Rectangle(100,32,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","restart"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","restart"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","restart")
                 ),
                   new Button("exitGame", new Rectangle(100,64,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","quit"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","quit"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","quit")
                 ),
             }
             );
@@ -165,14 +165,14 @@ namespace LD43
             tutorialUI = new UISystem(new List<Button>()
             {
                 new Button("startGame", new Rectangle(100,100,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","start"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","start"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","start")
                 ),
                  new Button("mainMenu", new Rectangle(100,0,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
                 )
             }
            );
@@ -180,9 +180,9 @@ namespace LD43
             pauseUI = new UISystem(new List<Button>()
             {
                 new Button("resumeGame", new Rectangle(100,0,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","resume"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","resume"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","resume")
                 ),
                  new Button("endGame", new Rectangle(100,32,32,16),
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
@@ -190,19 +190,19 @@ namespace LD43
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
                 ),
                   new Button("exitGame", new Rectangle(100,64,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","giveup"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","giveup"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","giveup")
                 ),
                    new Button("mainMenu", new Rectangle(100,96,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
                 ),
                  new Button("restartGame", new Rectangle(100,128,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","restart"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","restart"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","restart")
                 )
             }
            );
@@ -210,9 +210,9 @@ namespace LD43
             gameUI = new UISystem(new List<Button>()
             {
                 new Button("pauseGame", new Rectangle(100,0,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","pause"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","pause"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","pause")
                 )
             }
            );

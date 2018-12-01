@@ -14,5 +14,78 @@
     <Texture name="static" id="cursor">
       <Frameset amt="1" x="32" y="0" w="16" h="16" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
+    <Texture name="static" id="start">
+      <Frameset amt="1" x="48" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="start">
+      <Frameset amt="1" x="48" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="start">
+      <Frameset amt="1" x="48" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="quit">
+      <Frameset amt="1" x="80" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="quit">
+      <Frameset amt="1" x="80" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="quit">
+      <Frameset amt="1" x="80" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="giveup">
+      <Frameset amt="1" x="112" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="giveup">
+      <Frameset amt="1" x="112" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="giveup">
+      <Frameset amt="1" x="112" y="0" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="pause">
+      <Frameset amt="1" x="144" y="0" w="16" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="pause">
+      <Frameset amt="1" x="144" y="0" w="16" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="pause">
+      <Frameset amt="1" x="144" y="0" w="16" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="resume">
+      <Frameset amt="1" x="32" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="resume">
+      <Frameset amt="1" x="32" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="resume">
+      <Frameset amt="1" x="32" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="tutorial">
+      <Frameset amt="1" x="64" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="tutorial">
+      <Frameset amt="1" x="64" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="tutorial">
+      <Frameset amt="1" x="64" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="restart">
+      <Frameset amt="1" x="96" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="restart">
+      <Frameset amt="1" x="96" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="restart">
+      <Frameset amt="1" x="96" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="static" id="menu">
+      <Frameset amt="1" x="128" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="menu">
+      <Frameset amt="1" x="128" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="pressed" id="menu">
+      <Frameset amt="1" x="128" y="16" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    
   </Spritesheet>
 </Spritesheets>
