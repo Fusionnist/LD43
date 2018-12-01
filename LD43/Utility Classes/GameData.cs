@@ -8,23 +8,43 @@ namespace LD43
 {
     public static class GameData
     {
-        public static int miners, lumberjacks, priests, farmers, citizens;
-        public static int ores, wood, godpower, food, holiness;
-        public static int godAnger, villageHealth;
+        public static int  priests, citizens;
+        public static int ores, wood, food, holiness;
+        public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
+        public static int oreGain, woodGain, foodGain, maxVillagers, maxPriests;
 
         public static void Initialize()
         {
-            miners = lumberjacks = priests = farmers = citizens = 1;
-            ores = wood = food = godpower = 10;
+            priests = 1;
+            citizens = 5;
+            ores = wood = food;
             holiness = 0;
             godAnger = 0;
             villageHealth = 100;
+            oreGain = woodGain = foodGain = 1;
+            maxVillagers = 10;
+            maxPriests = 1;
+            godHunger = 0;
         }
 
         public static void Tick()
         {
+            if(godHunger < 0) { godHunger = 0; }
+            {
+                if(godAnger < 0) { godAnger = 0; }
+            }
 
+            food -= citizens + priests;
+
+            godAnger += godHunger;
+
+            godHunger += citizens;
+
+            if(food < 0) { villageHealth += food; food = 0;  }
+            if(godAnger > 100) { villageHealth -= (godAnger - 100); godAnger = 100; }
+
+            
         }
     }
 }
