@@ -90,6 +90,7 @@ namespace LD43
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
 
             currentUI = mainUI;
+            currentBG = mainMenuBG;
         }
         void CreateScenes()
         {
@@ -133,7 +134,7 @@ namespace LD43
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
 
-
+            LoadBGs();
             CreateUI();
         }
         void CreateUI()
@@ -229,6 +230,15 @@ namespace LD43
             }
            );
         }
+        void LoadBGs()
+        {
+            mainMenuBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "menu");
+            gameBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "game");
+            pauseBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "pause");
+            endBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "end");
+            tutorialBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "tutorial");
+
+        }
 
         protected override void UnloadContent()
         {
@@ -255,6 +265,7 @@ namespace LD43
                 ToggleSubState(GameSubState.Game);
 
                 currentUI = gameUI;
+                currentBG = gameBG;
             }
 
             if (currentUI.IssuedCommand("endGame"))
@@ -263,6 +274,7 @@ namespace LD43
                 ToggleSubState(GameSubState.End);
 
                 currentUI = endgameUI;
+                currentBG = endBG;
             }
 
             if (currentUI.IssuedCommand("restartGame"))
@@ -271,6 +283,7 @@ namespace LD43
                 ToggleSubState(GameSubState.Game);
 
                 currentUI = gameUI;
+                currentBG = gameBG;
             }
 
             if (currentUI.IssuedCommand("mainMenu"))
@@ -279,6 +292,7 @@ namespace LD43
                 ToggleSubState(GameSubState.Main);
 
                 currentUI = mainUI;
+                currentBG = mainMenuBG;
             }
 
             if (currentUI.IssuedCommand("pauseGame"))
@@ -287,6 +301,7 @@ namespace LD43
                 ToggleSubState(GameSubState.Pause);
 
                 currentUI = pauseUI;
+                currentBG = pauseBG;
             }
 
             if (currentUI.IssuedCommand("tutorial"))
@@ -295,6 +310,7 @@ namespace LD43
                 ToggleSubState(GameSubState.Tutorial);
 
                 currentUI = tutorialUI;
+                currentBG = tutorialBG;
             }
 
             if (currentUI.IssuedCommand("exitGame"))

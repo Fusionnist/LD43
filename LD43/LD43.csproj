@@ -123,6 +123,7 @@
     <Content Include="Content\Placeholder\buttons.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Placeholder\phbgs.png" />
     <Content Include="Content\Placeholder\placeholderPause.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
