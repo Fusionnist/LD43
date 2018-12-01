@@ -9,7 +9,7 @@ namespace LD43
     public static class GameData
     {
         public static int miners, lumberjacks, priests, farmers, citizens;
-        public static int ores, wood, godpower, food;
+        public static int ores, wood, godpower, food, holiness;
         public static int godAnger, villageHealth;
         public static bool pitOpen;
 
@@ -17,6 +17,7 @@ namespace LD43
         {
             miners = lumberjacks = priests = farmers = citizens = 1;
             ores = wood = food = godpower = 10;
+            holiness = 0;
             godAnger = 0;
             villageHealth = 100;
         }

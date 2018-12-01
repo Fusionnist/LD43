@@ -91,3 +91,9 @@
 /processorParam:TextureFormat=Color
 /build:Placeholder/shittyfont.png
 
+#begin Audio/MenuTrack.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuTrack.mp3
+
