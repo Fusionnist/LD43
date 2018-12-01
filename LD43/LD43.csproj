@@ -134,6 +134,9 @@
     <Content Include="Content\Placeholder\shittyfont.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Placeholder\tooltips.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Xml\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

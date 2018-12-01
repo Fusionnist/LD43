@@ -37,7 +37,7 @@ namespace LD43
         UISystem currentUI;
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
-        TextureDrawer cursorTex, currentBG;
+        TextureDrawer cursorTex, currentBG, tooltipTex;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
 
         FontDrawer fdrawer;
@@ -140,6 +140,7 @@ namespace LD43
             SpriteSheetCollection.LoadFromElementCollection(Content);
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
+            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
 
             LoadBGs();
             CreateUI();
@@ -442,12 +443,12 @@ namespace LD43
                     break;
             }
         }
-        void ToggleState(GameState newState_)
+        void ToggleState(GameState newState_, GameSubState newSubState_)
         {
             nextState = newState_;
             nextSubState = newSubState_;
 
-            if(nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game))
+            if (nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game))
             {
                 SetTransition();
             }
@@ -455,7 +456,7 @@ namespace LD43
             {
                 switchedState = true;
             }
-        } //set new nextstate and data based on old and new state
+        } //set new nextstate and data based on old and new state           
         void SetTransition()
         {
             transitioning = true;
@@ -464,7 +465,7 @@ namespace LD43
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue); 
             DrawScenes();
             DrawSwitch();
             //draw to buffer
@@ -543,8 +544,9 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            fdrawer.DrawText("font", cursorText, new Rectangle(new Point(0, 0), new Point(40, 180)), spriteBatch);
+            tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
             currentUI.Draw(spriteBatch);
+            fdrawer.DrawText("font", cursorText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
