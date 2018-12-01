@@ -42,6 +42,10 @@ namespace LD43
 
         FontDrawer fdrawer;
 
+        MonoGame.FZT.Assets.Timer transitionTimer;
+        bool transitioning, shouldReset;
+        bool transitionIN; //as opposed to transition OUT
+
         //Data
         Point wDims, vDims, mousePos;
         GameState currentState, nextState;
@@ -59,6 +63,8 @@ namespace LD43
             wDims = new Point(1920 / 3 * 2, 1080 / 3 * 2);
             vDims = new Point(320, 180);
 
+            transitionIN = true;
+
             //set dat up
             graphics.PreferredBackBufferWidth = wDims.X;
             graphics.PreferredBackBufferHeight = wDims.Y;
@@ -73,6 +79,8 @@ namespace LD43
 
             CreateInputProfile();
             CreateScenes();
+
+            transitionTimer = new MonoGame.FZT.Assets.Timer(1f);
 
             PhysicsManager.CreateWorld();
             PhysicsManager.SetUnitRatio(64);
@@ -122,10 +130,7 @@ namespace LD43
                 new KeyManager(Keys.Down, "down")
             });
         } //check whatever is plugged in to create input settings
-        void CreateNewGame()
-        {
-
-        } //create whatever's needed to start a new game
+        
 
         protected override void LoadContent()
         {
@@ -138,7 +143,13 @@ namespace LD43
 
             LoadBGs();
             CreateUI();
+
+            CreateNewGame();
         }
+        void CreateNewGame()
+        {
+            GameData.Initialize();
+        } //create whatever's needed to start a new game
         void CreateUI()
         {
             //NOTE: CREATE BUTTON VARIANTS
@@ -249,12 +260,13 @@ namespace LD43
 
         protected override void Update(GameTime gameTime)
         {
-            UpdateState();
+            float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            UpdateState(es);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             ipp.Update(Keyboard.GetState(), GamePad.GetState(0));
             cursor.Update();
-            float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
             UpdateSwitch(es);
             ReadCommandQueue();
             base.Update(gameTime);
@@ -263,56 +275,37 @@ namespace LD43
         {
             if (currentUI.IssuedCommand("startGame"))
             {
-                ToggleState(GameState.Game);
-                ToggleSubState(GameSubState.Game);
-
-                currentUI = gameUI;
-                currentBG = gameBG;
+                ToggleState(GameState.Game, GameSubState.Game);
             }
 
             if (currentUI.IssuedCommand("endGame"))
             {
-                ToggleState(GameState.Menu);
-                ToggleSubState(GameSubState.End);
-
-                currentUI = endgameUI;
-                currentBG = endBG;
+                ToggleState(GameState.Menu, GameSubState.End);
             }
 
             if (currentUI.IssuedCommand("restartGame"))
             {
-                ToggleState(GameState.Game);
-                ToggleSubState(GameSubState.Game);
+                ToggleState(GameState.Game, GameSubState.Game);
+            }
 
-                currentUI = gameUI;
-                currentBG = gameBG;
+            if (currentUI.IssuedCommand("resumeGame"))
+            {
+                ToggleState(GameState.Game, GameSubState.Game);
             }
 
             if (currentUI.IssuedCommand("mainMenu"))
             {
-                ToggleState(GameState.Menu);
-                ToggleSubState(GameSubState.Main);
-
-                currentUI = mainUI;
-                currentBG = mainMenuBG;
+                ToggleState(GameState.Menu, GameSubState.Main);
             }
 
             if (currentUI.IssuedCommand("pauseGame"))
             {
-                ToggleState(GameState.Game);
-                ToggleSubState(GameSubState.Pause);
-
-                currentUI = pauseUI;
-                currentBG = pauseBG;
+                ToggleState(GameState.Game, GameSubState.Pause);
             }
 
             if (currentUI.IssuedCommand("tutorial"))
             {
-                ToggleState(GameState.Menu);
-                ToggleSubState(GameSubState.Tutorial);
-
-                currentUI = tutorialUI;
-                currentBG = tutorialBG;
+                ToggleState(GameState.Menu, GameSubState.Tutorial);
             }
 
             if (currentUI.IssuedCommand("exitGame"))
@@ -320,14 +313,78 @@ namespace LD43
                 Exit();
             }
         }
-        void UpdateState()
+        void UpdateState(float es_)
         {
+            if (transitioning)
+            {
+                transitionTimer.Update(es_);
+                if (transitionTimer.Complete())
+                {
+                    if (transitionIN)
+                    {
+                        transitionIN = false;
+                        transitionTimer.Reset();
+                        switchedState = true;
+                    }
+                    else
+                    {
+                        transitioning = false;
+                        transitionIN = true;
+                    }
+                }
+            }
             if (switchedState)
             {
                 currentState = nextState;
                 currentSubState = nextSubState;
+                switchedState = false;
+                if (shouldReset)
+                {
+                    shouldReset = false;
+                    CreateNewGame();
+                }
+                StateChangeSwitch();
             }
         } //set the next state and substate to the current one at the start of the update
+        void StateChangeSwitch()
+        {
+            switch (currentState)
+            {
+                case GameState.Game:
+                    switch (currentSubState)
+                    {
+                        case GameSubState.Game: //GAME-GAME
+                            currentUI = gameUI;
+                            currentBG = gameBG;
+                            break;
+
+                        case GameSubState.Pause: //GAME-MAIN
+                            currentUI = pauseUI;
+                            currentBG = pauseBG;
+                            break;
+                    }
+                    break;
+                case GameState.Menu:
+                    switch (currentSubState)
+                    {
+                        case GameSubState.Main: //MENU-MAIN
+                            currentUI = mainUI;
+                            currentBG = mainMenuBG;
+                            break;
+
+                        case GameSubState.Tutorial: //MENU-TUT
+                            currentUI = tutorialUI;
+                            currentBG = tutorialBG;
+                            break;
+
+                        case GameSubState.End: //MENU-MAIN
+                            currentUI = endgameUI;
+                            currentBG = endBG;
+                            break;
+                    }
+                    break;
+            }
+        }
         void UpdateSwitch(float es_)
         {
             switch (currentState)
@@ -388,13 +445,22 @@ namespace LD43
         void ToggleState(GameState newState_)
         {
             nextState = newState_;
-            switchedState = true;
-        } //set new nextstate and data based on old and new state
-        void ToggleSubState(GameSubState newSubState_)
-        {
             nextSubState = newSubState_;
-            switchedState = true;
-        } //set new nextsubstate and data based on old and new sub state
+
+            if(nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game))
+            {
+                SetTransition();
+            }
+            else
+            {
+                switchedState = true;
+            }
+        } //set new nextstate and data based on old and new state
+        void SetTransition()
+        {
+            transitioning = true;
+            transitionTimer.Reset();
+        }
 
         protected override void Draw(GameTime gameTime)
         {
@@ -452,6 +518,7 @@ namespace LD43
                     }
                     break;
             }
+            scenes.DrawScene(spriteBatch, "overlay");
             cursorTex.Draw(spriteBatch, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
             spriteBatch.End();
 
@@ -487,7 +554,15 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-
+            if(transitioning)
+            if (transitionIN)
+            {
+                GraphicsDevice.Clear(new Color(0, 0, 0, (1 - transitionTimer.timer)));
+            }
+            else
+            {
+                GraphicsDevice.Clear(new Color(0, 0, 0, transitionTimer.timer));
+            }
             spriteBatch.End();
         } //draw to overlay scene
         void DrawPhysicsDebug()
