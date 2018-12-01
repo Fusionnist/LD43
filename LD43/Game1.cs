@@ -97,7 +97,8 @@ namespace LD43
                 font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
-            cursorText = "ass";
+            cursorText = "";
+            changeCursorText = true;
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -394,6 +395,7 @@ namespace LD43
                     switch (currentSubState)
                     {
                         case GameSubState.Game: //GAME-GAME
+                            UpdateGame(es_);
                             UpdateMenu(es_);
                             break;
 
@@ -422,7 +424,7 @@ namespace LD43
         } //update things based on game state
         void UpdateGame(float es_)
         {
-
+            changeCursorText = true;
         } //update the movey things
         void UpdateMenu(float es_)
         {
@@ -431,7 +433,10 @@ namespace LD43
             if (currentUI.HoveredButton != null)
                 HandleButtonTooltips();
             else
-                changeCursorText = true;
+            {
+                if (changeCursorText)
+                { cursorText = ""; }
+            }
         } //update the clicky things
 
         void HandleButtonTooltips()
@@ -544,7 +549,8 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
+            if (cursorText != "")
+                tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
             currentUI.Draw(spriteBatch);
             fdrawer.DrawText("font", cursorText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
 
