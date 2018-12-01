@@ -300,6 +300,7 @@ namespace LD43
             cursor.Update();
             UpdateSwitch(es);
             ReadCommandQueue();
+            EntityCollection.RecycleAll();
             base.Update(gameTime);
         }
         void ReadCommandQueue()
@@ -455,6 +456,7 @@ namespace LD43
         void UpdateGame(float es_)
         {
             EntityCollection.UpdateAll(es_);
+            
             UpdateHoveredLocation();
 
             changeTooltipText = true;
@@ -506,7 +508,7 @@ namespace LD43
                 EntityCollection.AddEntity(new Villager(
                new DrawerCollection(new List<TextureDrawer>()
                {
-
+                   SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "player")
                }, "texes"),
                new PositionManager(new Vector2(360, 100)),
                new List<Property>(),

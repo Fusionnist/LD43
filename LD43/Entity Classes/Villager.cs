@@ -49,7 +49,12 @@ namespace LD43
 
         void AddResource()
         {
-            GameData.food++;
+            if(type == "farmer")
+                GameData.food++;
+            if (type == "miner")
+                GameData.wood++;
+            if (type == "lumberjack")
+                GameData.ores++;
         }
 
         void CheckDeath()
@@ -73,6 +78,7 @@ namespace LD43
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
         {
+            flipH_ = state == VillagerState.walkingBack;
             base.Draw(sb_, flipH_, flipV_, angle_);
         }
     }
