@@ -52,7 +52,7 @@ namespace LD43
         GameState currentState, nextState;
         GameSubState currentSubState, nextSubState;
         bool switchedState, changeCursorText;
-        string cursorText;
+        string tooltipText; // if changing this in UpdateGame, set "changeCursorText" to false
         
         public Game1()
         {
@@ -98,7 +98,7 @@ namespace LD43
                 font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null ,null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
-            cursorText = "";
+            tooltipText = "";
             changeCursorText = true;
 
             currentUI = mainUI;
@@ -435,7 +435,7 @@ namespace LD43
         {
             showData = false;
             Rectangle showDataBounds = new Rectangle(0, 0, 16, 32);
-            if (showDataBounds.Contains(scenes.CurrentScene.ToVirtualPos(cursor.RawPos())){
+            if (showDataBounds.Contains(scenes.CurrentScene.ToVirtualPos(cursor.RawPos()))){
                 showData = true;
             }
         }
@@ -448,7 +448,7 @@ namespace LD43
             else
             {
                 if (changeCursorText)
-                { cursorText = ""; }
+                { tooltipText = ""; }
             }
         } //update the clicky things
 
@@ -457,7 +457,7 @@ namespace LD43
             switch(currentUI.HoveredButton.Command)
             {
                 default:
-                    cursorText = "this is a button";
+                    tooltipText = "this is a button";
                     break;
             }
         }
@@ -562,10 +562,10 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            if (cursorText != "")
+            if (tooltipText != "")
                 tooltipTex.Draw(spriteBatch, new Vector2(0, 0));
             currentUI.Draw(spriteBatch);
-            fdrawer.DrawText("font", cursorText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
+            fdrawer.DrawText("font", tooltipText, new Rectangle(new Point(5, 5), new Point(86, 54)), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
