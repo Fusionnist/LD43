@@ -159,7 +159,7 @@
       <Frameset amt="1" x="0" y="0" w="41" h="37" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="farm">
-      <Frameset amt="1" x="0" y="38" w="86" h="28" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="0" y="38" w="88" h="29" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="bridge">
       <Frameset amt="1" x="0" y="66" w="97" h="22" cx="0" cy="0" delay="0"></Frameset>
@@ -182,7 +182,7 @@
       <Frameset amt="1" x="272" y="157" w="45" h="39" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="hovered" id="farm">
-      <Frameset amt="1" x="328" y="199" w="58" h="39" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="278" y="113" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="hovered" id="bridge">
       <Frameset amt="1" x="277" y="0" w="99" h="23" cx="0" cy="0" delay="0"></Frameset>
@@ -194,7 +194,7 @@
       <Frameset amt="1" x="277" y="23" w="30" h="40" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="hovered" id="forest">
-      <Frameset amt="1" x="121" y="0" w="56" h="36" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="328" y="199" w="58" h="39" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="clicked" id="mine">
       <Frameset amt="1" x="5" y="213" w="43" h="38" cx="0" cy="0" delay="0"></Frameset>
