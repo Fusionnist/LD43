@@ -38,13 +38,14 @@ namespace LD43
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
         TextureDrawer cursorTex, currentBG;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
 
         FontDrawer fdrawer;
 
         MonoGame.FZT.Assets.Timer transitionTimer;
         bool transitioning, shouldReset;
         bool transitionIN; //as opposed to transition OUT
+        bool showData;
 
         //Data
         Point wDims, vDims;
@@ -138,6 +139,7 @@ namespace LD43
             SpriteSheetCollection.LoadFromElementCollection(Content);
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
+            icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
 
             LoadBGs();
             CreateUI();
@@ -392,10 +394,12 @@ namespace LD43
                     {
                         case GameSubState.Game: //GAME-GAME
                             UpdateMenu(es_);
+                            UpdateGame(es_);
                             break;
 
                         case GameSubState.Pause: //GAME-MAIN
                             UpdateMenu(es_);
+                            UpdateGame(es_);
                             break;
                     }
                     break;
@@ -419,8 +423,16 @@ namespace LD43
         } //update things based on game state
         void UpdateGame(float es_)
         {
-
+            UpdateHoveredLocation();
         } //update the movey things
+        void UpdateHoveredLocation()
+        {
+            showData = false;
+            Rectangle showDataBounds = new Rectangle(0, 0, 16, 32);
+            if (showDataBounds.Contains(scenes.CurrentScene.ToVirtualPos(cursor.RawPos())){
+                showData = true;
+            }
+        }
         void UpdateMenu(float es_)
         {
             currentUI.UpdateWithMouse(es_, cursor, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
@@ -534,6 +546,18 @@ namespace LD43
             scenes.SelectScene("overlay");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
+            if (currentState == GameState.Game)
+            {
+                if (showData && currentSubState == GameSubState.Game)
+                {
+                    DrawData();
+                }
+                else
+                {
+                    icons.Draw(spriteBatch, new Vector2(0, 0));
+                }
+            }
+
             //DRAW
             if(transitioning)
             if (transitionIN)
@@ -546,6 +570,10 @@ namespace LD43
             }
             spriteBatch.End();
         } //draw to overlay scene
+        void DrawData()
+        {
+            fdrawer.DrawText("font", "health: " + GameData.villageHealth,new Rectangle(16,16,100,100),spriteBatch);
+        }
         void DrawPhysicsDebug()
         {
             spriteBatch.Begin();

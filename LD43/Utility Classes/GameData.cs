@@ -14,7 +14,10 @@ namespace LD43
 
         public static void Initialize()
         {
-
+            miners = lumberjacks = priests = farmers = citizens = 1;
+            ores = wood = food = godpower = 10;
+            godAnger = 0;
+            villageHealth = 100;
         }
     }
 }
