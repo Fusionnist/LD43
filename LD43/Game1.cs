@@ -612,6 +612,9 @@ namespace LD43
                                     if (GameData.CanUpgrade("city"))
                                         GameData.Upgrade("city  ");
                                     break;
+                                case "bridge":
+                                    
+                                    break;
                             }
                         }
                         building.Click();
