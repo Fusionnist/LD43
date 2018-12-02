@@ -868,12 +868,14 @@ namespace LD43
         } //draw to overlay scene
         void DrawData()
         {
-            fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(16,0,100,100),spriteBatch);
-            fdrawer.DrawText("font", "anger: " + GameData.food, new Rectangle(16, 32, 100, 100), spriteBatch);
-
-            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 48, 100, 100), spriteBatch);
-            fdrawer.DrawText("font", "wood: " + GameData.wood, new Rectangle(16, 64, 100, 100), spriteBatch);
-            fdrawer.DrawText("font", "ores: " + GameData.ores, new Rectangle(16, 80, 100, 100), spriteBatch);
+            fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(0,0, 200, 100),spriteBatch);
+            fdrawer.DrawText("font", "god anger: " + GameData.godAnger, new Rectangle(0, 16, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(0, 32, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "wood: " + GameData.wood, new Rectangle(0, 48, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "ores: " + GameData.ores, new Rectangle(0, 64, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens, new Rectangle(0, 80, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "god hunger: " + GameData.godHunger, new Rectangle(0, 96, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "holiness: " + GameData.holiness, new Rectangle(0, 112, 150, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {
