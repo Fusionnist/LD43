@@ -18,6 +18,8 @@ namespace LD43
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
         public static int oreGain, woodGain, foodGain, maxVillagers, maxPriests;
+        static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
+
 
         public static List<LinkedVector> path = new List<LinkedVector>();
         public static LinkedVector townMiddle;
@@ -106,7 +108,37 @@ namespace LD43
 
         public static bool CanUpgrade(string name_)
         {
+            if(name_ == "forest")
+            {
+                if(OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
+            }
+            if (name_ == "mine")
+            {
+                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
+            }
+            if (name_ == "village")
+            {
+                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
+            }
+            if (name_ == "fields")
+            {
+                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
+            }
+            if (name_ == "church")
+            {
+                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
+            }
             return false;
+        }
+
+        static int OresPerLevel(int level)
+        {
+            return level * 5;
+        }
+
+        static int WoodPerLevel(int level)
+        {
+            return level * 5;
         }
 
         public static string UpgradeCost(string name_)
