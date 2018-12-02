@@ -61,6 +61,16 @@ namespace LD43
         public static LinkedVector townMiddle;
 
         //FUNCTIONS
+        public static int LevelOfBuilding(string name_)
+        {
+            if (name_ == "field" && fieldsLevel == maxLevel) { return fieldsLevel; }
+            if (name_ == "city" && villageLevel == maxLevel) { return villageLevel; }
+            if (name_ == "forest" && forestLevel == maxLevel) { return forestLevel; }
+            if (name_ == "church" && churchLevel == maxLevel) { return churchLevel; }
+            if (name_ == "mine" && mineLevel == maxLevel) { return mineLevel; }
+            return 0;
+        }
+
         public static void Initialize()
         {
             day = 1;
@@ -194,6 +204,11 @@ namespace LD43
 
         public static string UpgradeCost(string name_)
         {
+            if (name_ == "field" && fieldsLevel == maxLevel) { return "field is at max level"; }
+            if (name_ == "city" && villageLevel == maxLevel) { return "city is at max level"; }
+            if (name_ == "forest" && forestLevel == maxLevel) { return "forest is at max level"; }
+            if (name_ == "church" && churchLevel == maxLevel) { return "church is at max level"; }
+            if (name_ == "mine" && mineLevel == maxLevel) { return "mine is at max level"; }
             return "upgrade cost: " + wood +"/" + WoodPerLevel(name_) + " wood and "+ ores + "/" + OresPerLevel(name_)+" ores";
         }
 
