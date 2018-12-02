@@ -857,6 +857,13 @@ namespace LD43
                     icons.Draw(spriteBatch, new Vector2(0, 0));
                 }
             }
+            else
+            {
+                if (currentSubState == GameSubState.Tutorial)
+                {
+                    DrawTutorialText();
+                }
+            }
 
             //DRAW
             if(transitioning)
@@ -891,5 +898,13 @@ namespace LD43
 
             spriteBatch.End();
         } //DEBUG
+
+        void DrawTutorialText()
+        {
+            fdrawer.DrawText("font", "tutorial", new Rectangle(120, 10, 120, 20), spriteBatch);
+            fdrawer.DrawText("font", "you manage a village which lives under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 25, 315, 150), spriteBatch);
+            fdrawer.DrawText("font", "to do so, you will have to carefully balance all the resources at your disposal. these are mostly produced by upgrading your various buildings.", new Rectangle(5, 65, 315, 180), spriteBatch);
+            fdrawer.DrawText("font", "be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. you wouldn't want him to get angry, would you?", new Rectangle(5, 120, 315, 20), spriteBatch);
+        }
     }
 }
