@@ -980,11 +980,11 @@ namespace LD43
         void DrawData()
         {
             fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(0,0, 200, 100),spriteBatch);
-            fdrawer.DrawText("font", "god anger: " + GameData.godAnger + "+" + GameData.godHunger, new Rectangle(0, 11, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "food: " + GameData.food + "+" + GameData.FoodGain, new Rectangle(0, 22, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "wood: " + GameData.wood + "+" + GameData.WoodGain, new Rectangle(0, 33, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "ores: " + GameData.ores + "+" + GameData.OreGain, new Rectangle(0, 44, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens + "+" + GameData.VillagerGain, new Rectangle(0, 55, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "food: " + GameData.food + "+" + GameData.FoodGain, new Rectangle(0, 11, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "wood: " + GameData.wood + "+" + GameData.WoodGain, new Rectangle(0, 22, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "ores: " + GameData.ores + "+" + GameData.OreGain, new Rectangle(0, 33, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens + "+" + GameData.VillagerGain, new Rectangle(0, 44, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "god anger: " + GameData.godAnger + "+" + GameData.godHunger, new Rectangle(0, 55, 150, 100), spriteBatch);
             fdrawer.DrawText("font", "god hunger: " + GameData.godHunger, new Rectangle(0, 66, 150, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
