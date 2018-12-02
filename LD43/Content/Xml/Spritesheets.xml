@@ -230,5 +230,13 @@
     </Texture>
      
     </Spritesheet>
+  
+   <Spritesheet name="villager" source="Placeholder/villager">
+
+    <Texture name="normal" id="villager">
+      <Frameset amt="6" x="0" y="0" w="1" h="2" cx="1" cy="0" delay="0"></Frameset>
+    </Texture>
+     
+    </Spritesheet>
      
 </Spritesheets>

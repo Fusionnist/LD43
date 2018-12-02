@@ -47,9 +47,7 @@ namespace LD43
         FontDrawer fdrawer;
 
         MonoGame.FZT.Assets.Timer transitionTimer, gameTick;
-        bool transitioning, shouldReset;
-        bool transitionIN; //as opposed to transition OUT
-        bool showData;
+        bool transitioning, shouldReset, showData, transitionIN; //as opposed to transition OUT
         Random rng;
         GameEnding ending;
 
@@ -594,7 +592,7 @@ namespace LD43
                         switch (building.Name)
                         {
                             case "field":
-                                //CreateVillager("farmer");
+                                CreateVillager("farmer");
                                 if (GameData.CanUpgrade("field"))
                                     GameData.Upgrade("field");
                                 break;
@@ -657,7 +655,7 @@ namespace LD43
                 EntityCollection.AddEntity(new Villager(
                new DrawerCollection(new List<TextureDrawer>()
                {
-                   SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "villager")
+                   SpriteSheetCollection.GetTex("normal", "villager", "villager")
                }, "texes"),
                new PositionManager(new Vector2(360, 100)),
                new List<Property>(),
@@ -822,7 +820,7 @@ namespace LD43
         } //draw to overlay scene
         void DrawData()
         {
-            fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(16,16,100,100),spriteBatch);
+            fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(16,0,100,100),spriteBatch);
             fdrawer.DrawText("font", "anger: " + GameData.food, new Rectangle(16, 32, 100, 100), spriteBatch);
 
             fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(16, 48, 100, 100), spriteBatch);
