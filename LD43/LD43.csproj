@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entity Classes\Building.cs" />
+    <Compile Include="Entity Classes\God.cs" />
     <Compile Include="Entity Classes\Villager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
