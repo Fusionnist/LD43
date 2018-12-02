@@ -22,6 +22,7 @@ namespace LD43
         {
             state = GodState.Idle;
             mood = GodMood.Ok;
+            currentTex = textures.GetTex("idle");
         }
 
         public void Attack()
