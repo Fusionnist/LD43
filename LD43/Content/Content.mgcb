@@ -301,3 +301,9 @@
 /processorParam:TextureFormat=Color
 /build:Screens/endings.png
 
+#begin Audio/tinymusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/tinymusic.mp3
+
