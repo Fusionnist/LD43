@@ -217,5 +217,18 @@
 
   </Spritesheet>
   
-  
+   <Spritesheet name="tempbgs" source="Placeholder/tempbgs">
+
+    <Texture name="church" id="end">
+      <Frameset amt="1" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="revolt" id="end">
+      <Frameset amt="1" x="0" y="180" w="320" h="180  " cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="ded" id="end">
+      <Frameset amt="1" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+     
+    </Spritesheet>
+     
 </Spritesheets>

@@ -24,6 +24,7 @@ namespace LD43
 {
     enum GameState { Game, Menu }
     enum GameSubState { Game, Main, End, Pause, Tutorial }
+    enum GameEnding { churchWins, villageDestroyed, revolt }
 
     public class Game1 : Game
     {
@@ -41,7 +42,7 @@ namespace LD43
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
         TextureDrawer cursorTex, currentBG, tooltipTex;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, revoltBG, churchBG, destroyedBG;
 
         FontDrawer fdrawer;
 
@@ -50,6 +51,7 @@ namespace LD43
         bool transitionIN; //as opposed to transition OUT
         bool showData;
         Random rng;
+        GameEnding ending;
 
         //Data
         Point wDims, vDims;
@@ -314,7 +316,7 @@ namespace LD43
                 SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","resume"),
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","resume")
                 ),
-                 new Button("endGame", new Rectangle(100,32,32,16),
+                 new Button("endGameChurch", new Rectangle(100,32,32,16),
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
                 SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
@@ -343,6 +345,11 @@ namespace LD43
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","pause"),
                 SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","pause"),
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","pause")
+                ),
+                new Button("endGameRevolt", new Rectangle(0,0,32,16),
+                SpriteSheetCollection.GetTex("static","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","button"),
+                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","button")
                 )
             }
            );
@@ -354,7 +361,9 @@ namespace LD43
             pauseBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "pause");
             endBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "end");
             tutorialBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "tutorial");
-
+            revoltBG = SpriteSheetCollection.GetTex("revolt", "tempbgs", "end");
+            churchBG = SpriteSheetCollection.GetTex("church", "tempbgs", "end"); 
+            destroyedBG = SpriteSheetCollection.GetTex("ded", "tempbgs", "end");
         }
 
         protected override void UnloadContent()
@@ -389,6 +398,19 @@ namespace LD43
             if (currentUI.IssuedCommand("endGame"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.villageDestroyed;
+            }
+
+            if (currentUI.IssuedCommand("endGameChurch"))
+            {
+                ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.churchWins;
+            }
+
+            if (currentUI.IssuedCommand("endGameRevolt"))
+            {
+                ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.revolt;
             }
 
             if (currentUI.IssuedCommand("restartGame"))
@@ -491,7 +513,21 @@ namespace LD43
 
                         case GameSubState.End: //MENU-MAIN
                             currentUI = endgameUI;
-                            currentBG = endBG;
+                            switch (ending)
+                            {
+                                case GameEnding.churchWins:
+                                    currentBG = churchBG;
+                                    break;
+                                case GameEnding.revolt:
+                                    currentBG = revoltBG;
+                                    break;
+                                case GameEnding.villageDestroyed:
+                                    currentBG = destroyedBG;
+                                    break;
+                                default:
+                                    currentBG = endBG;
+                                    break;
+                            }
                             break;
                     }
                     break;
@@ -548,30 +584,33 @@ namespace LD43
             bool x = false;
             foreach (Building building in EntityCollection.GetGroup("buildings"))
             {
+                building.hoveredText = GameData.UpgradeCost(building.Name);
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked())
                     {
                         building.Click();
+                        
                         switch (building.Name)
                         {
                             case "field":
-                                CreateVillager("farmer");
+                                //CreateVillager("farmer");
+                                if (GameData.CanUpgrade("field"))
+                                    GameData.Upgrade("field");
                                 break;
                             case "mine":
-                                CreateVillager("miner");
+                                //CreateVillager("miner");
+                                if (GameData.CanUpgrade("mine"))
+                                    GameData.Upgrade("mine");
                                 break;
                             case "forest":
-                                CreateVillager("lumberjack");
+                                //CreateVillager("lumberjack");
+                                if (GameData.CanUpgrade("forest"))
+                                    GameData.Upgrade("forest");
                                 break;
                             case "city":
-                                if (EntityCollection.GetGroup("villagers").Count > 2)
-                                {
-                                    int r = rng.Next(EntityCollection.GetGroup("villagers").Count);
-                                    EntityCollection.GetGroup("villagers")[r].exists = false;
-                                    r = rng.Next(EntityCollection.GetGroup("villagers").Count);
-                                    EntityCollection.GetGroup("villagers")[r].exists = false;
-                                }
+                                if (GameData.CanUpgrade("city"))
+                                    GameData.Upgrade("city  ");
                                 break;
                         }
                     }
@@ -587,11 +626,6 @@ namespace LD43
                 }
                 else
                     building.isHovered = false;
-                if (building.Name == "city" && building.release)
-                {
-                    building.release = false;
-                    GameData.citizens += 3;
-                }
             }
         } //update the movey things
         void UpdateHoveredLocation()
