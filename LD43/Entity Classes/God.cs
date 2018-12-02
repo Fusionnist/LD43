@@ -8,6 +8,7 @@ using MonoGame.FZT.Assets;
 using MonoGame.FZT.Drawing;
 using MonoGame.FZT.Physics;
 using Microsoft.Xna.Framework;
+using MonoGame.FZT.Sound;
 
 namespace LD43
 {
@@ -35,7 +36,8 @@ namespace LD43
                 state = GodState.Attacking;
                 textures.GetTex("attack").Reset();
                 GameData.madness += GameData.citizensOutside;
-            }           
+                    SoundManager.PlayEffect("temp2");
+                }           
         }
 
         bool FindVillager()

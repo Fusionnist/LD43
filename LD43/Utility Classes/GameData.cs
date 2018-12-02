@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Drawing;
 using Microsoft.Xna.Framework;
+using MonoGame.FZT.Sound;
 
 namespace LD43
 {
@@ -188,6 +189,8 @@ namespace LD43
             if (i == 2) { villageLevel = 1; ParticleSystem.CreateInstance(new Vector2(260, 150), "smoke", true, 3); }
             if (i == 3) { churchLevel = 1; ParticleSystem.CreateInstance(new Vector2(240, 50), "smoke", true, 3); }
             if (i == 4) { fieldsLevel = 1; ParticleSystem.CreateInstance(new Vector2(80, 150), "smoke", true, 3); }
+
+            SoundManager.PlayEffect("temp2");
         }
 
         public static void Upgrade(string name_)

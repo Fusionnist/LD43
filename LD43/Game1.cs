@@ -674,8 +674,7 @@ namespace LD43
                                         foreach (God god in EntityCollection.GetGroup("god"))
                                         {
                                             god.Attack();
-                                        }
-                                        SoundManager.PlayEffect("temp2");
+                                        }   
                                         break;
                                 }
                        }
