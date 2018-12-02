@@ -18,14 +18,17 @@ namespace LD43
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
 
+
         public static int madness;
+
+        public static int day = 1, daysUntilDoom;
 
         public static int OreGain { get { return mineLevel; } }
         public static int WoodGain { get { return forestLevel; } }
-        public static int FoodGain { get { return fieldsLevel; } }
+        public static int FoodGain { get { return fieldsLevel * 3; } }
         public static int MaxVillagers { get { return 5 * villageLevel; } }
         public static int Holiness { get { return churchLevel; } }
-        public static int VillagerGain { get { return 1; } }
+        public static int VillagerGain { get { return villageLevel; } }
 
         static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
         
@@ -48,10 +51,12 @@ namespace LD43
         //FUNCTIONS
         public static void Initialize()
         {
+            day = 1;
+
             priests = 1;
-            availableCitizens = 5;
+            availableCitizens = 3;
             citizensOutside = 0;
-            ores = wood = food;
+            ores = wood = food = 5;
 
             madness = 0;
 
@@ -114,23 +119,25 @@ namespace LD43
 
         public static void Tick()
         {
-            if(godHunger < 0) { godHunger = 0; }
+            ores += OreGain;
+            wood += WoodGain;
+            food += FoodGain;
+
+            if (godHunger < 0) { godHunger = 0; }
             {
                 if(godAnger < 0) { godAnger = 0; }
             }
 
-            food -= availableCitizens + priests;
+            food -= availableCitizens;
 
             godAnger += godHunger;
 
             godHunger += availableCitizens;
 
             if(food < 0) { villageHealth += food; food = 0;  }
-            if(godAnger > 100) { villageHealth -= (godAnger - 100); godAnger = 100; }
+            if(godAnger > 100) { godAnger = 100; }
 
-            ores += OreGain;
-            wood += WoodGain;
-            food += FoodGain;
+            availableCitizens += VillagerGain;
         }
 
         public static bool CanUpgrade(string name_)
