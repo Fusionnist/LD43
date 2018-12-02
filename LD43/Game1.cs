@@ -171,11 +171,11 @@ namespace LD43
             Building church = new Building(
                 new DrawerCollection(
                     new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "church"),
-                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "church"),
-                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "church") },
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "church"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "church"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "church") },
                     "church"),
-                    new PositionManager(new Vector2(278, 75)),
+                    new PositionManager(new Vector2(229, 9)),
                     new List<Property>(),
                     5,
                     "church",
@@ -197,9 +197,9 @@ namespace LD43
             Building mine = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "mine"),
-                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "mine"),
-                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "mine") },
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "mine"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "mine"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "mine") },
                    "mine"),
                    new PositionManager(new Vector2(31, 55)),
                    new List<Property>(),
@@ -791,8 +791,6 @@ namespace LD43
                 pauseBG.Draw(spriteBatch, Vector2.Zero);
             }
             //DRAW
-            if (tooltipText != "")
-                tooltipTex.Draw(spriteBatch, tooltipPos);
             currentUI.Draw(spriteBatch);
             fdrawer.DrawText("font", tooltipText, new Rectangle((int)tooltipPos.X + 5, (int)tooltipPos.Y + 5, 86, 54), spriteBatch);
 
