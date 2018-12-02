@@ -36,6 +36,9 @@ namespace LD43
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return villageLevel; } }
 
+        public static int GodFeed { get { return 10; } }
+        public static int HungerIncrease { get { return TotalCitizens; } }
+
         public static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
         
         static int ChurchWoodCost { get { return churchLevel; } }
@@ -141,9 +144,9 @@ namespace LD43
 
             godAnger += godHunger;
 
-            godHunger += TotalCitizens;
+            godHunger += HungerIncrease;
 
-            if(food < 0) { villageHealth += food; food = 0;  }
+            if(food < 0) { villageHealth += food; food = 0;  if (villageHealth < 0) { villageHealth = 0; } }
             if(godAnger > 100) { godAnger = 100; }
 
             availableCitizens += VillagerGain;

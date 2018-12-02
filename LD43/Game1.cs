@@ -410,19 +410,19 @@ namespace LD43
             if (currentUI.IssuedCommand("endGame"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.villageDestroyed;
+                //ending = GameEnding.villageDestroyed;
             }
 
             if (currentUI.IssuedCommand("endGameChurch"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.churchWins;
+                //ending = GameEnding.churchWins;
             }
 
             if (currentUI.IssuedCommand("endGameRevolt"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.revolt;
+                //ending = GameEnding.revolt;
             }
 
             if (currentUI.IssuedCommand("restartGame"))
