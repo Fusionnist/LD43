@@ -22,6 +22,8 @@ namespace LD43
 
         public static int madness;
 
+        public static bool cultExists;
+
         public static int day = 1, daysUntilDoom;
 
         public static int OreGain { get { return mineLevel; } }
@@ -67,6 +69,7 @@ namespace LD43
             villageLevel = forestLevel = mineLevel = fieldsLevel = churchLevel = 1;
 
             godHunger = 0;
+            cultExists = false;
 
             CreatePath();
         }
