@@ -271,15 +271,20 @@ namespace LD43
             //NOTE: CREATE BUTTON VARIANTS
             mainUI = new UISystem(new List<Button>()
             {
-                new Button("startGame", new Rectangle(100,50,32,16), 
+                new Button("startGame", new Rectangle(220,50,32,16), 
                 SpriteSheetCollection.GetTex("idle","buttons","play"),
                 SpriteSheetCollection.GetTex("pressed","buttons","play"),
                 SpriteSheetCollection.GetTex("hovered","buttons","play")
                 ),
-                new Button("tutorial", new Rectangle(100,100,32,16),
+                new Button("tutorial", new Rectangle(220,122,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","square"),
                 SpriteSheetCollection.GetTex("pressed","buttons","square"),
                 SpriteSheetCollection.GetTex("hovered","buttons","square")
+                ),
+                new Button("exitGame", new Rectangle(100,64,32,16),
+                SpriteSheetCollection.GetTex("idle","buttons","quit"),
+                SpriteSheetCollection.GetTex("pressed","buttons","quit"),
+                SpriteSheetCollection.GetTex("hovered","buttons","quit")
                 )
             }
             );
@@ -322,9 +327,9 @@ namespace LD43
             pauseUI = new UISystem(new List<Button>()
             {
                 new Button("resumeGame", new Rectangle(60,120,32,16),
-                SpriteSheetCollection.GetTex("idle","buttons","resume"),
-                SpriteSheetCollection.GetTex("pressed","buttons","resume"),
-                SpriteSheetCollection.GetTex("hovered","buttons","resume")
+                SpriteSheetCollection.GetTex("idle","buttons","play"),
+                SpriteSheetCollection.GetTex("pressed","buttons","play"),
+                SpriteSheetCollection.GetTex("hovered","buttons","play")
                 ),
                    new Button("mainMenu", new Rectangle(144,120,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","menu"),
@@ -341,7 +346,7 @@ namespace LD43
 
             gameUI = new UISystem(new List<Button>()
             {
-                new Button("pauseGame", new Rectangle(304,0,16,16),
+                new Button("pauseGame", new Rectangle(288,0,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","pause"),
                 SpriteSheetCollection.GetTex("pressed","buttons","pause"),
                 SpriteSheetCollection.GetTex("hovered","buttons","pause")
@@ -980,7 +985,6 @@ namespace LD43
             fdrawer.DrawText("font", "ores: " + GameData.ores, new Rectangle(0, 44, 150, 100), spriteBatch);
             fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens, new Rectangle(0, 55, 150, 100), spriteBatch);
             fdrawer.DrawText("font", "god hunger: " + GameData.godHunger, new Rectangle(0, 66, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "holiness: " + GameData.Holiness, new Rectangle(0, 77, 150, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {
@@ -996,8 +1000,8 @@ namespace LD43
         void DrawTutorialText()
         {
             fdrawer.DrawText("font", "tutorial", new Rectangle(120, 0, 120, 20), spriteBatch);
-            fdrawer.DrawText("font", "you manage a village which lives under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 15, 315, 150), spriteBatch);
-            fdrawer.DrawText("font", "to do so, you will have to carefully balance all the resources at your disposal. these are mostly produced by upgrading your various buildings.", new Rectangle(5, 55, 315, 180), spriteBatch);
+            fdrawer.DrawText("font", "you control a village living under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 15, 315, 150), spriteBatch);
+            fdrawer.DrawText("font", "to do so, you will have to balance all the resources at your disposal, mostly produced by your various buildings which can be upgraded.", new Rectangle(5, 55, 315, 180), spriteBatch);
             fdrawer.DrawText("font", "be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. you wouldn't want him to get angry, would you?", new Rectangle(5, 110, 315, 20), spriteBatch);
         }
 
