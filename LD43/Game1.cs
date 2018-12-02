@@ -168,6 +168,8 @@ namespace LD43
         }
         void CreateNewGame()
         {
+            EntityCollection.Flush();
+
             GameData.Initialize();
 
             CreateGod();
@@ -251,7 +253,6 @@ namespace LD43
                    "this is a building"
                );
 
-            EntityCollection.Flush();
             EntityCollection.CreateGroup("building", "buildings");
             EntityCollection.CreateGroup("cunt", "villagers");
             EntityCollection.CreateGroup("god", "god");
@@ -643,7 +644,9 @@ namespace LD43
                                     break;
                                 case "bridge":
                                     foreach (God god in EntityCollection.GetGroup("god"))
+                                    {
                                         god.Attack();
+                                    }
                                     SoundManager.PlayEffect("temp2");
                                     break;
                             }

@@ -217,7 +217,7 @@
 
   </Spritesheet>
   
-   <Spritesheet name="tempbgs" source="Placeholder/tempbgs">
+  <Spritesheet name="tempbgs" source="Placeholder/tempbgs">
 
     <Texture name="church" id="end">
       <Frameset amt="1" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
@@ -231,7 +231,7 @@
      
     </Spritesheet>
   
-   <Spritesheet name="villager" source="Placeholder/villager">
+  <Spritesheet name="villager" source="Placeholder/villager">
 
     <Texture name="normal" id="villager">
       <Frameset amt="6" x="0" y="0" w="1" h="2" cx="1" cy="0" delay="0.5"></Frameset>
@@ -297,14 +297,14 @@
 
   </Spritesheet>
   
- <Spritesheet name="god" source="Placeholder/godSheet">
+  <Spritesheet name="god" source="Placeholder/godSheet">
 
     <Texture name="idle" id="god">
       <Frameset amt="1" x="0" y="0" w="240" h="160" cx="0" cy="0" delay="0.5"></Frameset>
     </Texture>
    
-    <Texture name="attack" id="god">
-      <Frameset amt="1" x="240" y="112" w="80" h="48" cx="0" cy="0" delay="0.5"></Frameset>
+    <Texture name="attack" id="god" loop="false">
+      <Frameset amt="1" x="240" y="112" w="80" h="48" cx="0" cy="0" delay="0.5" ></Frameset>
     </Texture>
      
     </Spritesheet>
