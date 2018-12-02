@@ -23,6 +23,7 @@ namespace LD43
     {
         public bool isHovered, wasClicked, release;
         public string hoveredText;
+        public int level;
         float cd, maxCd;
 
         public Building(DrawerCollection textures_, PositionManager pos_, List<Property> props_, float cd_, string name_ = null, string text_ = null) : base(textures_, pos_, props_, name_, "building")
@@ -32,6 +33,7 @@ namespace LD43
             wasClicked = false;
             hoveredText = text_;
             release = false;
+            level = 1;
         }
 
         public override void Update(float es_)

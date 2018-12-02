@@ -42,7 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Building.cs" />
+    <Compile Include="Entity Classes\Building.cs" />
     <Compile Include="Entity Classes\Villager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -130,6 +130,8 @@
     </Content>
     <Content Include="Content\Placeholder\church.png" />
     <Content Include="Content\Placeholder\city.png" />
+    <Content Include="Content\Placeholder\Font.png" />
+    <Content Include="Content\Placeholder\font2.png" />
     <Content Include="Content\Placeholder\food.png" />
     <Content Include="Content\Placeholder\mine.png" />
     <Content Include="Content\Placeholder\moreBuildings.png" />
@@ -143,6 +145,7 @@
     <Content Include="Content\Placeholder\shittyfont.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Placeholder\tempbgs.png" />
     <Content Include="Content\Placeholder\tooltips.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
