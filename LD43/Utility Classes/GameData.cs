@@ -46,5 +46,20 @@ namespace LD43
 
             
         }
+
+        public static bool CanUpgrade(string name_)
+        {
+            return false;
+        }
+
+        public static string UpgradeCost(string name_)
+        {
+            return "cost: 1 pp and 34 bob";
+        }
+
+        public static void Upgrade(string name_)
+        {
+
+        }
     }
 }
