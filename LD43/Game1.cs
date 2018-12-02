@@ -24,7 +24,7 @@ namespace LD43
 {
     enum GameState { Game, Menu }
     enum GameSubState { Game, Main, End, Pause, Tutorial }
-    enum GameEnding { churchWins, villageDestroyed, revolt }
+    enum GameEnding { churchWins, villageDestroyed, revolt, cult, starvation }
 
     public class Game1 : Game
     {
@@ -43,11 +43,12 @@ namespace LD43
 
         TextureDrawer cursorTex, currentBG, tooltipTex, meterTex;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, revoltBG, churchBG, destroyedBG;
+        TextureDrawer goodEnding, destructionEnding, revoltEnding, starvationEnding, cultEnding;
 
         FontDrawer fdrawer;
 
         MonoGame.FZT.Assets.Timer transitionTimer, gameTick;
-        bool transitioning, shouldReset, showData, transitionIN, cultExists; //as opposed to transition OUT
+        bool transitioning, shouldReset, showData, transitionIN; //as opposed to transition OUT
         Random rng;
         GameEnding ending;
 
@@ -109,8 +110,6 @@ namespace LD43
             tooltipText = "";
             changeTooltipText = true;
             tooltipPos = new Vector2(70, 0);
-
-            cultExists = false;
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -360,6 +359,11 @@ namespace LD43
             revoltBG = SpriteSheetCollection.GetTex("revolt", "tempbgs", "end");
             churchBG = SpriteSheetCollection.GetTex("church", "tempbgs", "end"); 
             destroyedBG = SpriteSheetCollection.GetTex("ded", "tempbgs", "end");
+            goodEnding = SpriteSheetCollection.GetTex("endings", "endings", "good");
+            destructionEnding = SpriteSheetCollection.GetTex("endings", "endings", "destroyed");
+            revoltEnding = SpriteSheetCollection.GetTex("endings", "endings", "revolted");
+            starvationEnding = SpriteSheetCollection.GetTex("endings", "endings", "starved");
+            cultEnding = SpriteSheetCollection.GetTex("endings", "endings", "awakened");
         }
         void CreateGod()
         {
@@ -525,13 +529,19 @@ namespace LD43
                             switch (ending)
                             {
                                 case GameEnding.churchWins:
-                                    currentBG = churchBG;
+                                    currentBG = goodEnding;
                                     break;
                                 case GameEnding.revolt:
-                                    currentBG = revoltBG;
+                                    currentBG = revoltEnding;
                                     break;
                                 case GameEnding.villageDestroyed:
-                                    currentBG = destroyedBG;
+                                    currentBG = destructionEnding;
+                                    break;
+                                case GameEnding.starvation:
+                                    currentBG = starvationEnding;
+                                    break;
+                                case GameEnding.cult:
+                                    currentBG = cultEnding;
                                     break;
                                 default:
                                     currentBG = endBG;
@@ -598,9 +608,9 @@ namespace LD43
             
             UpdateHoveredLocation();
 
-            if (GameData.madness >= 90 && !cultExists)
+            if (GameData.madness >= 90 && !GameData.cultExists)
             {
-                cultExists = true;
+                GameData.cultExists = true;
                 Building cult = new Building(
                 new DrawerCollection(
                     new List<TextureDrawer>() {

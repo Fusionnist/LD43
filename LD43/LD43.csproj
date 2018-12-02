@@ -117,9 +117,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Screens\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\Audio\MenuTrack.mp3" />
     <Content Include="Content\Audio\PrototypeMusic3.mp3" />
@@ -154,6 +152,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Placeholder\villager.png" />
+    <Content Include="Content\Screens\endings.png" />
     <Content Include="Content\Sprites\attackanimation.png" />
     <Content Include="Content\Sprites\defbuildingsheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
