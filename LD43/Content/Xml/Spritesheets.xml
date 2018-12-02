@@ -341,5 +341,64 @@
     </Texture>
 
   </Spritesheet>
+
+  <Spritesheet name="buttons" source="Sprites/buttons">
+
+    <Texture name="idle" id="play">
+      <Frameset amt="1" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="play">
+      <Frameset amt="1" x="32" y="0" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="play">
+      <Frameset amt="1" x="64" y="0" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="idle" id="pause">
+      <Frameset amt="1" x="0" y="16" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="pause">
+      <Frameset amt="1" x="32" y="16" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="pause">
+      <Frameset amt="1" x="64" y="16" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="idle" id="square">
+      <Frameset amt="1" x="0" y="32" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="square">
+      <Frameset amt="1" x="32" y="32" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="square">
+      <Frameset amt="1" x="64" y="32" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="idle" id="quit">
+      <Frameset amt="1" x="0" y="48" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="quit">
+      <Frameset amt="1" x="32" y="48" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="quit">
+      <Frameset amt="1" x="64" y="48" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="idle" id="menu">
+      <Frameset amt="1" x="0" y="64" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="menu">
+      <Frameset amt="1" x="32" y="64" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="menu">
+      <Frameset amt="1" x="64" y="64" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="idle" id="restart">
+      <Frameset amt="1" x="0" y="80" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="restart">
+      <Frameset amt="1" x="32" y="80" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="restart">
+      <Frameset amt="1" x="64" y="80" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+
+  </Spritesheet>
      
 </Spritesheets>

@@ -287,19 +287,19 @@ namespace LD43
             endgameUI = new UISystem(new List<Button>()
             {
                 new Button("mainMenu", new Rectangle(100,0,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
+                SpriteSheetCollection.GetTex("idle","buttons","menu"),
+                SpriteSheetCollection.GetTex("pressed","buttons","menu"),
+                SpriteSheetCollection.GetTex("hovered","buttons","menu")
                 ),
                 new Button("restartGame", new Rectangle(100,32,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","restart"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","restart"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","restart")
+                SpriteSheetCollection.GetTex("static","buttons","restart"),
+                SpriteSheetCollection.GetTex("pressed","buttons","restart"),
+                SpriteSheetCollection.GetTex("hovered","buttons","restart")
                 ),
                   new Button("exitGame", new Rectangle(100,64,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","quit"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","quit"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","quit")
+                SpriteSheetCollection.GetTex("static","buttons","quit"),
+                SpriteSheetCollection.GetTex("pressed","buttons","quit"),
+                SpriteSheetCollection.GetTex("hovered","buttons","quit")
                 ),
             }
             );
@@ -307,9 +307,9 @@ namespace LD43
             tutorialUI = new UISystem(new List<Button>()
             {
                 new Button("startGame", new Rectangle(64,160,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","start"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","start"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","start")
+                SpriteSheetCollection.GetTex("static","buttons","start"),
+                SpriteSheetCollection.GetTex("pressed","buttons","start"),
+                SpriteSheetCollection.GetTex("hovered","buttons","start")
                 ),
                  new Button("mainMenu", new Rectangle(224,160,32,16),
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
