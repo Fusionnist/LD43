@@ -17,7 +17,7 @@
     </Texture>
 
     <Texture name="static" id="icons">
-      <Frameset amt="1" x="32" y="32" w="16" h="32" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="32" y="32" w="16" h="16" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
 
     <Texture name="static" id="villager">
