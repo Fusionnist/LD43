@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MonoGame.FZT.Assets;
+using MonoGame.FZT.Drawing;
 using Microsoft.Xna.Framework;
 
 namespace LD43
@@ -179,11 +180,11 @@ namespace LD43
 
             int i = r.Next(0, 5);
 
-            if (i == 0) { forestLevel = 1; }
-            if (i == 1) { mineLevel = 1; }
-            if (i == 2) { villageLevel = 1; }
-            if (i == 3) { churchLevel = 1; }
-            if (i == 4) { fieldsLevel = 1; }
+            if (i == 0) { forestLevel = 1; ParticleSystem.CreateInstance(new Vector2(15, 117), "smoke", true, 3); }
+            if (i == 1) { mineLevel = 1; ParticleSystem.CreateInstance(new Vector2(50, 64), "smoke", true, 3); }
+            if (i == 2) { villageLevel = 1; ParticleSystem.CreateInstance(new Vector2(260, 150), "smoke", true, 3); }
+            if (i == 3) { churchLevel = 1; ParticleSystem.CreateInstance(new Vector2(240, 50), "smoke", true, 3); }
+            if (i == 4) { fieldsLevel = 1; ParticleSystem.CreateInstance(new Vector2(80, 150), "smoke", true, 3); }
         }
 
         public static void Upgrade(string name_)
