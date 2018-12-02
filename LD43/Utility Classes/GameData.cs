@@ -29,29 +29,32 @@ namespace LD43
 
         public static int day = 1, daysUntilDoom;
 
-        public static int OreGain { get { return mineLevel; } }
-        public static int WoodGain { get { return forestLevel; } }
-        public static int FoodGain { get { return fieldsLevel * 3; } }
+        public static int OreGain { get { return mineLevel * villageLevel; } }
+        public static int WoodGain { get { return forestLevel * villageLevel * 2; } }
+        public static int FoodGain { get { return fieldsLevel * 2; } }
         public static int MaxVillagers { get { return 5 * villageLevel; } }
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return villageLevel; } }
 
         public static int GodFeed { get { return 10; } }
-        public static int HungerIncrease { get { return TotalCitizens; } }
+        public static int HungerIncrease { get { return day; } }
+        public static int MadnessGain { get { return day * TotalCitizens; } }
 
         public static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
         
-        static int ChurchWoodCost { get { return churchLevel; } }
-        static int FieldsWoodCost { get { return fieldsLevel; } }
-        static int MineWoodCost { get { return mineLevel; } }
-        static int VillageWoodCost { get { return villageLevel; } }
+        static int ChurchWoodCost { get { return churchLevel * 5; } }
+        static int FieldsWoodCost { get { return fieldsLevel * 2; } }
+        static int MineWoodCost { get { return mineLevel * 3; } }
+        static int VillageWoodCost { get { return villageLevel * 4; } }
         static int ForestWoodCost { get { return forestLevel; } }
 
-        static int ChurchOreCost { get { return churchLevel; } }
+        static int ChurchOreCost { get { return churchLevel * 2; } }
         static int FieldsOreCost { get { return fieldsLevel; } }
         static int MineOreCost { get { return mineLevel; } }
         static int VillageOreCost { get { return villageLevel; } }
         static int ForestOreCost { get { return forestLevel; } }
+
+        public static int maxLevel = 10;
 
 
         public static List<LinkedVector> path = new List<LinkedVector>();
@@ -154,6 +157,11 @@ namespace LD43
 
         public static bool CanUpgrade(string name_)
         {
+            if (name_ == "field" && fieldsLevel == maxLevel) { return false; }
+            if (name_ == "city" && villageLevel == maxLevel) { return false; }
+            if (name_ == "forest" && forestLevel == maxLevel) { return false; }
+            if (name_ == "church" && churchLevel == maxLevel) { return false; }
+            if (name_ == "mine" && mineLevel == maxLevel) { return false; }
             if (OresPerLevel(name_) <= ores && WoodPerLevel(name_) <= wood) { return true; }
             return false;
         }

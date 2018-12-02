@@ -36,7 +36,7 @@ namespace LD43
                     
                     state = GodState.Attacking;
                     textures.GetTex("attack").Reset();
-                    GameData.madness += GameData.citizensOutside;
+                    GameData.madness += GameData.MadnessGain;
                     if(GameData.madness > 100) { GameData.madness = 100; }
                     SoundManager.PlayEffect("temp2");
                 }
