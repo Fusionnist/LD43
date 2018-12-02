@@ -167,10 +167,14 @@ namespace LD43
 
             SoundManager.PlaySong("main");
 
+            ParticleSystem.AcquireTxture(SpriteSheetCollection.GetTex("smoke", "smoke", "smoke"));
+
             CreateNewGame();
         }
         void CreateNewGame()
         {
+            ParticleSystem.Flush();
+
             EntityCollection.Flush();
 
             GameData.Initialize();
@@ -575,6 +579,8 @@ namespace LD43
         } //update things based on game state
         void UpdateGame(float es_)
         {
+            ParticleSystem.UpdateAll(es_);
+
             EntityCollection.UpdateAll(es_);
             gameTick.Update(es_);
             if (gameTick.Complete())
@@ -840,6 +846,8 @@ namespace LD43
                 ent.Draw(spriteBatch);
             foreach (var ent in EntityCollection.GetGroup("buildings"))
                 ent.Draw(spriteBatch);
+
+            ParticleSystem.DrawAll(spriteBatch);
 
             spriteBatch.End();
         } //draw to game scene
