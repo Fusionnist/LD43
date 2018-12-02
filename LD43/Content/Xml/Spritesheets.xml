@@ -398,6 +398,15 @@
     <Texture name="pressed" id="restart">
       <Frameset amt="1" x="64" y="80" w="32" h="16" cx="0" cy="0" delay="0" ></Frameset>
     </Texture>
+    <Texture name="idle" id="question">
+      <Frameset amt="1" x="0" y="96" w="32" h="16" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="question">
+      <Frameset amt="1" x="32" y="96" w="32" h="16" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="pressed" id="question">
+      <Frameset amt="1" x="64" y="96" w="32" h="16" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
 
   </Spritesheet>
      
