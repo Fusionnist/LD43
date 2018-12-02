@@ -41,8 +41,8 @@ namespace LD43
         UISystem currentUI;
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
-        TextureDrawer cursorTex, currentBG, tooltipTex, meterTex;
-        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, revoltBG, churchBG, destroyedBG;
+        TextureDrawer cursorTex, currentBG, meterTex;
+        TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
         TextureDrawer goodEnding, destructionEnding, revoltEnding, starvationEnding, cultEnding;
 
         FontDrawer fdrawer;
@@ -153,7 +153,6 @@ namespace LD43
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
             icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
-            tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
             meterTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/meter"));
 
             LoadBGs();
@@ -357,9 +356,6 @@ namespace LD43
             pauseBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "pause");
             endBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "end");
             tutorialBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "tutorial");
-            revoltBG = SpriteSheetCollection.GetTex("revolt", "tempbgs", "end");
-            churchBG = SpriteSheetCollection.GetTex("church", "tempbgs", "end"); 
-            destroyedBG = SpriteSheetCollection.GetTex("ded", "tempbgs", "end");
             goodEnding = SpriteSheetCollection.GetTex("endings", "endings", "good");
             destructionEnding = SpriteSheetCollection.GetTex("endings", "endings", "destroyed");
             revoltEnding = SpriteSheetCollection.GetTex("endings", "endings", "revolted");
