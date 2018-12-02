@@ -190,7 +190,7 @@ namespace LD43
                     "church"),
                     new PositionManager(new Vector2(229, 9)),
                     new List<Property>(),
-                    5,
+                    .1f,
                     "church",
                     "this is a building"
                 );
@@ -203,7 +203,7 @@ namespace LD43
                    "field"),
                    new PositionManager(new Vector2(43, 132)),
                    new List<Property>(),
-                   5,
+                   .1f,
                    "field",
                    "this is a building"
                );
@@ -216,7 +216,7 @@ namespace LD43
                    "mine"),
                    new PositionManager(new Vector2(31, 55)),
                    new List<Property>(),
-                   5,
+                   .1f,
                    "mine",
                    "this is a building"
                );
@@ -229,7 +229,7 @@ namespace LD43
                    "forest"),
                    new PositionManager(new Vector2(0, 123)),
                    new List<Property>(),
-                   5,
+                   .1f,
                    "forest",
                    "this is a building"
                );
@@ -242,7 +242,7 @@ namespace LD43
                    "city"),
                    new PositionManager(new Vector2(217, 124)),
                    new List<Property>(),
-                   5,
+                   .1f,
                    "city",
                    "this is a building"
                );
@@ -255,7 +255,7 @@ namespace LD43
                    "bridge"),
                    new PositionManager(new Vector2(117, 158)),
                    new List<Property>(),
-                   5,
+                   .1f,
                    "bridge",
                    "this is a building"
                );
