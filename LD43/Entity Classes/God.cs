@@ -31,13 +31,15 @@ namespace LD43
         public void Attack()
         {
             if(state != GodState.Attacking)
-            if (FindVillager())
-            {
-                state = GodState.Attacking;
-                textures.GetTex("attack").Reset();
-                GameData.madness += GameData.citizensOutside;
+                if (FindVillager())
+                {
+                    
+                    state = GodState.Attacking;
+                    textures.GetTex("attack").Reset();
+                    GameData.madness += GameData.citizensOutside;
+                    if(GameData.madness > 100) { GameData.madness = 100; }
                     SoundManager.PlayEffect("temp2");
-                }           
+                }
         }
 
         bool FindVillager()
@@ -58,12 +60,14 @@ namespace LD43
             if(state == GodState.Attacking)
                 if (textures.GetTex("attack").Ended())
                 {
+                    GameData.godHunger -= GameData.GodFeed;
                     target.exists = false;
                     GameData.citizensOutside--;
                     state = GodState.Idle;
                 }
             if(GameData.godAnger == 100)
             {
+                GameData.attacks++;
                 GameData.DestroyBuilding();
                 GameData.godAnger = 50;
             }

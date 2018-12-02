@@ -20,6 +20,8 @@ namespace LD43
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
 
+        public static int revolts, attacks;
+
 
         public static int madness;
 
@@ -34,7 +36,10 @@ namespace LD43
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return villageLevel; } }
 
-        static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
+        public static int GodFeed { get { return 10; } }
+        public static int HungerIncrease { get { return TotalCitizens; } }
+
+        public static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
         
         static int ChurchWoodCost { get { return churchLevel; } }
         static int FieldsWoodCost { get { return fieldsLevel; } }
@@ -63,6 +68,8 @@ namespace LD43
             ores = wood = food = 5;
 
             madness = 0;
+
+            attacks = revolts = 0;
 
             godAnger = 0;
             villageHealth = 100;        
@@ -133,13 +140,13 @@ namespace LD43
                 if(godAnger < 0) { godAnger = 0; }
             }
 
-            food -= availableCitizens;
+            food -= TotalCitizens;
 
             godAnger += godHunger;
 
-            godHunger += availableCitizens;
+            godHunger += HungerIncrease;
 
-            if(food < 0) { villageHealth += food; food = 0;  }
+            if(food < 0) { villageHealth += food; food = 0;  if (villageHealth < 0) { villageHealth = 0; } }
             if(godAnger > 100) { godAnger = 100; }
 
             availableCitizens += VillagerGain;

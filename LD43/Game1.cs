@@ -392,6 +392,8 @@ namespace LD43
             cursor.Update();
             UpdateSwitch(es);
             ReadCommandQueue();
+            if(currentState == GameState.Game && nextSubState != GameSubState.End)
+                HandleEnding();
             EntityCollection.RecycleAll();
 
             base.Update(gameTime);
@@ -408,19 +410,19 @@ namespace LD43
             if (currentUI.IssuedCommand("endGame"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.villageDestroyed;
+                //ending = GameEnding.villageDestroyed;
             }
 
             if (currentUI.IssuedCommand("endGameChurch"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.churchWins;
+                //ending = GameEnding.churchWins;
             }
 
             if (currentUI.IssuedCommand("endGameRevolt"))
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.revolt;
+                //ending = GameEnding.revolt;
             }
 
             if (currentUI.IssuedCommand("restartGame"))
@@ -594,13 +596,12 @@ namespace LD43
             {
                 GameData.Tick();
                 gameTick.Reset();
-                for(int y = 0; y < GameData.VillagerGain; y++)
+
+                if (GameData.citizensOutside < GameData.MaxVillagers)
                 {
-                    if(GameData.citizensOutside < GameData.MaxVillagers)
-                    {
-                        CreateVillager("cunt");
-                    }
+                    CreateVillager("cunt");
                 }
+
             }
             
             UpdateHoveredLocation();
@@ -748,6 +749,34 @@ namespace LD43
                ));
             }
         }   
+        void HandleEnding()
+        {
+            if(GameData.attacks == 10)
+            {
+                ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.villageDestroyed;
+
+                if(GameData.mineLevel == 10 && GameData.villageLevel == 10 && GameData.churchLevel == 10 && GameData.fieldsLevel == 10 && GameData.forestLevel == 10)
+                {
+                    ending = GameEnding.churchWins;
+                }
+            }
+            if (GameData.daysUntilDoom == 0 && GameData.cultExists)
+            {
+                ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.cult;
+            }
+            if (GameData.villageHealth == 0)
+            {
+                ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.starvation;
+            }
+            if (GameData.revolts == 10)
+            {
+                ToggleState(GameState.Menu, GameSubState.End);
+                ending = GameEnding.revolt;
+            }
+        }
 
         void HandleButtonTooltips()
         {
