@@ -109,7 +109,7 @@ namespace LD43
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
             changeTooltipText = true;
-            tooltipPos = new Vector2(15, 0);
+            tooltipPos = new Vector2(33, 0);
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -152,7 +152,7 @@ namespace LD43
             SpriteSheetCollection.LoadFromElementCollection(Content);
 
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
-            icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
+            icons = SpriteSheetCollection.GetTex("idle", "buttons", "question");
             meterTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/meter"));
 
             LoadBGs();
@@ -271,17 +271,17 @@ namespace LD43
             //NOTE: CREATE BUTTON VARIANTS
             mainUI = new UISystem(new List<Button>()
             {
-                new Button("startGame", new Rectangle(220,50,32,16), 
+                new Button("startGame", new Rectangle(220,42,32,16), 
                 SpriteSheetCollection.GetTex("idle","buttons","play"),
                 SpriteSheetCollection.GetTex("pressed","buttons","play"),
                 SpriteSheetCollection.GetTex("hovered","buttons","play")
                 ),
-                new Button("tutorial", new Rectangle(220,122,32,16),
+                new Button("tutorial", new Rectangle(220,82,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","square"),
                 SpriteSheetCollection.GetTex("pressed","buttons","square"),
                 SpriteSheetCollection.GetTex("hovered","buttons","square")
                 ),
-                new Button("exitGame", new Rectangle(100,64,32,16),
+                new Button("exitGame", new Rectangle(220,122,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","quit"),
                 SpriteSheetCollection.GetTex("pressed","buttons","quit"),
                 SpriteSheetCollection.GetTex("hovered","buttons","quit")
@@ -350,7 +350,7 @@ namespace LD43
                 SpriteSheetCollection.GetTex("idle","buttons","pause"),
                 SpriteSheetCollection.GetTex("pressed","buttons","pause"),
                 SpriteSheetCollection.GetTex("hovered","buttons","pause")
-                ),
+                )
             }
            );
         }
@@ -639,7 +639,7 @@ namespace LD43
                 else if (building.Name == "bridge")
                     building.hoveredText = "the god's anger is at " + GameData.godAnger.ToString() + " and his hunger is at " + GameData.godHunger.ToString() + ". you currently have " + GameData.TotalCitizens.ToString() + " villagers. Appease the god?";
                 else
-                    building.hoveredText = GameData.UpgradeCost(building.Name) + ".";
+                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". building level:" + building.level.ToString();
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked() && GameData.CanUpgrade(building.Name))
@@ -721,7 +721,7 @@ namespace LD43
         void UpdateHoveredLocation()
         {
             showData = false;
-            Rectangle showDataBounds = new Rectangle(0, 0, 16, 32);
+            Rectangle showDataBounds = new Rectangle(0, 0, 32, 16);
             if (showDataBounds.Contains(scenes.CurrentScene.ToVirtualPos(cursor.RawPos()))){
                 showData = true;
             }
