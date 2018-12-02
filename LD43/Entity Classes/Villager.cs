@@ -57,7 +57,7 @@ namespace LD43
                 if ((posman.pos - path[objectivevec]).Length() < 1)
                 {
                     objectivevec--;
-                    if (objectivevec <= 0)
+                    if (objectivevec < 0)
                     {
                         state = VillagerState.returning;
                         Return();

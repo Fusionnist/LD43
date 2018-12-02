@@ -595,7 +595,7 @@ namespace LD43
                 gameTick.Reset();
                 for(int y = 0; y < GameData.VillagerGain; y++)
                 {
-                    if(GameData.TotalCitizens < GameData.MaxVillagers)
+                    if(GameData.citizensOutside < GameData.MaxVillagers)
                     {
                         CreateVillager("cunt");
                     }

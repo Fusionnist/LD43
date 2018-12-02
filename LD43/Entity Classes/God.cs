@@ -18,6 +18,8 @@ namespace LD43
         GodState state;
         GodMood mood;
 
+        Villager target;
+
         public God(DrawerCollection textures_, PositionManager pos_, List<Property> properties_, string name_, string type_) : base(textures_, pos_, properties_, name_, type_)
         {
             state = GodState.Idle;
@@ -31,6 +33,7 @@ namespace LD43
             {
                 state = GodState.Attacking;
                 textures.GetTex("attack").Reset();
+                GameData.madness += GameData.citizensOutside;
             }           
         }
 
@@ -40,8 +43,7 @@ namespace LD43
             {
                 if(v.posman.pos.X > 125 && v.posman.pos.X < 210)
                 {
-                    v.exists = false;
-                    GameData.citizensOutside--;
+                    target = v;
                     return true;
                 }
             }
@@ -51,10 +53,12 @@ namespace LD43
         public override void Update(float elapsedTime_)
         {
             if(state == GodState.Attacking)
-            if (textures.GetTex("attack").Ended())
-            {
-                state = GodState.Idle;
-            }
+                if (textures.GetTex("attack").Ended())
+                {
+                    target.exists = false;
+                    GameData.citizensOutside--;
+                    state = GodState.Idle;
+                }
             base.Update(elapsedTime_);
         }
 
@@ -62,7 +66,7 @@ namespace LD43
         {
             if(state == GodState.Attacking)
             {
-                textures.GetTex("attack").Draw(sb_, Vector2.Zero);
+                textures.GetTex("attack").Draw(sb_, target.posman.pos + new Vector2(-20,-20));
             }
             base.Draw(sb_, flipH_, flipV_, angle_);
         }
