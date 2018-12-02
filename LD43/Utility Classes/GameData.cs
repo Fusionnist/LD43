@@ -12,29 +12,50 @@ namespace LD43
     {
         public static int TotalCitizens { get { return availableCitizens + citizensOutside; } set { } }
 
-        public static int  priests, availableCitizens, citizensOutside;
-        
-        public static int ores, wood, food, holiness;
+        public static int priests, availableCitizens, citizensOutside;
+
+        public static int ores, wood, food;
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
-        public static int oreGain, woodGain, foodGain, maxVillagers, maxPriests;
+
+        public static int OreGain { get { return mineLevel; } }
+        public static int WoodGain { get { return forestLevel; } }
+        public static int FoodGain { get { return fieldsLevel; } }
+        public static int MaxVillagers { get { return 10; } }
+        public static int Holiness { get { return churchLevel; } }
+        public static int VillagerGain { get { return 1; } }
+
         static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
+        
+        static int ChurchWoodCost { get { return churchLevel; } }
+        static int FieldsWoodCost { get { return fieldsLevel; } }
+        static int MineWoodCost { get { return mineLevel; } }
+        static int VillageWoodCost { get { return villageLevel; } }
+        static int ForestWoodCost { get { return forestLevel; } }
+
+        static int ChurchOreCost { get { return churchLevel; } }
+        static int FieldsOreCost { get { return fieldsLevel; } }
+        static int MineOreCost { get { return mineLevel; } }
+        static int VillageOreCost { get { return villageLevel; } }
+        static int ForestOreCost { get { return forestLevel; } }
 
 
         public static List<LinkedVector> path = new List<LinkedVector>();
         public static LinkedVector townMiddle;
 
+        //FUNCTIONS
         public static void Initialize()
         {
             priests = 1;
             availableCitizens = 5;
+            citizensOutside = 0;
             ores = wood = food;
-            holiness = 0;
+
             godAnger = 0;
             villageHealth = 100;
-            oreGain = woodGain = foodGain = 1;
-            maxVillagers = 10;
-            maxPriests = 1;
+
+            villageLevel = forestLevel = mineLevel = fieldsLevel = churchLevel = 1;
+
             godHunger = 0;
 
             CreatePath();
@@ -103,52 +124,51 @@ namespace LD43
             if(food < 0) { villageHealth += food; food = 0;  }
             if(godAnger > 100) { villageHealth -= (godAnger - 100); godAnger = 100; }
 
-            
+            ores += OreGain;
+            wood += WoodGain;
+            food += FoodGain;
         }
 
         public static bool CanUpgrade(string name_)
         {
-            if(name_ == "forest")
-            {
-                if(OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
-            }
-            if (name_ == "mine")
-            {
-                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
-            }
-            if (name_ == "village")
-            {
-                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
-            }
-            if (name_ == "fields")
-            {
-                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
-            }
-            if (name_ == "church")
-            {
-                if (OresPerLevel(forestLevel) >= ores && WoodPerLevel(forestLevel) >= wood) { return true; }
-            }
+            if (OresPerLevel(name_) <= ores && WoodPerLevel(name_) <= wood) { return true; }
             return false;
         }
 
-        static int OresPerLevel(int level)
+        static int OresPerLevel(string name_)
         {
-            return level * 5;
+            if (name_ == "forest") { return ForestOreCost; }
+            if (name_ == "field") { return FieldsOreCost; }
+            if (name_ == "mine") { return MineOreCost; }
+            if (name_ == "city") { return VillageOreCost; }
+            if (name_ == "church") { return ChurchOreCost; }
+
+            return 0;
         }
 
-        static int WoodPerLevel(int level)
+        static int WoodPerLevel(string name_)
         {
-            return level * 5;
+            if (name_ == "forest") { return ForestWoodCost; }
+            if (name_ == "field") { return FieldsWoodCost; }
+            if (name_ == "mine") { return MineWoodCost; }
+            if (name_ == "city") { return VillageWoodCost; }
+            if (name_ == "church") { return ChurchWoodCost; }
+
+            return 0;
         }
 
         public static string UpgradeCost(string name_)
         {
-            return "cost: 1 pp and 34 bob";
+            return "upgrade cost: " + WoodPerLevel(name_) + " wood and "+ OresPerLevel(name_)+" ores";
         }
 
         public static void Upgrade(string name_)
         {
-
+            if (name_ == "forest") { ores -= ForestOreCost; wood -= ForestWoodCost; forestLevel++; }
+            if (name_ == "field") { ores -= FieldsOreCost; wood -= FieldsWoodCost; fieldsLevel++; }
+            if (name_ == "mine") { ores -= MineOreCost; wood -= MineWoodCost; mineLevel++; }
+            if (name_ == "city") { ores -= VillageOreCost; wood -= VillageWoodCost; villageLevel++; }
+            if (name_ == "church") { ores -= ChurchOreCost; wood -= ChurchWoodCost; churchLevel++; }
         }
     }
 }
