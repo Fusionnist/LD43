@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="Content\Audio\MenuTrack.mp3" />
     <Content Include="Content\Audio\PrototypeMusic3.mp3" />
+    <Content Include="Content\Audio\tinymusic.mp3" />
     <Content Include="Content\Placeholder\bridge.png" />
     <Content Include="Content\Placeholder\buildingStuff.png" />
     <Content Include="Content\Placeholder\buttons.png">
