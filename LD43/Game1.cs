@@ -41,7 +41,7 @@ namespace LD43
         UISystem currentUI;
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
-        TextureDrawer cursorTex, currentBG, tooltipTex;
+        TextureDrawer cursorTex, currentBG, tooltipTex, meterTex;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons, revoltBG, churchBG, destroyedBG;
 
         FontDrawer fdrawer;
@@ -155,6 +155,7 @@ namespace LD43
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
             icons = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "icons");
             tooltipTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/tooltips"));
+            meterTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/meter"));
 
             LoadBGs();
             CreateUI();
@@ -830,7 +831,11 @@ namespace LD43
             scenes.SelectScene("menu");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
-            if(currentSubState == GameSubState.Pause)
+            DrawMeter(GameData.madness / 2, new Vector2(10, 160));
+            DrawMeter((int)(GameData.d * 5), new Vector2(135, 160));
+            DrawMeter((int)((gameTick.time / gameTick.timer) * 50), new Vector2(260, 160));
+                
+            if (currentSubState == GameSubState.Pause)
             {
                 pauseBG.Draw(spriteBatch, Vector2.Zero);
                 fdrawer.DrawText("font", "pause", new Rectangle(140, 10, 40, 11), spriteBatch);
@@ -905,6 +910,14 @@ namespace LD43
             fdrawer.DrawText("font", "you manage a village which lives under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 15, 315, 150), spriteBatch);
             fdrawer.DrawText("font", "to do so, you will have to carefully balance all the resources at your disposal. these are mostly produced by upgrading your various buildings.", new Rectangle(5, 55, 315, 180), spriteBatch);
             fdrawer.DrawText("font", "be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. you wouldn't want him to get angry, would you?", new Rectangle(5, 110, 315, 20), spriteBatch);
+        }
+
+        void DrawMeter(int length_, Vector2 pos_)
+        {
+            for (int i = 0; i < length_; i++)
+            {
+                meterTex.Draw(spriteBatch, new Vector2(pos_.X + i, pos_.Y));
+            }
         }
     }
 }

@@ -136,6 +136,7 @@
     <Content Include="Content\Placeholder\godSheet.png" />
     <Content Include="Content\Placeholder\hurty.wav" />
     <Content Include="Content\Placeholder\jump.wav" />
+    <Content Include="Content\Placeholder\meter.png" />
     <Content Include="Content\Placeholder\mine.png" />
     <Content Include="Content\Placeholder\moreBuildings.png" />
     <Content Include="Content\Placeholder\phbgs.png" />

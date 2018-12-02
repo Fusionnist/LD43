@@ -56,7 +56,7 @@ namespace LD43
             madness = 0;
 
             godAnger = 0;
-            villageHealth = 100;
+            villageHealth = 100;        
 
             villageLevel = forestLevel = mineLevel = fieldsLevel = churchLevel = 1;
 
