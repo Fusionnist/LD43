@@ -599,13 +599,11 @@ namespace LD43
                     building.hoveredText = "the god's anger is at " + GameData.godAnger.ToString() + " and his hunger is at " + GameData.godHunger.ToString() + ". you currently have " + GameData.TotalCitizens.ToString() + " villagers. Appease the god?";
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
-                    if (GameData.CanUpgrade(building.Name))
+                    if (cursor.GetClicked() && GameData.CanUpgrade(building.Name))
                     {
-                        if (cursor.GetClicked())
-                        {
-                            if (!building.wasClicked)
-                            {
-                                switch (building.Name)
+                       if (!building.wasClicked)
+                       {
+                           switch (building.Name)
                                 {
                                     case "field":
                                         //CreateVillager("farmer");
@@ -643,19 +641,19 @@ namespace LD43
                                         SoundManager.PlayEffect("temp2");
                                         break;
                                 }
-                            }
-                            building.Click();
-                        }
-                        else
-                        {
-                            if (building.hoveredText != null)
-                            {
-                                tooltipText = building.hoveredText; changeTooltipText = false;
-                            }
-                            building.isHovered = true;
-                        }
-                        x = true;
+                       }
+                       building.Click();
                     }
+                    else
+                    {
+                        if (building.hoveredText != null)
+                        {
+                            tooltipText = building.hoveredText; changeTooltipText = false;
+                        }
+                        if (GameData.CanUpgrade(building.Name))
+                            building.isHovered = true;
+                    }
+                    x = true;
                 }
                 else
                     building.isHovered = false;
@@ -696,7 +694,7 @@ namespace LD43
                type_
                ));
             }
-        }
+        }   
 
         void HandleButtonTooltips()
         {
