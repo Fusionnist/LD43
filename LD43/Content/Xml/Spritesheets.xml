@@ -258,6 +258,9 @@
     <Texture name="idle" id="forest">
       <Frameset amt="1" x="0" y="31" w="60" h="75" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
+    <Texture name="idle" id="cult">
+      <Frameset amt="1" x="72" y="0" w="22" h="18 " cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
     <Texture name="hovered" id="mine">
       <Frameset amt="1" x="272" y="157" w="45" h="39" cx="0" cy="0" delay="0"></Frameset>
     </Texture>

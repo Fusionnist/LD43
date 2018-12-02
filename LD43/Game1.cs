@@ -47,7 +47,7 @@ namespace LD43
         FontDrawer fdrawer;
 
         MonoGame.FZT.Assets.Timer transitionTimer, gameTick;
-        bool transitioning, shouldReset, showData, transitionIN; //as opposed to transition OUT
+        bool transitioning, shouldReset, showData, transitionIN, cultExists; //as opposed to transition OUT
         Random rng;
         GameEnding ending;
 
@@ -109,6 +109,8 @@ namespace LD43
             tooltipText = "";
             changeTooltipText = true;
             tooltipPos = new Vector2(70, 0);
+
+            cultExists = false;
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -589,14 +591,35 @@ namespace LD43
             
             UpdateHoveredLocation();
 
+            if (GameData.madness >= 50 && !cultExists)
+            {
+                cultExists = true;
+                Building cult = new Building(
+                new DrawerCollection(
+                    new List<TextureDrawer>() {
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "cult"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "cult"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "cult") },
+                    "cult"),
+                    new PositionManager(new Vector2(46, 24)),
+                    new List<Property>(),
+                    5,
+                    "cult",
+                    ""
+                );
+                EntityCollection.AddEntity(cult);
+            }
+
             changeTooltipText = true;
             bool x = false;
             foreach (Building building in EntityCollection.GetGroup("buildings"))
             {
-                if (building.Name != "bridge")
-                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". you currently have " + GameData.ores.ToString() + " ore and " + GameData.wood.ToString() + " wood.";
-                else
+                if (building.Name == "cult")
+                    building.hoveredText = "";
+                else if (building.Name == "bridge")
                     building.hoveredText = "the god's anger is at " + GameData.godAnger.ToString() + " and his hunger is at " + GameData.godHunger.ToString() + ". you currently have " + GameData.TotalCitizens.ToString() + " villagers. Appease the god?";
+                else
+                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". you currently have " + GameData.ores.ToString() + " ore and " + GameData.wood.ToString() + " wood.";
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked() && GameData.CanUpgrade(building.Name))
