@@ -168,6 +168,8 @@ namespace LD43
         {
             GameData.Initialize();
 
+            CreateGod();
+
             Building church = new Building(
                 new DrawerCollection(
                     new List<TextureDrawer>() {
@@ -362,6 +364,18 @@ namespace LD43
             revoltBG = SpriteSheetCollection.GetTex("revolt", "tempbgs", "end");
             churchBG = SpriteSheetCollection.GetTex("church", "tempbgs", "end"); 
             destroyedBG = SpriteSheetCollection.GetTex("ded", "tempbgs", "end");
+        }
+        void CreateGod()
+        {
+            EntityCollection.AddEntity(
+                new God(
+                    new DrawerCollection(new List<TextureDrawer>()
+                    {
+                        SpriteSheetCollection.GetTex("idle", "god", "god"),
+                        SpriteSheetCollection.GetTex("attack", "god", "god")
+                    }, "tex"),
+                    new PositionManager(new Vector2(40, 20)),
+                    new List<Property>(), "god", "god"));
         }
 
         protected override void UnloadContent()
