@@ -99,11 +99,11 @@ namespace LD43
 
             fdrawer = new FontDrawer();
             List<TextureDrawer> font = new List<TextureDrawer>();
-            string junk = "abcdefghijklmnopqrstuvwxyz.,!?'0123456789";
-            Texture2D tex = Content.Load<Texture2D>("Placeholder/shittyfont");
-            for (int i = 0; i < 41; i++)
+            string junk = "abcdefghijklmnopqrstuvwxyz\".,;:?!'\"][-+/\\^&é0123456789";
+            Texture2D tex = Content.Load<Texture2D>("Placeholder/font2");
+            for (int i = 0; i < junk.Length; i++)
             {
-                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(6 * i, 0, 6, 6), new Point(0, 0)), null, junk[i].ToString(), null, null));
+                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(8 * i, 0, 8, 11), new Point(0, 0)), null, junk[i].ToString(), null, null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
