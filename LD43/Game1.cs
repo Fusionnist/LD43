@@ -109,7 +109,7 @@ namespace LD43
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
             changeTooltipText = true;
-            tooltipPos = new Vector2(70, 0);
+            tooltipPos = new Vector2(15, 0);
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -876,7 +876,7 @@ namespace LD43
             }
             //DRAW
             currentUI.Draw(spriteBatch);
-            fdrawer.DrawText("font", tooltipText, new Rectangle((int)tooltipPos.X, (int)tooltipPos.Y, 320 - 2 * (int)tooltipPos.X, 180), spriteBatch);
+            fdrawer.DrawText("font", tooltipText, new Rectangle((int)tooltipPos.X, (int)tooltipPos.Y, 320 - (int)tooltipPos.X, 180), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
