@@ -31,7 +31,7 @@ namespace LD43
 
         public static int OreGain { get { return mineLevel * villageLevel; } }
         public static int WoodGain { get { return forestLevel * villageLevel * 2; } }
-        public static int FoodGain { get { return fieldsLevel * 2; } }
+        public static int FoodGain { get { return fieldsLevel * 2 * villageLevel; } }
         public static int MaxVillagers { get { return 5 * villageLevel; } }
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return villageLevel; } }
@@ -81,6 +81,8 @@ namespace LD43
 
             godHunger = 0;
             cultExists = false;
+
+            daysUntilDoom = 10;
 
             CreatePath();
         }
@@ -138,10 +140,9 @@ namespace LD43
             wood += WoodGain;
             food += FoodGain;
 
-            if (godHunger < 0) { godHunger = 0; }
-            {
-                if(godAnger < 0) { godAnger = 0; }
-            }
+
+            if(godAnger < 0) { godAnger = 0; }
+
 
             food -= TotalCitizens;
 
@@ -153,6 +154,9 @@ namespace LD43
             if(godAnger > 100) { godAnger = 100; }
 
             availableCitizens += VillagerGain;
+
+            if (cultExists) { daysUntilDoom--; }
+            if(daysUntilDoom < 0) { daysUntilDoom=0;}
         }
 
         public static bool CanUpgrade(string name_)

@@ -61,6 +61,7 @@ namespace LD43
                 if (textures.GetTex("attack").Ended())
                 {
                     GameData.godHunger -= GameData.GodFeed;
+                    if(GameData.godHunger < 0) { GameData.godHunger = 0; }
                     target.exists = false;
                     GameData.citizensOutside--;
                     state = GodState.Idle;
