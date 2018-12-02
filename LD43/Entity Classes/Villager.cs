@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Drawing;
 using MonoGame.FZT.Physics;
+using Microsoft.Xna.Framework;
 
 
 namespace LD43
@@ -15,9 +16,15 @@ namespace LD43
     public class Villager : Entity
     {
         VillagerState state;
+        Timer walkOutTimer;
+        List<Vector2> path;
+        int objectivevec;
+        float walkSpeed = 0.1f;
         public Villager(DrawerCollection textures_, PositionManager pos_, List<Property> properties_, string name_, string type_) : base(textures_, pos_, properties_, name_, type_)
         {
             state = VillagerState.walkingLeft;
+            pos_.pos = GameData.townMiddle.vec;
+            path = GameData.GetRandomPath();
         }
 
         public override void Update(float elapsedTime_)
@@ -27,21 +34,32 @@ namespace LD43
             {
 
             }
-            if(state == VillagerState.walkingLeft)
+            Vector2 mov = (posman.pos - path[objectivevec]);
+            if(mov != Vector2.Zero)
+                mov.Normalize();
+            posman.mov += mov * walkSpeed * -1;
+            if (state == VillagerState.walkingLeft)
             {
-                posman.mov.X = -1;
-                if(posman.pos.X < -32)
-                    state = VillagerState.walkingBack;
+               if((posman.pos-path[objectivevec]).Length() < 1)
+                {
+                    objectivevec++;
+                    if (objectivevec >= path.Count)
+                    {
+                        objectivevec--;
+                        state = VillagerState.walkingBack;
+                    }
+                }
             }
             if (state == VillagerState.walkingBack)
             {
-                posman.mov.X = 1;
-
-                if(posman.pos.X > 360)
+                if ((posman.pos - path[objectivevec]).Length() < 1)
                 {
-                    AddResource();
-                    state = VillagerState.returning;
-                    Return();
+                    objectivevec--;
+                    if (objectivevec <= 0)
+                    {
+                        state = VillagerState.returning;
+                        Return();
+                    }
                 }
             }
             base.Update(elapsedTime_);
@@ -72,7 +90,7 @@ namespace LD43
 
         void Return()
         {
-            GameData.citizens++;
+            GameData.availableCitizens++;
             exists = false;
         }
 

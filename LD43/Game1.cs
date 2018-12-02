@@ -375,6 +375,7 @@ namespace LD43
             UpdateSwitch(es);
             ReadCommandQueue();
             EntityCollection.RecycleAll();
+
             base.Update(gameTime);
         }
         void ReadCommandQueue()
@@ -540,6 +541,7 @@ namespace LD43
             {
                 GameData.Tick();
                 gameTick.Reset();
+                CreateVillager("cunt");
             }
             
             UpdateHoveredLocation();
@@ -590,7 +592,7 @@ namespace LD43
                 if (building.Name == "city" && building.release)
                 {
                     building.release = false;
-                    GameData.citizens += 3;
+                    GameData.availableCitizens += 3;
                 }
             }
         } //update the movey things
@@ -616,9 +618,9 @@ namespace LD43
         } //update the clicky things
         void CreateVillager(string type_)
         {
-            if(GameData.citizens > 0)
+            if(GameData.availableCitizens > 0)
             {
-                GameData.citizens--;
+                GameData.availableCitizens--;
 
                 EntityCollection.AddEntity(new Villager(
                new DrawerCollection(new List<TextureDrawer>()
