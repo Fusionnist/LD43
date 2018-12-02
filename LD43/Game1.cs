@@ -592,7 +592,7 @@ namespace LD43
             
             UpdateHoveredLocation();
 
-            if (GameData.madness >= 50 && !cultExists)
+            if (GameData.madness >= 90 && !cultExists)
             {
                 cultExists = true;
                 Building cult = new Building(
@@ -682,6 +682,23 @@ namespace LD43
                 else
                     building.isHovered = false;
             }
+
+            if (new Rectangle(10, 165, GameData.madness / 2, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+            {
+                tooltipText = "the village's madness is at " + GameData.madness.ToString() + "/100";
+                changeTooltipText = false;
+            }
+            else if (new Rectangle(135, 165, GameData.daysUntilDoom / 2, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+            {
+                tooltipText = "the village is mad and has created a cult! you have " + GameData.daysUntilDoom.ToString() + " days until doom.";
+                changeTooltipText = false;
+            }
+            else if (new Rectangle(260, 165, (int)((gameTick.timer / gameTick.time) * 50), 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+            {
+                tooltipText = "the next day starts in " + Math.Ceiling(gameTick.timer).ToString() + " seconds.";
+                changeTooltipText = false;
+            }
+
         } //update the movey things
         void UpdateHoveredLocation()
         {
@@ -831,9 +848,12 @@ namespace LD43
             scenes.SelectScene("menu");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
-            DrawMeter(GameData.madness / 2, new Vector2(10, 160));
-            DrawMeter((GameData.daysUntilDoom * 5), new Vector2(135, 160));
-            DrawMeter((int)((gameTick.time / gameTick.timer) * 50), new Vector2(260, 160));
+            if (currentState == GameState.Game)
+            {
+                DrawMeter(GameData.madness / 2, new Vector2(10, 165));
+                DrawMeter((GameData.daysUntilDoom * 5), new Vector2(135, 165));
+                DrawMeter((int)((gameTick.timer / gameTick.time) * 50), new Vector2(260, 165));
+            }
                 
             if (currentSubState == GameSubState.Pause)
             {
