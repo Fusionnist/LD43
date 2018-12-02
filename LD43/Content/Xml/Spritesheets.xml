@@ -234,9 +234,67 @@
    <Spritesheet name="villager" source="Placeholder/villager">
 
     <Texture name="normal" id="villager">
-      <Frameset amt="6" x="0" y="0" w="1" h="2" cx="1" cy="0" delay="0"></Frameset>
+      <Frameset amt="6" x="0" y="0" w="1" h="2" cx="1" cy="0" delay="0.5"></Frameset>
     </Texture>
      
     </Spritesheet>
+  <Spritesheet name="defBuildings" source="Sprites/defbuildingsheet">
+
+    <Texture name="idle" id="mine">
+      <Frameset amt="1" x="0" y="0" w="53" h="30" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="farm">
+      <Frameset amt="1" x="276" y="113" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="bridge">
+      <Frameset amt="1" x="277" y="0" w="99" h="23" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="city">
+      <Frameset amt="1" x="277" y="63" w="95" h="36" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="church">
+      <Frameset amt="1" x="108" y="0" w="31" h="50" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="idle" id="forest">
+      <Frameset amt="1" x="328" y="199" w="58" h="39" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="mine">
+      <Frameset amt="1" x="272" y="157" w="45" h="39" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="farm">
+      <Frameset amt="1" x="276" y="113" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="bridge">
+      <Frameset amt="1" x="277" y="0" w="99" h="23" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="city">
+      <Frameset amt="1" x="277" y="63" w="95" h="36" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="church">
+      <Frameset amt="1" x="277" y="23" w="30" h="40" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="hovered" id="forest">
+      <Frameset amt="1" x="328" y="199" w="58" h="39" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="mine">
+      <Frameset amt="1" x="5" y="213" w="43" h="38" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="farm">
+      <Frameset amt="1" x="0" y="105" w="87" h="30" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="bridge">
+      <Frameset amt="1" x="0" y="0" w="97" h="21" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="city">
+      <Frameset amt="1" x="0" y="61" w="93" h="34" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="church">
+      <Frameset amt="1" x="0" y="22" w="28" h="39" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="forest">
+      <Frameset amt="1" x="1" y="153" w="57" h="37" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+
+  </Spritesheet>
      
 </Spritesheets>

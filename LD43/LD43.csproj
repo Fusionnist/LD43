@@ -118,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Screens\" />
-    <Folder Include="Content\Sprites\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Audio\MenuTrack.mp3" />
@@ -150,6 +149,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Placeholder\villager.png" />
+    <Content Include="Content\Sprites\defbuildingsheet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Xml\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
