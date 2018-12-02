@@ -639,7 +639,7 @@ namespace LD43
                 else if (building.Name == "bridge")
                     building.hoveredText = "the god's anger is at " + GameData.godAnger.ToString() + " and his hunger is at " + GameData.godHunger.ToString() + ". you currently have " + GameData.TotalCitizens.ToString() + " villagers. Appease the god?";
                 else
-                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". building level:" + building.level.ToString();
+                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". building level:" + GameData.LevelOfBuilding(building.Name).ToString();
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked() && GameData.CanUpgrade(building.Name))
