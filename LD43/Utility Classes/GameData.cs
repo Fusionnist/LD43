@@ -39,6 +39,7 @@ namespace LD43
         public static int GodFeed { get { return 10; } }
         public static int HungerIncrease { get { return day; } }
         public static int MadnessGain { get { return day * TotalCitizens; } }
+        public static int MadnessLoss { get { return day; } }
 
         public static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
         
@@ -63,11 +64,11 @@ namespace LD43
         //FUNCTIONS
         public static int LevelOfBuilding(string name_)
         {
-            if (name_ == "field" && fieldsLevel == maxLevel) { return fieldsLevel; }
-            if (name_ == "city" && villageLevel == maxLevel) { return villageLevel; }
-            if (name_ == "forest" && forestLevel == maxLevel) { return forestLevel; }
-            if (name_ == "church" && churchLevel == maxLevel) { return churchLevel; }
-            if (name_ == "mine" && mineLevel == maxLevel) { return mineLevel; }
+            if (name_ == "field" ) { return fieldsLevel; }
+            if (name_ == "city" ) { return villageLevel; }
+            if (name_ == "forest" ) { return forestLevel; }
+            if (name_ == "church" ) { return churchLevel; }
+            if (name_ == "mine") { return mineLevel; }
             return 0;
         }
 
@@ -150,6 +151,7 @@ namespace LD43
             wood += WoodGain;
             food += FoodGain;
 
+            madness -= MadnessLoss;
 
             if(godAnger < 0) { godAnger = 0; }
 
