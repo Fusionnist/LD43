@@ -159,6 +159,7 @@ namespace LD43
             CreateUI();
 
             SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "game");
+            //SoundManager.AddSong(Content.Load<Song>("Audio/tinymusic"), "game");
             SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/hurty"), "temp1");
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/jump"), "temp2");
