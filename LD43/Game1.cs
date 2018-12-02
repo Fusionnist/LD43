@@ -706,7 +706,7 @@ namespace LD43
                 tooltipText = "the village's madness is at " + GameData.madness.ToString() + "/100";
                 changeTooltipText = false;
             }
-            else if (new Rectangle(135, 165, GameData.daysUntilDoom / 2, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+            else if (new Rectangle(135, 165, GameData.daysUntilDoom * 5, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())) && GameData.cultExists)
             {
                 tooltipText = "the village is mad and has created a cult! you have " + GameData.daysUntilDoom.ToString() + " days until doom.";
                 changeTooltipText = false;
@@ -925,7 +925,8 @@ namespace LD43
             if (currentState == GameState.Game)
             {
                 DrawMeter(GameData.madness / 2, new Vector2(10, 165));
-                DrawMeter((GameData.daysUntilDoom * 5), new Vector2(135, 165));
+                if (GameData.cultExists)
+                    DrawMeter(GameData.daysUntilDoom * 5, new Vector2(135, 165));
                 DrawMeter((int)((gameTick.timer / gameTick.time) * 50), new Vector2(260, 165));
             }
                 
@@ -979,11 +980,11 @@ namespace LD43
         void DrawData()
         {
             fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(0,0, 200, 100),spriteBatch);
-            fdrawer.DrawText("font", "god anger: " + GameData.godAnger, new Rectangle(0, 11, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "food: " + GameData.food, new Rectangle(0, 22, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "wood: " + GameData.wood, new Rectangle(0, 33, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "ores: " + GameData.ores, new Rectangle(0, 44, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens, new Rectangle(0, 55, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "god anger: " + GameData.godAnger + "+" + GameData.godHunger, new Rectangle(0, 11, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "food: " + GameData.food + "+" + GameData.FoodGain, new Rectangle(0, 22, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "wood: " + GameData.wood + "+" + GameData.WoodGain, new Rectangle(0, 33, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "ores: " + GameData.ores + "+" + GameData.OreGain, new Rectangle(0, 44, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens + "+" + GameData.VillagerGain, new Rectangle(0, 55, 150, 100), spriteBatch);
             fdrawer.DrawText("font", "god hunger: " + GameData.godHunger, new Rectangle(0, 66, 150, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
