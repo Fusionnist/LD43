@@ -99,8 +99,10 @@ namespace LD43
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
         {
+            posman.pos.Y -= 3;
             flipH_ = state == VillagerState.walkingBack;
             base.Draw(sb_, flipH_, flipV_, angle_);
+            posman.pos.Y += 3;
         }
     }
 }

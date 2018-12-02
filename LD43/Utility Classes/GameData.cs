@@ -41,7 +41,7 @@ namespace LD43
         static void CreatePath()
         {
             //create centers
-            townMiddle = new LinkedVector(new Vector2(280, 160));
+            townMiddle = new LinkedVector(new Vector2(260, 160));
             //create default path
             List<LinkedVector> path1 = new List<LinkedVector>();
             path1.Add(townMiddle);
