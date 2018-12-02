@@ -214,9 +214,9 @@ namespace LD43
             Building forest = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "forest"),
-                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "forest"),
-                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "forest") },
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "forest"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "forest"),
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "forest") },
                    "forest"),
                    new PositionManager(new Vector2(0, 123)),
                    new List<Property>(),
@@ -601,7 +601,10 @@ namespace LD43
             bool x = false;
             foreach (Building building in EntityCollection.GetGroup("buildings"))
             {
-                building.hoveredText = GameData.UpgradeCost(building.Name);
+                if (building.Name != "bridge")
+                    building.hoveredText = "this building costs " + GameData.UpgradeCost(building.Name) + " to upgrade. you currently have " + GameData.ores.ToString() + " ore and " + GameData.wood.ToString() + " wood.";
+                else
+                    building.hoveredText = "the god's anger is at " + GameData.godAnger.ToString() + " and his hunger is at " + GameData.godHunger.ToString() + ". you currently have " + GameData.TotalCitizens.ToString() + " villagers. Appease the god?";
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked())
@@ -763,8 +766,8 @@ namespace LD43
                     switch (currentSubState)
                     {
                         case GameSubState.Game:
-                            scenes.DrawScene(spriteBatch, "menu");
                             scenes.DrawScene(spriteBatch, "game");
+                            scenes.DrawScene(spriteBatch, "menu");
                             break;
 
                         case GameSubState.Pause:
