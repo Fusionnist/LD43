@@ -594,7 +594,7 @@ namespace LD43
                         switch (building.Name)
                         {
                             case "field":
-                                CreateVillager("farmer");
+                                //CreateVillager("farmer");
                                 if (GameData.CanUpgrade("field"))
                                     GameData.Upgrade("field");
                                 break;
