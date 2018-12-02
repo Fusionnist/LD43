@@ -21,7 +21,7 @@ namespace LD43
 {
     class Building : Entity
     {
-        public bool isHovered, wasClicked;
+        public bool isHovered, wasClicked, release;
         public string hoveredText;
         float cd, maxCd;
 
@@ -31,6 +31,7 @@ namespace LD43
             isHovered = false;
             wasClicked = false;
             hoveredText = text_;
+            release = false;
         }
 
         public override void Update(float es_)
@@ -41,6 +42,7 @@ namespace LD43
                 if (cd <= 0)
                 {
                     wasClicked = false;
+                    release = true;
                 }
             }
             if (!wasClicked)
