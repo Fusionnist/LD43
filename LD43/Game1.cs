@@ -593,7 +593,13 @@ namespace LD43
             {
                 GameData.Tick();
                 gameTick.Reset();
-                CreateVillager("cunt");
+                for(int y = 0; y < GameData.VillagerGain; y++)
+                {
+                    if(GameData.TotalCitizens < GameData.MaxVillagers)
+                    {
+                        CreateVillager("cunt");
+                    }
+                }
             }
             
             UpdateHoveredLocation();
@@ -696,8 +702,6 @@ namespace LD43
         {
             if(GameData.availableCitizens > 0)
             {
-                GameData.availableCitizens--;
-
                 EntityCollection.AddEntity(new Villager(
                new DrawerCollection(new List<TextureDrawer>()
                {
@@ -875,7 +879,7 @@ namespace LD43
             fdrawer.DrawText("font", "ores: " + GameData.ores, new Rectangle(0, 64, 150, 100), spriteBatch);
             fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens, new Rectangle(0, 80, 150, 100), spriteBatch);
             fdrawer.DrawText("font", "god hunger: " + GameData.godHunger, new Rectangle(0, 96, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "holiness: " + GameData.holiness, new Rectangle(0, 112, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "holiness: " + GameData.Holiness, new Rectangle(0, 112, 150, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {
