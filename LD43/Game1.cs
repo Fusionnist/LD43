@@ -108,7 +108,7 @@ namespace LD43
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
             changeTooltipText = true;
-            tooltipPos = new Vector2(vDims.X - 96, 0);
+            tooltipPos = new Vector2(60, 0);
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -341,7 +341,7 @@ namespace LD43
 
             gameUI = new UISystem(new List<Button>()
             {
-                new Button("pauseGame", new Rectangle(100,0,32,16),
+                new Button("pauseGame", new Rectangle(304,0,16,16),
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","pause"),
                 SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","pause"),
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","pause")
@@ -806,7 +806,7 @@ namespace LD43
             }
             //DRAW
             currentUI.Draw(spriteBatch);
-            fdrawer.DrawText("font", tooltipText, new Rectangle((int)tooltipPos.X + 5, (int)tooltipPos.Y + 5, 86, 54), spriteBatch);
+            fdrawer.DrawText("font", tooltipText, new Rectangle((int)tooltipPos.X, (int)tooltipPos.Y, 200, 180), spriteBatch);
 
             spriteBatch.End();
         } //draw to menu scene
