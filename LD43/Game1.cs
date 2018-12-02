@@ -589,30 +589,32 @@ namespace LD43
                 {
                     if (cursor.GetClicked())
                     {
-                        building.Click();
-                        
-                        switch (building.Name)
+                        if (!building.wasClicked)
                         {
-                            case "field":
-                                //CreateVillager("farmer");
-                                if (GameData.CanUpgrade("field"))
-                                    GameData.Upgrade("field");
-                                break;
-                            case "mine":
-                                //CreateVillager("miner");
-                                if (GameData.CanUpgrade("mine"))
-                                    GameData.Upgrade("mine");
-                                break;
-                            case "forest":
-                                //CreateVillager("lumberjack");
-                                if (GameData.CanUpgrade("forest"))
-                                    GameData.Upgrade("forest");
-                                break;
-                            case "city":
-                                if (GameData.CanUpgrade("city"))
-                                    GameData.Upgrade("city  ");
-                                break;
+                            switch (building.Name)
+                            {
+                                case "field":
+                                    //CreateVillager("farmer");
+                                    if (GameData.CanUpgrade("field"))
+                                        GameData.Upgrade("field");
+                                    break;
+                                case "mine":
+                                    //CreateVillager("miner");
+                                    if (GameData.CanUpgrade("mine"))
+                                        GameData.Upgrade("mine");
+                                    break;
+                                case "forest":
+                                    //CreateVillager("lumberjack");
+                                    if (GameData.CanUpgrade("forest"))
+                                        GameData.Upgrade("forest");
+                                    break;
+                                case "city":
+                                    if (GameData.CanUpgrade("city"))
+                                        GameData.Upgrade("city  ");
+                                    break;
+                            }
                         }
+                        building.Click();
                     }
                     else
                     {
