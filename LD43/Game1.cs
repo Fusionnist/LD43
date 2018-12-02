@@ -157,6 +157,8 @@ namespace LD43
             SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "game");
             SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
 
+            SoundManager.PlaySong("main");
+
             CreateNewGame();
         }
         void CreateNewGame()
@@ -246,7 +248,7 @@ namespace LD43
             EntityCollection.CreateGroup("building", "buildings");
             EntityCollection.AddEntities(new List<Entity>() { church, field, mine, forest, city, bridge });
 
-            SoundManager.PlaySong("main");
+           
         } //create whatever's needed to start a new game
         void CreateUI()
         {
@@ -375,7 +377,9 @@ namespace LD43
         {
             if (currentUI.IssuedCommand("startGame"))
             {
+                shouldReset = true;
                 ToggleState(GameState.Game, GameSubState.Game);
+               
             }
 
             if (currentUI.IssuedCommand("endGame"))
@@ -385,7 +389,9 @@ namespace LD43
 
             if (currentUI.IssuedCommand("restartGame"))
             {
+                shouldReset = true;
                 ToggleState(GameState.Game, GameSubState.Game);
+               
             }
 
             if (currentUI.IssuedCommand("resumeGame"))
@@ -623,7 +629,7 @@ namespace LD43
             nextState = newState_;
             nextSubState = newSubState_;
 
-            if (nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game))
+            if (nextSubState != GameSubState.Pause && !(currentSubState == GameSubState.Pause && nextState == GameState.Game && !shouldReset))
             {
                 SetTransition();
             }
