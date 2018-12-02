@@ -25,6 +25,7 @@ namespace LD43
             state = VillagerState.walkingLeft;
             pos_.pos = GameData.townMiddle.vec;
             path = GameData.GetRandomPath();
+            GameData.citizensOutside--;
         }
 
         public override void Update(float elapsedTime_)
@@ -86,11 +87,13 @@ namespace LD43
         void Die()
         {
             exists = false;
+            GameData.citizensOutside--;
         }
 
         void Return()
         {
             GameData.availableCitizens++;
+            GameData.citizensOutside--;
             exists = false;
         }
 
