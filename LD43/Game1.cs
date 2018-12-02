@@ -832,7 +832,7 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             DrawMeter(GameData.madness / 2, new Vector2(10, 160));
-            DrawMeter((int)(GameData.d * 5), new Vector2(135, 160));
+            DrawMeter((GameData.daysUntilDoom * 5), new Vector2(135, 160));
             DrawMeter((int)((gameTick.time / gameTick.timer) * 50), new Vector2(260, 160));
                 
             if (currentSubState == GameSubState.Pause)
