@@ -272,14 +272,14 @@ namespace LD43
             mainUI = new UISystem(new List<Button>()
             {
                 new Button("startGame", new Rectangle(100,50,32,16), 
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","start"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","start"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","start")
+                SpriteSheetCollection.GetTex("idle","buttons","play"),
+                SpriteSheetCollection.GetTex("pressed","buttons","play"),
+                SpriteSheetCollection.GetTex("hovered","buttons","play")
                 ),
                 new Button("tutorial", new Rectangle(100,100,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","tutorial"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","tutorial"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","tutorial")
+                SpriteSheetCollection.GetTex("idle","buttons","square"),
+                SpriteSheetCollection.GetTex("pressed","buttons","square"),
+                SpriteSheetCollection.GetTex("hovered","buttons","square")
                 )
             }
             );
@@ -292,12 +292,12 @@ namespace LD43
                 SpriteSheetCollection.GetTex("hovered","buttons","menu")
                 ),
                 new Button("restartGame", new Rectangle(100,32,32,16),
-                SpriteSheetCollection.GetTex("static","buttons","restart"),
+                SpriteSheetCollection.GetTex("idle","buttons","restart"),
                 SpriteSheetCollection.GetTex("pressed","buttons","restart"),
                 SpriteSheetCollection.GetTex("hovered","buttons","restart")
                 ),
                   new Button("exitGame", new Rectangle(100,64,32,16),
-                SpriteSheetCollection.GetTex("static","buttons","quit"),
+                SpriteSheetCollection.GetTex("idle","buttons","quit"),
                 SpriteSheetCollection.GetTex("pressed","buttons","quit"),
                 SpriteSheetCollection.GetTex("hovered","buttons","quit")
                 ),
@@ -307,14 +307,14 @@ namespace LD43
             tutorialUI = new UISystem(new List<Button>()
             {
                 new Button("startGame", new Rectangle(64,160,32,16),
-                SpriteSheetCollection.GetTex("static","buttons","start"),
-                SpriteSheetCollection.GetTex("pressed","buttons","start"),
-                SpriteSheetCollection.GetTex("hovered","buttons","start")
+                SpriteSheetCollection.GetTex("idle","buttons","play"),
+                SpriteSheetCollection.GetTex("pressed","buttons","play"),
+                SpriteSheetCollection.GetTex("hovered","buttons","play")
                 ),
                  new Button("mainMenu", new Rectangle(224,160,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
+                SpriteSheetCollection.GetTex("idle","buttons","menu"),
+                SpriteSheetCollection.GetTex("pressed","buttons","menu"),
+                SpriteSheetCollection.GetTex("hovered","buttons","menu")
                 )
             }
            );
@@ -322,19 +322,19 @@ namespace LD43
             pauseUI = new UISystem(new List<Button>()
             {
                 new Button("resumeGame", new Rectangle(60,120,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","resume"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","resume"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","resume")
+                SpriteSheetCollection.GetTex("idle","buttons","resume"),
+                SpriteSheetCollection.GetTex("pressed","buttons","resume"),
+                SpriteSheetCollection.GetTex("hovered","buttons","resume")
                 ),
                    new Button("mainMenu", new Rectangle(144,120,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
+                SpriteSheetCollection.GetTex("idle","buttons","menu"),
+                SpriteSheetCollection.GetTex("pressed","buttons","menu"),
+                SpriteSheetCollection.GetTex("hovered","buttons","menu")
                 ),
                  new Button("restartGame", new Rectangle(228,120,32,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","restart"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","restart"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","restart")
+                SpriteSheetCollection.GetTex("idle","buttons","restart"),
+                SpriteSheetCollection.GetTex("pressed","buttons","restart"),
+                SpriteSheetCollection.GetTex("hovered","buttons","restart")
                 )
             }
            );
@@ -342,9 +342,9 @@ namespace LD43
             gameUI = new UISystem(new List<Button>()
             {
                 new Button("pauseGame", new Rectangle(304,0,16,16),
-                SpriteSheetCollection.GetTex("static","PlaceholderSheet","pause"),
-                SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","pause"),
-                SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","pause")
+                SpriteSheetCollection.GetTex("idle","buttons","pause"),
+                SpriteSheetCollection.GetTex("pressed","buttons","pause"),
+                SpriteSheetCollection.GetTex("hovered","buttons","pause")
                 ),
             }
            );
@@ -356,11 +356,11 @@ namespace LD43
             pauseBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "pause");
             endBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "end");
             tutorialBG = SpriteSheetCollection.GetTex("bg", "PlaceholderBGs", "tutorial");
-            goodEnding = SpriteSheetCollection.GetTex("endings", "endings", "good");
-            destructionEnding = SpriteSheetCollection.GetTex("endings", "endings", "destroyed");
-            revoltEnding = SpriteSheetCollection.GetTex("endings", "endings", "revolted");
-            starvationEnding = SpriteSheetCollection.GetTex("endings", "endings", "starved");
-            cultEnding = SpriteSheetCollection.GetTex("endings", "endings", "awakened");
+            goodEnding = SpriteSheetCollection.GetTex("ending", "endings", "good");
+            destructionEnding = SpriteSheetCollection.GetTex("ending", "endings", "destroyed");
+            revoltEnding = SpriteSheetCollection.GetTex("ending", "endings", "revolted");
+            starvationEnding = SpriteSheetCollection.GetTex("ending", "endings", "starved");
+            cultEnding = SpriteSheetCollection.GetTex("ending", "endings", "awakened");
         }
         void CreateGod()
         {
@@ -780,7 +780,33 @@ namespace LD43
 
         void HandleButtonTooltips()
         {
-
+            switch (currentUI.HoveredButton.Command)
+            {
+                case "mainMenu":
+                    tooltipText = "return to main menu?";
+                    break;
+                case "restartGame":
+                    tooltipText = "restart from nothing?";
+                    break;
+                case "exitGame":
+                    tooltipText = "exit the game?";
+                    break;
+                case "startGame":    
+                    tooltipText = "begin the game?";
+                    break;
+                case "resumeGame":
+                    tooltipText = "resume?";
+                    break;
+                case "pauseGame":
+                    tooltipText = "";
+                    break;
+                case "tutorial":
+                    tooltipText = "instructions for the game";
+                    break;
+                default:
+                    tooltipText = "this is a button";
+                    break;
+            }
         }
         void ToggleState(GameState newState_, GameSubState newSubState_)
         {
