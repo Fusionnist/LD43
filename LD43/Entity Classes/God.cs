@@ -59,6 +59,11 @@ namespace LD43
                     GameData.citizensOutside--;
                     state = GodState.Idle;
                 }
+            if(GameData.godAnger == 100)
+            {
+                GameData.DestroyBuilding();
+                GameData.godAnger = 50;
+            }
             base.Update(elapsedTime_);
         }
 

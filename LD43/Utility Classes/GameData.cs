@@ -163,7 +163,20 @@ namespace LD43
 
         public static string UpgradeCost(string name_)
         {
-            return "upgrade cost: " + WoodPerLevel(name_) + " wood and "+ OresPerLevel(name_)+" ores";
+            return "upgrade cost: " + wood +"/" + WoodPerLevel(name_) + " wood and "+ ores + "/" + OresPerLevel(name_)+" ores";
+        }
+
+        public static void DestroyBuilding()
+        {
+            Random r = new Random();
+
+            int i = r.Next(0, 5);
+
+            if (i == 0) { forestLevel = 1; }
+            if (i == 1) { mineLevel = 1; }
+            if (i == 2) { villageLevel = 1; }
+            if (i == 3) { churchLevel = 1; }
+            if (i == 4) { fieldsLevel = 1; }
         }
 
         public static void Upgrade(string name_)
