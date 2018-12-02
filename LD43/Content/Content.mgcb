@@ -253,3 +253,15 @@
 /processorParam:TextureFormat=Color
 /build:Placeholder/godSheet.png
 
+#begin Placeholder/hurty.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/hurty.wav
+
+#begin Placeholder/jump.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/jump.wav
+

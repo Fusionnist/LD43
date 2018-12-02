@@ -159,6 +159,7 @@ namespace LD43
 
             SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "game");
             SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/hurty"), "temp1");
 
             SoundManager.PlaySong("main");
 
@@ -252,6 +253,7 @@ namespace LD43
             EntityCollection.Flush();
             EntityCollection.CreateGroup("building", "buildings");
             EntityCollection.CreateGroup("cunt", "villagers");
+            EntityCollection.CreateGroup("god", "god");
             EntityCollection.AddEntities(new List<Entity>() { church, field, mine, forest, city, bridge });
 
            
@@ -627,7 +629,8 @@ namespace LD43
                                         GameData.Upgrade("city  ");
                                     break;
                                 case "bridge":
-                                    
+                                    foreach (God god in EntityCollection.GetGroup("god"))
+                                        god.Attack();
                                     break;
                             }
                         }
@@ -793,7 +796,11 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            foreach (var ent in EntityCollection.GetAllEnts())
+            foreach (var ent in EntityCollection.GetGroup("god"))
+                ent.Draw(spriteBatch);
+            foreach (var ent in EntityCollection.GetGroup("villagers"))
+                ent.Draw(spriteBatch);
+            foreach (var ent in EntityCollection.GetGroup("buildings"))
                 ent.Draw(spriteBatch);
 
             spriteBatch.End();

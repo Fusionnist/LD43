@@ -134,6 +134,8 @@
     <Content Include="Content\Placeholder\font2.png" />
     <Content Include="Content\Placeholder\food.png" />
     <Content Include="Content\Placeholder\godSheet.png" />
+    <Content Include="Content\Placeholder\hurty.wav" />
+    <Content Include="Content\Placeholder\jump.wav" />
     <Content Include="Content\Placeholder\mine.png" />
     <Content Include="Content\Placeholder\moreBuildings.png" />
     <Content Include="Content\Placeholder\phbgs.png" />
