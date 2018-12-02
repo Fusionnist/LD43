@@ -160,6 +160,7 @@ namespace LD43
             SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "game");
             SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/hurty"), "temp1");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/jump"), "temp2");
 
             SoundManager.PlaySong("main");
 
@@ -613,24 +614,34 @@ namespace LD43
                                     //CreateVillager("farmer");
                                     if (GameData.CanUpgrade("field"))
                                         GameData.Upgrade("field");
+                                    SoundManager.PlayEffect("temp1");
                                     break;
                                 case "mine":
                                     //CreateVillager("miner");
                                     if (GameData.CanUpgrade("mine"))
                                         GameData.Upgrade("mine");
+                                    SoundManager.PlayEffect("temp1");
                                     break;
                                 case "forest":
                                     //CreateVillager("lumberjack");
                                     if (GameData.CanUpgrade("forest"))
                                         GameData.Upgrade("forest");
+                                    SoundManager.PlayEffect("temp1");
                                     break;
                                 case "city":
                                     if (GameData.CanUpgrade("city"))
-                                        GameData.Upgrade("city  ");
+                                        GameData.Upgrade("city");
+                                    SoundManager.PlayEffect("temp1");
+                                    break;
+                                case "church":
+                                    if (GameData.CanUpgrade("church"))
+                                        GameData.Upgrade("church");
+                                    SoundManager.PlayEffect("temp1");
                                     break;
                                 case "bridge":
                                     foreach (God god in EntityCollection.GetGroup("god"))
                                         god.Attack();
+                                    SoundManager.PlayEffect("temp2");
                                     break;
                             }
                         }
