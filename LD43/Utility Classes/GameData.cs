@@ -10,7 +10,10 @@ namespace LD43
 {
     public static class GameData
     {
-        public static int  priests, availableCitizens;
+        public static int TotalCitizens { get { return availableCitizens + citizensOutside; } set { } }
+
+        public static int  priests, availableCitizens, citizensOutside;
+        
         public static int ores, wood, food, holiness;
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
@@ -38,17 +41,27 @@ namespace LD43
         static void CreatePath()
         {
             //create centers
-            townMiddle = new LinkedVector(new Vector2(30, 30));
+            townMiddle = new LinkedVector(new Vector2(280, 160));
             //create default path
             List<LinkedVector> path1 = new List<LinkedVector>();
             path1.Add(townMiddle);
-            AddToChain(path1, new LinkedVector(new Vector2(60, 60)));
-            AddToChain(path1, new LinkedVector(new Vector2(100, 60)));
+            AddToChain(path1, new LinkedVector(new Vector2(289, 124)));
+            AddToChain(path1, new LinkedVector(new Vector2(264, 105)));
+            AddToChain(path1, new LinkedVector(new Vector2(285, 92)));
+            AddToChain(path1, new LinkedVector(new Vector2(270, 80)));
+            AddToChain(path1, new LinkedVector(new Vector2(260, 80)));
+            AddToChain(path1, new LinkedVector(new Vector2(236, 59)));
+            AddToChain(path1, new LinkedVector(new Vector2(259, 59)));
 
             List<LinkedVector> path2 = new List<LinkedVector>();
             path2.Add(townMiddle);
-            AddToChain(path2, new LinkedVector(new Vector2(60, 30)));
-            AddToChain(path2, new LinkedVector(new Vector2(100, 30)));
+            AddToChain(path2, new LinkedVector(new Vector2(75, 160)));
+            AddToChain(path2, new LinkedVector(new Vector2(104, 137)));
+            AddToChain(path2, new LinkedVector(new Vector2(86, 120)));
+            AddToChain(path2, new LinkedVector(new Vector2(38, 120)));
+            AddToChain(path2, new LinkedVector(new Vector2(39, 106)));
+            AddToChain(path2, new LinkedVector(new Vector2(76, 70)));
+            AddToChain(path2, new LinkedVector(new Vector2(70, 64)));
         }
 
         public static List<Vector2> GetRandomPath()
