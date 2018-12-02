@@ -16,20 +16,44 @@ namespace LD43
     public class God : Entity
     {
         GodState state;
-        GodMood mod;
+        GodMood mood;
 
         public God(DrawerCollection textures_, PositionManager pos_, List<Property> properties_, string name_, string type_) : base(textures_, pos_, properties_, name_, type_)
         {
-
+            state = GodState.Idle;
+            mood = GodMood.Ok;
         }
 
         public void Attack()
         {
-            textures.GetTex("attack").Reset();
+            if (FindVillager())
+            {
+                state = GodState.Attacking;
+                textures.GetTex("attack").Reset();
+            }           
+        }
+
+        bool FindVillager()
+        {
+            foreach(Villager v in EntityCollection.GetGroup("villagers"))
+            {
+                if(v.posman.pos.X > 125 && v.posman.pos.X < 210)
+                {
+                    v.exists = false;
+                    GameData.citizensOutside--;
+                    return true;
+                }
+            }
+            return false;
         }
 
         public override void Update(float elapsedTime_)
         {
+            if(state == GodState.Attacking)
+            if (textures.GetTex("attack").Ended())
+            {
+                state = GodState.Idle;
+            }
             base.Update(elapsedTime_);
         }
 
