@@ -300,12 +300,12 @@ namespace LD43
 
             tutorialUI = new UISystem(new List<Button>()
             {
-                new Button("startGame", new Rectangle(100,100,32,16),
+                new Button("startGame", new Rectangle(64,160,32,16),
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","start"),
                 SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","start"),
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","start")
                 ),
-                 new Button("mainMenu", new Rectangle(100,0,32,16),
+                 new Button("mainMenu", new Rectangle(224,160,32,16),
                 SpriteSheetCollection.GetTex("static","PlaceholderSheet","menu"),
                 SpriteSheetCollection.GetTex("pressed","PlaceholderSheet","menu"),
                 SpriteSheetCollection.GetTex("hovered","PlaceholderSheet","menu")
@@ -691,7 +691,7 @@ namespace LD43
                 if (changeTooltipText)
                 { tooltipText = ""; }
             }
-        } //update the clicky things
+        } //update the clicky things        
         void CreateVillager(string type_)
         {
             if(GameData.availableCitizens > 0)
@@ -897,10 +897,10 @@ namespace LD43
 
         void DrawTutorialText()
         {
-            fdrawer.DrawText("font", "tutorial", new Rectangle(120, 10, 120, 20), spriteBatch);
-            fdrawer.DrawText("font", "you manage a village which lives under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 25, 315, 150), spriteBatch);
-            fdrawer.DrawText("font", "to do so, you will have to carefully balance all the resources at your disposal. these are mostly produced by upgrading your various buildings.", new Rectangle(5, 65, 315, 180), spriteBatch);
-            fdrawer.DrawText("font", "be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. you wouldn't want him to get angry, would you?", new Rectangle(5, 120, 315, 20), spriteBatch);
+            fdrawer.DrawText("font", "tutorial", new Rectangle(120, 0, 120, 20), spriteBatch);
+            fdrawer.DrawText("font", "you manage a village which lives under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 15, 315, 150), spriteBatch);
+            fdrawer.DrawText("font", "to do so, you will have to carefully balance all the resources at your disposal. these are mostly produced by upgrading your various buildings.", new Rectangle(5, 55, 315, 180), spriteBatch);
+            fdrawer.DrawText("font", "be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. you wouldn't want him to get angry, would you?", new Rectangle(5, 110, 315, 20), spriteBatch);
         }
     }
 }
