@@ -18,10 +18,12 @@ namespace LD43
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
 
+        public static int madness;
+
         public static int OreGain { get { return mineLevel; } }
         public static int WoodGain { get { return forestLevel; } }
         public static int FoodGain { get { return fieldsLevel; } }
-        public static int MaxVillagers { get { return 10; } }
+        public static int MaxVillagers { get { return 5 * villageLevel; } }
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return 1; } }
 
@@ -50,6 +52,8 @@ namespace LD43
             availableCitizens = 5;
             citizensOutside = 0;
             ores = wood = food;
+
+            madness = 0;
 
             godAnger = 0;
             villageHealth = 100;
@@ -90,7 +94,7 @@ namespace LD43
         public static List<Vector2> GetRandomPath()
         {
             Random r = new Random();
-            int segments = r.Next(5, 10);
+            int segments = r.Next(1, 10);
             List<Vector2> answer = new List<Vector2>(){townMiddle.vec};
             LinkedVector current = townMiddle;
             for(int x = 0; x < segments; x++)
