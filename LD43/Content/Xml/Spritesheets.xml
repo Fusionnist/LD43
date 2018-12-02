@@ -296,5 +296,17 @@
     </Texture>
 
   </Spritesheet>
+  
+ <Spritesheet name="god" source="Placeholder/godSheet">
+
+    <Texture name="idle" id="god">
+      <Frameset amt="1" x="0" y="0" w="240" h="160" cx="0" cy="0" delay="0.5"></Frameset>
+    </Texture>
+   
+    <Texture name="attack" id="god">
+      <Frameset amt="1" x="240" y="112" w="80" h="48" cx="0" cy="0" delay="0.5"></Frameset>
+    </Texture>
+     
+    </Spritesheet>
      
 </Spritesheets>

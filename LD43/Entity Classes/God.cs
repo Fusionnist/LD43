@@ -9,7 +9,7 @@ using MonoGame.FZT.Drawing;
 using MonoGame.FZT.Physics;
 using Microsoft.Xna.Framework;
 
-namespace LD43.Entity_Classes
+namespace LD43
 {
     enum GodState { Idle, Attacking }
     enum GodMood { Ok, Ungry, Pissed, VladimirPutin }
