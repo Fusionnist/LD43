@@ -29,6 +29,7 @@ namespace LD43
 
         public void Attack()
         {
+            if(state != GodState.Attacking)
             if (FindVillager())
             {
                 state = GodState.Attacking;
