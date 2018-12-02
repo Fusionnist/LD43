@@ -18,7 +18,10 @@ namespace LD43
         public static int godAnger, villageHealth, godHunger;
         public static bool pitOpen;
 
+
         public static int madness;
+
+        public static int day = 1, daysUntilDoom;
 
         public static int OreGain { get { return mineLevel; } }
         public static int WoodGain { get { return forestLevel; } }
@@ -48,6 +51,8 @@ namespace LD43
         //FUNCTIONS
         public static void Initialize()
         {
+            day = 1;
+
             priests = 1;
             availableCitizens = 3;
             citizensOutside = 0;
