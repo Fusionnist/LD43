@@ -45,10 +45,11 @@ namespace LD43
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
         TextureDrawer goodEnding, destructionEnding, revoltEnding, starvationEnding, cultEnding;
         TextureDrawer gameBg, mountains, clouds, aendingAnim, gded;
+        TextureDrawer mm, dd;
 
         FontDrawer fdrawer;
 
-        MonoGame.FZT.Assets.Timer transitionTimer, gameTick;
+        MonoGame.FZT.Assets.Timer transitionTimer, gameTick, villagerTick;
         bool transitioning, shouldReset, showData, transitionIN; //as opposed to transition OUT
         Random rng;
         GameEnding ending;
@@ -69,7 +70,7 @@ namespace LD43
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            wDims = new Point(1920 / 3 * 2, 1080 / 3 * 2);
+            wDims = new Point(1920, 1080);
             vDims = new Point(320, 180);
 
             transitionIN = true;
@@ -90,6 +91,7 @@ namespace LD43
             CreateScenes();
 
             transitionTimer = new MonoGame.FZT.Assets.Timer(2f);
+            villagerTick = new MonoGame.FZT.Assets.Timer(10f);
             gameTick = new MonoGame.FZT.Assets.Timer(GameData.GameTick);
 
             PhysicsManager.CreateWorld();
@@ -111,7 +113,7 @@ namespace LD43
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
             changeTooltipText = true;
-            tooltipPos = new Vector2(33, 0);
+            tooltipPos = new Vector2(33, 2);
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
@@ -159,14 +161,22 @@ namespace LD43
             meterTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/meter"));
             cloudTex = new TextureDrawer(Content.Load<Texture2D>("Sprites/clouds"));
 
+            dd = TextureDrawer.FromHorizontalStrip(Content.Load<Texture2D>("Placeholder/Daytime"), 39);
+            mm = TextureDrawer.FromHorizontalStrip(Content.Load<Texture2D>("Placeholder/MM"), 39);
+
             LoadBGs();
             CreateUI();
 
             SoundManager.AddSong(Content.Load<Song>("Audio/PrototypeMusic3"), "game");
             //SoundManager.AddSong(Content.Load<Song>("Audio/tinymusic"), "game");
             SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
-            SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/hurty"), "temp1");
-            SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/jump"), "temp2");
+
+
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Audio/build"), "build");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Audio/church_victory"), "win");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Audio/loss"), "lose");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Audio/sacrifice"), "sacrifice");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("Audio/delevel"), "destroy");
 
             gameBg = SpriteSheetCollection.GetTex("bg", "gameBgs", "bg");
             clouds = SpriteSheetCollection.GetTex("clouds", "gameBgs", "bg");
@@ -301,17 +311,17 @@ namespace LD43
 
             endgameUI = new UISystem(new List<Button>()
             {
-                new Button("mainMenu", new Rectangle(100,0,32,16),
+                new Button("mainMenu", new Rectangle(144,140,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","menu"),
                 SpriteSheetCollection.GetTex("pressed","buttons","menu"),
                 SpriteSheetCollection.GetTex("hovered","buttons","menu")
                 ),
-                new Button("restartGame", new Rectangle(100,32,32,16),
+                new Button("restartGame", new Rectangle(68,140,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","restart"),
                 SpriteSheetCollection.GetTex("pressed","buttons","restart"),
                 SpriteSheetCollection.GetTex("hovered","buttons","restart")
                 ),
-                  new Button("exitGame", new Rectangle(100,64,32,16),
+                  new Button("exitGame", new Rectangle(220,140,32,16),
                 SpriteSheetCollection.GetTex("idle","buttons","quit"),
                 SpriteSheetCollection.GetTex("pressed","buttons","quit"),
                 SpriteSheetCollection.GetTex("hovered","buttons","quit")
@@ -384,7 +394,8 @@ namespace LD43
                     new DrawerCollection(new List<TextureDrawer>()
                     {
                         SpriteSheetCollection.GetTex("idle", "god", "god"),
-                        SpriteSheetCollection.GetTex("attack", "god", "god")
+                        SpriteSheetCollection.GetTex("attack", "god", "god"),
+                        SpriteSheetCollection.GetTex("swipe", "swipe", "swipe")
                     }, "tex"),
                     new PositionManager(new Vector2(40, 20)),
                     new List<Property>(), "god", "god"));
@@ -397,6 +408,7 @@ namespace LD43
 
         protected override void Update(GameTime gameTime)
         {
+            tooltipText = "";
             float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             SoundManager.Update(es);
@@ -617,11 +629,20 @@ namespace LD43
                 GameData.Tick();
                 gameTick.Reset();
 
+               
+
+            }
+
+            villagerTick.Update(es_);
+            if (villagerTick.Complete())
+            {
                 if (GameData.citizensOutside < GameData.MaxVillagers)
                 {
                     CreateVillager("cunt");
                 }
 
+                villagerTick.time = (float)rng.Next(3, 15);
+                villagerTick.Reset();
             }
             
             UpdateHoveredLocation();
@@ -654,7 +675,7 @@ namespace LD43
                 else if (building.Name == "bridge")
                     building.hoveredText = "the god's anger is at " + GameData.godAnger.ToString() + " and his hunger is at " + GameData.godHunger.ToString() + ". you currently have " + GameData.TotalCitizens.ToString() + " villagers. Appease the god?";
                 else
-                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". building level:" + GameData.LevelOfBuilding(building.Name).ToString();
+                    building.hoveredText = GameData.UpgradeCost(building.Name) + ". Level:" + GameData.LevelOfBuilding(building.Name).ToString();
                 if (!x && new Rectangle(building.posman.pos.ToPoint(), building.GetBounds().Size).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
                 {
                     if (cursor.GetClicked() && GameData.CanUpgrade(building.Name))
@@ -667,29 +688,29 @@ namespace LD43
                                         //CreateVillager("farmer");
                                         if (GameData.CanUpgrade("field"))
                                             GameData.Upgrade("field");
-                                        SoundManager.PlayEffect("temp1");
+                                        SoundManager.PlayEffect("build");
                                         break;
                                     case "mine":
                                         //CreateVillager("miner");
                                         if (GameData.CanUpgrade("mine"))
                                             GameData.Upgrade("mine");
-                                        SoundManager.PlayEffect("temp1");
+                                        SoundManager.PlayEffect("build");
                                         break;
                                     case "forest":
                                         //CreateVillager("lumberjack");
                                         if (GameData.CanUpgrade("forest"))
                                             GameData.Upgrade("forest");
-                                        SoundManager.PlayEffect("temp1");
+                                        SoundManager.PlayEffect("build");
                                         break;
                                     case "city":
                                         if (GameData.CanUpgrade("city"))
                                             GameData.Upgrade("city");
-                                        SoundManager.PlayEffect("temp1");
+                                        SoundManager.PlayEffect("build");
                                         break;
                                     case "church":
                                         if (GameData.CanUpgrade("church"))
                                             GameData.Upgrade("church");
-                                        SoundManager.PlayEffect("temp1");
+                                        SoundManager.PlayEffect("build");
                                         break;
                                     case "bridge":
                                         foreach (God god in EntityCollection.GetGroup("god"))
@@ -716,19 +737,19 @@ namespace LD43
                     building.isHovered = false;
             }
 
-            if (new Rectangle(10, 165, GameData.madness / 2, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+            if (new Rectangle(10, 165, 100, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
             {
-                tooltipText = "the village's madness is at " + GameData.madness.ToString() + "/100";
+                tooltipText = "The village's madness is at " + GameData.madness.ToString() + "/100";
                 changeTooltipText = false;
             }
-            else if (new Rectangle(135, 165, GameData.daysUntilDoom * 5, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())) && GameData.cultExists)
+            else if (new Rectangle(135, 165, 50, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())) && GameData.cultExists)
             {
-                tooltipText = "the village is mad and has created a cult! you have " + GameData.daysUntilDoom.ToString() + " days until doom.";
+                tooltipText = GameData.daysUntilDoom.ToString() + " days until doom.";
                 changeTooltipText = false;
             }
-            else if (new Rectangle(260, 165, (int)((gameTick.timer / gameTick.time) * 50), 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
+            else if (new Rectangle(260, 165, 100, 10).Contains(scenes.GetScene("base").ToVirtualPos(cursor.RawPos())))
             {
-                tooltipText = "the next day starts in " + Math.Ceiling(gameTick.timer).ToString() + " seconds.";
+                tooltipText = "Next day in " + Math.Ceiling(gameTick.timer).ToString() + " s";
                 changeTooltipText = false;
             }
 
@@ -780,6 +801,8 @@ namespace LD43
 
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.churchWins;
+                SoundManager.PlayEffect("win");
+
                 gded.Reset();
 
                 
@@ -790,12 +813,16 @@ namespace LD43
 
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.cult;
+                SoundManager.PlayEffect("win");
+
                 aendingAnim.Reset();
             }
             if (GameData.villageHealth == 0)
             {
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.starvation;
+                SoundManager.PlayEffect("lose");
+
             }
             if (GameData.attacks == 5)
             {
@@ -803,6 +830,8 @@ namespace LD43
 
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.villageDestroyed;
+                SoundManager.PlayEffect("win");
+
                 aendingAnim.Reset();
             }
         }
@@ -812,25 +841,25 @@ namespace LD43
             switch (currentUI.HoveredButton.Command)
             {
                 case "mainMenu":
-                    tooltipText = "return to main menu?";
+                    tooltipText = "Return to main menu?";
                     break;
                 case "restartGame":
-                    tooltipText = "restart from nothing?";
+                    tooltipText = "Restart from nothing?";
                     break;
                 case "exitGame":
-                    tooltipText = "exit the game?";
+                    tooltipText = "Exit the game?";
                     break;
                 case "startGame":    
-                    tooltipText = "begin the game?";
+                    tooltipText = "Begin the game?";
                     break;
                 case "resumeGame":
-                    tooltipText = "resume?";
+                    tooltipText = "Resume?";
                     break;
                 case "pauseGame":
                     tooltipText = "";
                     break;
                 case "tutorial":
-                    tooltipText = "instructions for the game";
+                    tooltipText = "Tutorial";
                     break;
                 default:
                     tooltipText = "this is a button";
@@ -933,14 +962,16 @@ namespace LD43
 
             //DRAW
             mountains.Draw(spriteBatch, Vector2.Zero);
-            //foreach (var ent in EntityCollection.GetGroup("god"))
-            //    ent.Draw(spriteBatch);
+
             foreach (var ent in EntityCollection.GetGroup("villagers"))
                 ent.Draw(spriteBatch);
             foreach (var ent in EntityCollection.GetGroup("buildings"))
                 ent.Draw(spriteBatch);
 
-            if(nextSubState == GameSubState.End)
+            foreach (var ent in EntityCollection.GetGroup("god"))
+                ent.Draw(spriteBatch);
+
+            if (nextSubState == GameSubState.End)
             {
                 if(ending == GameEnding.churchWins)
                 { gded.Draw(spriteBatch, Vector2.Zero); }
@@ -963,16 +994,21 @@ namespace LD43
 
             if (currentState == GameState.Game)
             {
+                mm.SetCompletion((float)GameData.madness / 100);
+                mm.Draw(spriteBatch, new Vector2(10, 165));
+                dd.SetCompletion(gameTick.timer / gameTick.time);
+                dd.Draw(spriteBatch, new Vector2(260, 165));
+
                 DrawMeter(GameData.madness / 2, new Vector2(10, 165));
-                if (GameData.cultExists)
-                    DrawMeter(GameData.daysUntilDoom * 5, new Vector2(135, 165));
+                //if (GameData.cultExists)
+                //    DrawMeter(GameData.daysUntilDoom * 5, new Vector2(135, 165));
                 DrawMeter((int)((gameTick.timer / gameTick.time) * 50), new Vector2(260, 165));
             }
                 
             if (currentSubState == GameSubState.Pause)
             {
                 pauseBG.Draw(spriteBatch, Vector2.Zero);
-                fdrawer.DrawText("font", "pause", new Rectangle(140, 10, 40, 11), spriteBatch);
+                fdrawer.DrawText("font", "Pause", new Rectangle(140, 10, 40, 11), spriteBatch);
             }
             //DRAW
             currentUI.Draw(spriteBatch);
@@ -1018,13 +1054,14 @@ namespace LD43
         } //draw to overlay scene
         void DrawData()
         {
-            fdrawer.DrawText("font", "village health: " + GameData.villageHealth,new Rectangle(0,0, 200, 100),spriteBatch);
-            fdrawer.DrawText("font", "food: " + GameData.food + "+" + GameData.FoodGain, new Rectangle(0, 11, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "wood: " + GameData.wood + "+" + GameData.WoodGain, new Rectangle(0, 22, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "ores: " + GameData.ores + "+" + GameData.OreGain, new Rectangle(0, 33, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "villagers: " + GameData.TotalCitizens + "+" + GameData.VillagerGain, new Rectangle(0, 44, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "god anger: " + GameData.godAnger + "+" + GameData.godHunger, new Rectangle(0, 55, 150, 100), spriteBatch);
-            fdrawer.DrawText("font", "god hunger: " + GameData.godHunger, new Rectangle(0, 66, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "Village health: " + GameData.villageHealth,new Rectangle(0,0, 200, 100),spriteBatch);
+            fdrawer.DrawText("font", "Food: " + GameData.food + "+" + GameData.FoodGain, new Rectangle(0, 11, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "Wood: " + GameData.wood + "+" + GameData.WoodGain, new Rectangle(0, 22, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "Ores: " + GameData.ores + "+" + GameData.OreGain, new Rectangle(0, 33, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "Villagers: " + GameData.TotalCitizens + "+" + GameData.VillagerGain, new Rectangle(0, 44, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "God anger: " + GameData.godAnger + "+" + GameData.godHunger, new Rectangle(0, 55, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "God hunger: " + GameData.godHunger, new Rectangle(0, 66, 150, 100), spriteBatch);
+            fdrawer.DrawText("font", "Day: " + GameData.day, new Rectangle(0, 77, 150, 100), spriteBatch);
         }
         void DrawPhysicsDebug()
         {
@@ -1039,23 +1076,24 @@ namespace LD43
 
         void DrawTutorialText()
         {
-            fdrawer.DrawText("font", "tutorial", new Rectangle(120, 0, 120, 20), spriteBatch);
-            fdrawer.DrawText("font", "you control a village living under the shadow of a bloodthirsty god. your aim is to lead them to a happy end.", new Rectangle(5, 15, 315, 150), spriteBatch);
-            fdrawer.DrawText("font", "to do so, you will have to balance all the resources at your disposal, mostly produced by your various buildings which can be upgraded.", new Rectangle(5, 55, 315, 180), spriteBatch);
-            fdrawer.DrawText("font", "be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. you wouldn't want him to get angry, would you?", new Rectangle(5, 110, 315, 20), spriteBatch);
+            fdrawer.DrawText("font", "Tutorial", new Rectangle(120, 0, 120, 20), spriteBatch);
+            fdrawer.DrawText("font", "You control a village living under the shadow of a bloodthirsty god. Your aim is to lead them to a happy end.", new Rectangle(5, 15, 315, 150), spriteBatch);
+            fdrawer.DrawText("font", "To do so, you will have to balance all the resources at your disposal, mostly produced by your various buildings which can be upgraded.", new Rectangle(5, 55, 315, 180), spriteBatch);
+            fdrawer.DrawText("font", "Be wary though, if you don't sometimes sacrifice villagers to the god, he will get angry. You wouldn't want him to get angry, would you?", new Rectangle(5, 110, 315, 20), spriteBatch);
         }
 
         void DrawMeter(int length_, Vector2 pos_)
         {
-            for (int i = 0; i < length_; i++)
-            {
-                meterTex.Draw(spriteBatch, new Vector2(pos_.X + i, pos_.Y));
-            }
+            //for (int i = 0; i < length_; i++)
+            //{
+            //    meterTex.Draw(spriteBatch, new Vector2(pos_.X + i, pos_.Y));
+            //}
         }
 
         void DrawClouds(float es_)
         {
             cloudTimer += cloudSpeed * es_;
+            if(cloudTimer >= 320) { cloudTimer -= 320; }
             cloudTex.Draw(spriteBatch, new Vector2(-320 + cloudTimer, 0));
             cloudTex.Draw(spriteBatch, new Vector2(cloudTimer, 0));
         }

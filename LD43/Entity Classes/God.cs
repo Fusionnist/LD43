@@ -35,10 +35,10 @@ namespace LD43
                 {
                     
                     state = GodState.Attacking;
-                    textures.GetTex("attack").Reset();
+                    textures.GetTex("swipe").Reset();
                     GameData.madness += GameData.MadnessGain;
                     if(GameData.madness > 100) { GameData.madness = 100; }
-                    SoundManager.PlayEffect("temp2");
+                    SoundManager.PlayEffect("sacrifice");
                 }
         }
 
@@ -57,8 +57,9 @@ namespace LD43
 
         public override void Update(float elapsedTime_)
         {
-            if(state == GodState.Attacking)
-                if (textures.GetTex("attack").Ended())
+            textures.GetTex("swipe").Update(elapsedTime_);
+            if (state == GodState.Attacking)
+                if (textures.GetTex("swipe").Ended())
                 {
                     GameData.godHunger -= GameData.GodFeed;
                     if(GameData.godHunger < 0) { GameData.godHunger = 0; }
@@ -79,9 +80,9 @@ namespace LD43
         {
             if(state == GodState.Attacking)
             {
-                textures.GetTex("attack").Draw(sb_, target.posman.pos + new Vector2(-20,-20));
+                textures.GetTex("swipe").Draw(sb_, target.posman.pos + new Vector2(-24,-11));
             }
-            base.Draw(sb_, flipH_, flipV_, angle_);
+            //base.Draw(sb_, flipH_, flipV_, angle_);
         }
     }
 }

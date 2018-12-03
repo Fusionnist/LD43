@@ -39,20 +39,20 @@ namespace LD43
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return villageLevel; } }
 
-        public static int GodFeed { get { return day * 2; } }
-        public static int HungerIncrease { get { return day; } }
-        public static int MadnessGain { get { return day * TotalCitizens; } }
-        public static int MadnessLoss { get { return day; } }
+        public static int GodFeed { get { return day * 3; } }
+        public static int HungerIncrease { get { return day * villageLevel; } }
+        public static int MadnessGain { get { return TotalCitizens; } }
+        public static int MadnessLoss { get { return TotalCitizens; } }
 
         public static int mineLevel, churchLevel, forestLevel, fieldsLevel, villageLevel;
         
-        static int ChurchWoodCost { get { return churchLevel * 5; } }
+        static int ChurchWoodCost { get { return churchLevel * 15; } }
         static int FieldsWoodCost { get { return fieldsLevel * 2; } }
         static int MineWoodCost { get { return mineLevel * 3; } }
         static int VillageWoodCost { get { return villageLevel * 4; } }
         static int ForestWoodCost { get { return forestLevel; } }
 
-        static int ChurchOreCost { get { return churchLevel * 2; } }
+        static int ChurchOreCost { get { return churchLevel * 7; } }
         static int FieldsOreCost { get { return fieldsLevel; } }
         static int MineOreCost { get { return mineLevel; } }
         static int VillageOreCost { get { return villageLevel; } }
@@ -159,6 +159,7 @@ namespace LD43
             food += FoodGain;
 
             madness -= MadnessLoss;
+            if(madness < 0) { madness = 0; }
 
             if(godAnger < 0) { godAnger = 0; }
            
@@ -212,12 +213,12 @@ namespace LD43
 
         public static string UpgradeCost(string name_)
         {
-            if (name_ == "field" && fieldsLevel == maxLevel) { return "field is at max level"; }
-            if (name_ == "city" && villageLevel == maxLevel) { return "city is at max level"; }
-            if (name_ == "forest" && forestLevel == maxLevel) { return "forest is at max level"; }
-            if (name_ == "church" && churchLevel == maxLevel) { return "church is at max level"; }
-            if (name_ == "mine" && mineLevel == maxLevel) { return "mine is at max level"; }
-            return "upgrade cost: " + wood +"/" + WoodPerLevel(name_) + " wood and "+ ores + "/" + OresPerLevel(name_)+" ores";
+            if (name_ == "field" && fieldsLevel == maxLevel) { return "Field is at max level"; }
+            if (name_ == "city" && villageLevel == maxLevel) { return "City is at max level"; }
+            if (name_ == "forest" && forestLevel == maxLevel) { return "Forest is at max level"; }
+            if (name_ == "church" && churchLevel == maxLevel) { return "Church is at max level"; }
+            if (name_ == "mine" && mineLevel == maxLevel) { return "Mine is at max level"; }
+            return "Upgrade cost: " + wood +"/" + WoodPerLevel(name_) + " wood and "+ ores + "/" + OresPerLevel(name_)+" ores";
         }
 
         public static void DestroyBuilding()
@@ -232,7 +233,7 @@ namespace LD43
             if (i == 3) { churchLevel = 1; ParticleSystem.CreateInstance(new Vector2(240, 50), "smoke", true, 3); }
             if (i == 4) { fieldsLevel = 1; ParticleSystem.CreateInstance(new Vector2(80, 150), "smoke", true, 3); }
 
-            SoundManager.PlayEffect("temp2");
+            SoundManager.PlayEffect("destroy");
         }
 
         public static void Upgrade(string name_)

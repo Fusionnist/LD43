@@ -119,8 +119,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Content\Audio\build.wav" />
+    <Content Include="Content\Audio\church_victory.wav" />
+    <Content Include="Content\Audio\delevel.wav" />
+    <Content Include="Content\Audio\loss.wav" />
     <Content Include="Content\Audio\MenuTrack.mp3" />
     <Content Include="Content\Audio\PrototypeMusic3.mp3" />
+    <Content Include="Content\Audio\sacrifice.wav" />
     <Content Include="Content\Audio\tinymusic.mp3" />
     <Content Include="Content\Placeholder\bridge.png" />
     <Content Include="Content\Placeholder\buildingStuff.png" />
@@ -129,6 +134,7 @@
     </Content>
     <Content Include="Content\Placeholder\church.png" />
     <Content Include="Content\Placeholder\city.png" />
+    <Content Include="Content\Placeholder\Daytime.png" />
     <Content Include="Content\Placeholder\Font.png" />
     <Content Include="Content\Placeholder\font2.png" />
     <Content Include="Content\Placeholder\food.png" />
@@ -137,6 +143,7 @@
     <Content Include="Content\Placeholder\jump.wav" />
     <Content Include="Content\Placeholder\meter.png" />
     <Content Include="Content\Placeholder\mine.png" />
+    <Content Include="Content\Placeholder\MM.png" />
     <Content Include="Content\Placeholder\moreBuildings.png" />
     <Content Include="Content\Placeholder\phbgs.png" />
     <Content Include="Content\Placeholder\placeholderPause.png">
@@ -174,6 +181,7 @@
     <Content Include="Content\Sprites\GameAssets\Forest.png" />
     <Content Include="Content\Sprites\GameAssets\God Hover STATIC Sprite.png" />
     <Content Include="Content\Sprites\GameAssets\Mine.png" />
+    <Content Include="Content\Sprites\GameAssets\swipe.png" />
     <Content Include="Content\Sprites\GameAssets\Town.png" />
     <Content Include="Content\Xml\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

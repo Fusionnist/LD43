@@ -241,10 +241,10 @@
   <Spritesheet name="defBuildings" source="Sprites/defbuildingsheet">
 
     <Texture name="idle" id="mine">
-      <Frameset amt="1" x="0" y="0" w="53" h="30" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="0" y="0" w="64" h="32" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="farm">
-      <Frameset amt="1" x="128" y="128" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="128" y="128" w="80" h="48" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="bridge">
       <Frameset amt="1" x="64" y="64" w="96" h="48" cx="0" cy="0" delay="0"></Frameset>
@@ -261,11 +261,8 @@
     <Texture name="idle" id="cult">
       <Frameset amt="1" x="72" y="0" w="22" h="18 " cx="0" cy="0" delay="0"></Frameset>
     </Texture>
-    <Texture name="hovered" id="mine">
-      <Frameset amt="1" x="272" y="157" w="45" h="39" cx="0" cy="0" delay="0"></Frameset>
-    </Texture>
-    <Texture name="hovered" id="farm">
-      <Frameset amt="1" x="276" y="113" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="hovered" id="farm" loop="false">
+      <Frameset amt="9" x="208" y="128" w="80" h="48" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
     <Texture name="hovered" id="bridge" loop="false">
       <Frameset amt="9" x="160" y="64" w="96" h="48" cx="0" cy="0" delay="0.1"></Frameset>
@@ -276,26 +273,32 @@
     <Texture name="hovered" id="church" loop="false">
       <Frameset amt="9" x="160" y="0" w="64" h="64" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
-    <Texture name="hovered" id="forest">
-      <Frameset amt="1" x="328" y="199" w="58" h="39" cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="hovered" id="forest" loop="false">
+      <Frameset amt="9" x="0" y="368" w="64" h="80" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
     <Texture name="hovered" id="mine" loop="false">
-      <Frameset amt="9" x="0" y="224" w="53" h="30" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="9" x="0" y="224" w="64" h="32" cx="0" cy="0" delay="0.1"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="mine">
+      <Frameset amt="1" x="0" y="0" w="64" h="32" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="clicked" id="farm">
-      <Frameset amt="1" x="0" y="105" w="87" h="30" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="128" y="128" w="80" h="48" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="clicked" id="bridge">
-      <Frameset amt="1" x="0" y="0" w="97" h="21" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="64" y="64" w="96" h="48" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="clicked" id="city">
-      <Frameset amt="1" x="0" y="61" w="93" h="34" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="0" y="128" w="128" h="66" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="clicked" id="church">
-      <Frameset amt="1" x="0" y="22" w="28" h="39" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="96" y="0" w="64" h="64" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="clicked" id="forest">
-      <Frameset amt="1" x="1" y="153" w="57" h="37" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="0" y="48" w="64" h="80" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clicked" id="cult">
+      <Frameset amt="1" x="72" y="0" w="22" h="18 " cx="0" cy="0" delay="0"></Frameset>
     </Texture>
 
   </Spritesheet>
@@ -374,6 +377,14 @@
       <Frameset amt="12" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
       <Frameset amt="12" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
       <Frameset amt="10" x="0" y="540" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+    </Texture>
+
+  </Spritesheet>
+
+  <Spritesheet name="swipe" source="Sprites/GameAssets/swipe">
+
+    <Texture name="swipe" id="swipe" loop="false">
+      <Frameset amt="14" x="0" y="0" w="48" h="32" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
 
   </Spritesheet>
