@@ -21,7 +21,7 @@ namespace LD43
 {
     class Building : Entity
     {
-        public bool isHovered, wasClicked, release;
+        public bool isHovered, wasHovered, wasClicked, release;
         public string hoveredText;
         public int level;
         float cd, maxCd;
@@ -50,11 +50,15 @@ namespace LD43
             if (!wasClicked)
             {
                 if (isHovered)
-                    currentTex = textures.GetTex("hovered");
+                {
+                    if (!wasHovered) { textures.GetTex("hovered").Reset(); }                 
+                }
                 else
                     currentTex = textures.GetTex("idle");
             }
             base.Update(es_);
+
+            wasHovered = isHovered;
         }
 
         public virtual void Click()
@@ -70,6 +74,8 @@ namespace LD43
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
         {
             base.Draw(sb_, flipH_, flipV_, angle_);
+            if(isHovered && wasHovered)
+            textures.GetTex("hovered").Draw(sb_, posman.pos);
         }
     }
 }

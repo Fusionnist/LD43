@@ -165,6 +165,7 @@
     <Content Include="Content\Sprites\GameAssets\Church.png" />
     <Content Include="Content\Sprites\GameAssets\clouds.png" />
     <Content Include="Content\Sprites\GameAssets\Cult.png" />
+    <Content Include="Content\Sprites\GameAssets\Ending_Chaos_New.png" />
     <Content Include="Content\Sprites\GameAssets\Ending_Church.png" />
     <Content Include="Content\Sprites\GameAssets\Ending_Church_New.png" />
     <Content Include="Content\Sprites\GameAssets\Ending_Destruction_spritesheet.png" />

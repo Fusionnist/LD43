@@ -244,19 +244,19 @@
       <Frameset amt="1" x="0" y="0" w="53" h="30" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="farm">
-      <Frameset amt="1" x="276" y="113" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="128" y="128" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="bridge">
-      <Frameset amt="1" x="277" y="0" w="99" h="23" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="64" y="64" w="96" h="48" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="city">
-      <Frameset amt="1" x="277" y="63" w="95" h="36" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="0" y="128" w="128" h="66" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="church">
-      <Frameset amt="1" x="108" y="0" w="31" h="50" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="96" y="0" w="64" h="64" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="forest">
-      <Frameset amt="1" x="0" y="31" w="60" h="75" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="1" x="0" y="48" w="64" h="80" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
     <Texture name="idle" id="cult">
       <Frameset amt="1" x="72" y="0" w="22" h="18 " cx="0" cy="0" delay="0"></Frameset>
@@ -267,20 +267,20 @@
     <Texture name="hovered" id="farm">
       <Frameset amt="1" x="276" y="113" w="89" h="32  " cx="0" cy="0" delay="0"></Frameset>
     </Texture>
-    <Texture name="hovered" id="bridge">
-      <Frameset amt="1" x="277" y="0" w="99" h="23" cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="hovered" id="bridge" loop="false">
+      <Frameset amt="9" x="160" y="64" w="96" h="48" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
-    <Texture name="hovered" id="city">
-      <Frameset amt="1" x="277" y="63" w="95" h="36" cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="hovered" id="city" loop="false">
+      <Frameset amt="10" x="0" y="256" w="128" h="66" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
-    <Texture name="hovered" id="church">
-      <Frameset amt="1" x="277" y="23" w="30" h="40" cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="hovered" id="church" loop="false">
+      <Frameset amt="9" x="160" y="0" w="64" h="64" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
     <Texture name="hovered" id="forest">
       <Frameset amt="1" x="328" y="199" w="58" h="39" cx="0" cy="0" delay="0"></Frameset>
     </Texture>
-    <Texture name="clicked" id="mine">
-      <Frameset amt="1" x="5" y="213" w="43" h="38" cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="hovered" id="mine" loop="false">
+      <Frameset amt="9" x="0" y="224" w="53" h="30" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
     <Texture name="clicked" id="farm">
       <Frameset amt="1" x="0" y="105" w="87" h="30" cx="0" cy="0" delay="0"></Frameset>
@@ -356,12 +356,13 @@
     
   </Spritesheet>
 
-  <Spritesheet name="endingSheet" source="Sprites/GameAssets/Ending_Destruction_spritesheet">
+  <Spritesheet name="endingSheet" source="Sprites/GameAssets/Ending_Chaos_New">
 
     <Texture name="bg" id="bg" loop="false">
       <Frameset amt="12" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
       <Frameset amt="12" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
-      <Frameset amt="8" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="12" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="7" x="0" y="540" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
 
   </Spritesheet>

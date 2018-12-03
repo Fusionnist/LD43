@@ -145,8 +145,7 @@ namespace LD43
                 new KeyManager(Keys.Up, "up"),
                 new KeyManager(Keys.Down, "down")
             });
-        } //check whatever is plugged in to create input settings
-        
+        } //check whatever is plugged in to create input settings       
 
         protected override void LoadContent()
         {
@@ -195,10 +194,10 @@ namespace LD43
                 new DrawerCollection(
                     new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "defBuildings", "church"),
-                        SpriteSheetCollection.GetTex("idle", "defBuildings", "church"),
+                        SpriteSheetCollection.GetTex("hovered", "defBuildings", "church"),
                         SpriteSheetCollection.GetTex("idle", "defBuildings", "church") },
                     "church"),
-                    new PositionManager(new Vector2(229, 9)),
+                    new PositionManager(new Vector2(217, 8)),
                     new List<Property>(),
                     .1f,
                     "church",
@@ -207,11 +206,11 @@ namespace LD43
             Building field = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "farm"),
-                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "farm"),
-                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "farm") },
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "farm"),
+                        SpriteSheetCollection.GetTex("hovered", "defBuildings", "farm"),
+                        SpriteSheetCollection.GetTex("clicked", "defBuildings", "farm") },
                    "field"),
-                   new PositionManager(new Vector2(43, 132)),
+                   new PositionManager(new Vector2(53, 131)),
                    new List<Property>(),
                    .1f,
                    "field",
@@ -221,7 +220,7 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "defBuildings", "mine"),
-                        SpriteSheetCollection.GetTex("idle", "defBuildings", "mine"),
+                        SpriteSheetCollection.GetTex("hovered", "defBuildings", "mine"),
                         SpriteSheetCollection.GetTex("idle", "defBuildings", "mine") },
                    "mine"),
                    new PositionManager(new Vector2(31, 55)),
@@ -234,10 +233,10 @@ namespace LD43
                new DrawerCollection(
                    new List<TextureDrawer>() {
                         SpriteSheetCollection.GetTex("idle", "defBuildings", "forest"),
-                        SpriteSheetCollection.GetTex("idle", "defBuildings", "forest"),
+                        SpriteSheetCollection.GetTex("hovered", "defBuildings", "forest"),
                         SpriteSheetCollection.GetTex("idle", "defBuildings", "forest") },
                    "forest"),
-                   new PositionManager(new Vector2(0, 123)),
+                   new PositionManager(new Vector2(0, 89)),
                    new List<Property>(),
                    .1f,
                    "forest",
@@ -246,11 +245,11 @@ namespace LD43
             Building city = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "city"),
-                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "city"),
-                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "city") },
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "city"),
+                        SpriteSheetCollection.GetTex("hovered", "defBuildings", "city"),
+                        SpriteSheetCollection.GetTex("clicked", "defBuildings", "city") },
                    "city"),
-                   new PositionManager(new Vector2(217, 124)),
+                   new PositionManager(new Vector2(204, 112)),
                    new List<Property>(),
                    .1f,
                    "city",
@@ -259,11 +258,11 @@ namespace LD43
             Building bridge = new Building(
                new DrawerCollection(
                    new List<TextureDrawer>() {
-                        SpriteSheetCollection.GetTex("idle", "buildingStuff", "bridge"),
-                        SpriteSheetCollection.GetTex("hovered", "moreBuildings", "bridge"),
-                        SpriteSheetCollection.GetTex("clicked", "moreBuildings", "bridge") },
+                        SpriteSheetCollection.GetTex("idle", "defBuildings", "bridge"),
+                        SpriteSheetCollection.GetTex("hovered", "defBuildings", "bridge"),
+                        SpriteSheetCollection.GetTex("clicked", "defBuildings", "bridge") },
                    "bridge"),
-                   new PositionManager(new Vector2(117, 158)),
+                   new PositionManager(new Vector2(111, 133)),
                    new List<Property>(),
                    .1f,
                    "bridge",
@@ -777,7 +776,7 @@ namespace LD43
         {
             if (GameData.mineLevel == 5 && GameData.villageLevel == 5 && GameData.churchLevel == 5 && GameData.fieldsLevel == 5 && GameData.forestLevel == 5)
             {
-                transitionTimer.time = 6f;
+                transitionTimer.time = 7f;
 
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.churchWins;
@@ -787,7 +786,7 @@ namespace LD43
             }
             if (GameData.daysUntilDoom == 0 && GameData.cultExists)
             {
-                transitionTimer.time = 6f;
+                transitionTimer.time = 7f;
 
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.cult;
@@ -798,9 +797,9 @@ namespace LD43
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.starvation;
             }
-            if (GameData.attacks == 10)
+            if (GameData.attacks == 5)
             {
-                transitionTimer.time = 6f;
+                transitionTimer.time = 7f;
 
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.villageDestroyed;

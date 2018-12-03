@@ -12,7 +12,7 @@ namespace LD43
 {
     public static class GameData
     {
-        public static float GameTick = 1f;
+        public static float GameTick = 15f;
 
         public static int TotalCitizens { get { return availableCitizens + citizensOutside; } set { } }
 
