@@ -358,10 +358,21 @@
 
   <Spritesheet name="endingSheet" source="Sprites/GameAssets/Ending_Destruction_spritesheet">
 
-    <Texture name="bg" id="bg">
-      <Frameset amt="12" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
-      <Frameset amt="12" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
-      <Frameset amt="8" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    <Texture name="bg" id="bg" loop="false">
+      <Frameset amt="12" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="12" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="8" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+    </Texture>
+
+  </Spritesheet>
+
+  <Spritesheet name="churchEndingSheet" source="Sprites/GameAssets/Ending_Church_New">
+
+    <Texture name="bg" id="bg" loop="false">
+      <Frameset amt="12" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="12" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="12" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
+      <Frameset amt="10" x="0" y="540" w="320" h="180" cx="0" cy="0" delay="0.1"></Frameset>
     </Texture>
 
   </Spritesheet>

@@ -12,6 +12,8 @@ namespace LD43
 {
     public static class GameData
     {
+        public static float GameTick = 1f;
+
         public static int TotalCitizens { get { return availableCitizens + citizensOutside; } set { } }
 
         public static int priests, availableCitizens, citizensOutside;

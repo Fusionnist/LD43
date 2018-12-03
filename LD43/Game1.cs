@@ -44,7 +44,7 @@ namespace LD43
         TextureDrawer cursorTex, currentBG, meterTex, cloudTex;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
         TextureDrawer goodEnding, destructionEnding, revoltEnding, starvationEnding, cultEnding;
-        TextureDrawer gameBg, mountains, clouds, endingAnim;
+        TextureDrawer gameBg, mountains, clouds, aendingAnim, gded;
 
         FontDrawer fdrawer;
 
@@ -89,8 +89,8 @@ namespace LD43
             CreateInputProfile();
             CreateScenes();
 
-            transitionTimer = new MonoGame.FZT.Assets.Timer(1f);
-            gameTick = new MonoGame.FZT.Assets.Timer(12f);
+            transitionTimer = new MonoGame.FZT.Assets.Timer(2f);
+            gameTick = new MonoGame.FZT.Assets.Timer(GameData.GameTick);
 
             PhysicsManager.CreateWorld();
             PhysicsManager.SetUnitRatio(64);
@@ -115,7 +115,7 @@ namespace LD43
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
-            cloudSpeed = 2;
+            cloudSpeed = 3;
             cloudTimer = 0;
         }
         void CreateScenes()
@@ -169,10 +169,11 @@ namespace LD43
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/hurty"), "temp1");
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/jump"), "temp2");
 
-            gameBg = SpriteSheetCollection.GetTex("idle", "buttons", "question");
-            clouds = SpriteSheetCollection.GetTex("idle", "buttons", "question");
-            mountains = SpriteSheetCollection.GetTex("idle", "buttons", "question");
-            endingAnim = SpriteSheetCollection.GetTex("idle", "buttons", "question");
+            gameBg = SpriteSheetCollection.GetTex("bg", "gameBgs", "bg");
+            clouds = SpriteSheetCollection.GetTex("clouds", "gameBgs", "bg");
+            mountains = SpriteSheetCollection.GetTex("fg", "gameBgs", "bg");
+            aendingAnim = SpriteSheetCollection.GetTex("bg", "endingSheet", "bg");
+            gded = SpriteSheetCollection.GetTex("bg", "churchEndingSheet", "bg");
 
             SoundManager.PlaySong("main");
 
@@ -407,9 +408,13 @@ namespace LD43
             cursor.Update();
             UpdateSwitch(es);
             ReadCommandQueue();
-            if(currentState == GameState.Game && nextSubState != GameSubState.End)
+            if(currentState == GameState.Game && nextSubState != GameSubState.End && !transitioning)
                 HandleEnding();
             EntityCollection.RecycleAll();
+
+            //UGLY CODE
+            aendingAnim.Update(es);
+            gded.Update(es);
 
             base.Update(gameTime);
         }
@@ -515,7 +520,7 @@ namespace LD43
                     {
                         case GameSubState.Game: //GAME-GAME
                             currentUI = gameUI;
-                            currentBG = gameBG;
+                            currentBG = gameBg;
                             break;
 
                         case GameSubState.Pause: //GAME-MAIN
@@ -540,6 +545,7 @@ namespace LD43
 
                         case GameSubState.End: //MENU-MAIN
                             currentUI = endgameUI;
+                            transitionTimer.time = 2f;
                             switch (ending)
                             {
                                 case GameEnding.churchWins:
@@ -738,15 +744,18 @@ namespace LD43
         }
         void UpdateMenu(float es_)
         {
-            currentUI.UpdateWithMouse(es_, cursor, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
-
-            if (currentUI.HoveredButton != null)
-                HandleButtonTooltips();
-            else
+            if (!transitioning)
             {
-                if (changeTooltipText)
-                { tooltipText = ""; }
-            }
+                currentUI.UpdateWithMouse(es_, cursor, scenes.CurrentScene.ToVirtualPos(cursor.RawPos()));
+
+                if (currentUI.HoveredButton != null)
+                    HandleButtonTooltips();
+                else
+                {
+                    if (changeTooltipText)
+                    { tooltipText = ""; }
+                }
+            }            
         } //update the clicky things        
         void CreateVillager(string type_)
         {
@@ -768,23 +777,34 @@ namespace LD43
         {
             if (GameData.mineLevel == 5 && GameData.villageLevel == 5 && GameData.churchLevel == 5 && GameData.fieldsLevel == 5 && GameData.forestLevel == 5)
             {
+                transitionTimer.time = 6f;
+
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.churchWins;
+                gded.Reset();
+
+                
             }
             if (GameData.daysUntilDoom == 0 && GameData.cultExists)
             {
+                transitionTimer.time = 6f;
+
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.cult;
+                aendingAnim.Reset();
             }
             if (GameData.villageHealth == 0)
             {
                 ToggleState(GameState.Menu, GameSubState.End);
                 ending = GameEnding.starvation;
             }
-            if (GameData.revolts == 10)
+            if (GameData.attacks == 10)
             {
+                transitionTimer.time = 6f;
+
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.revolt;
+                ending = GameEnding.villageDestroyed;
+                aendingAnim.Reset();
             }
         }
 
@@ -913,12 +933,25 @@ namespace LD43
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             //DRAW
-            foreach (var ent in EntityCollection.GetGroup("god"))
-                ent.Draw(spriteBatch);
+            mountains.Draw(spriteBatch, Vector2.Zero);
+            //foreach (var ent in EntityCollection.GetGroup("god"))
+            //    ent.Draw(spriteBatch);
             foreach (var ent in EntityCollection.GetGroup("villagers"))
                 ent.Draw(spriteBatch);
             foreach (var ent in EntityCollection.GetGroup("buildings"))
                 ent.Draw(spriteBatch);
+
+            if(nextSubState == GameSubState.End)
+            {
+                if(ending == GameEnding.churchWins)
+                { gded.Draw(spriteBatch, Vector2.Zero); }
+               
+                if (ending == GameEnding.cult)
+                { aendingAnim.Draw(spriteBatch, Vector2.Zero); }
+
+                if (ending == GameEnding.villageDestroyed)
+                { aendingAnim.Draw(spriteBatch, Vector2.Zero); }
+            }
 
             ParticleSystem.DrawAll(spriteBatch);
 
@@ -976,11 +1009,11 @@ namespace LD43
             if(transitioning)
             if (transitionIN)
             {
-                GraphicsDevice.Clear(new Color(0, 0, 0, (1 - transitionTimer.timer)));
+                GraphicsDevice.Clear(new Color(0, 0, 0, (transitionTimer.time - transitionTimer.timer)/transitionTimer.time));
             }
             else
             {
-                GraphicsDevice.Clear(new Color(0, 0, 0, transitionTimer.timer));
+                GraphicsDevice.Clear(new Color(0, 0, 0, transitionTimer.timer/transitionTimer.time));
             }
             spriteBatch.End();
         } //draw to overlay scene
