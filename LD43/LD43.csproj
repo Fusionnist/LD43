@@ -159,6 +159,18 @@
     <Content Include="Content\Sprites\defbuildingsheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\GameAssets\Background.png" />
+    <Content Include="Content\Sprites\GameAssets\Bridge.png" />
+    <Content Include="Content\Sprites\GameAssets\Church.png" />
+    <Content Include="Content\Sprites\GameAssets\clouds.png" />
+    <Content Include="Content\Sprites\GameAssets\Cult.png" />
+    <Content Include="Content\Sprites\GameAssets\Ending_Destruction_spritesheet.png" />
+    <Content Include="Content\Sprites\GameAssets\Farm.png" />
+    <Content Include="Content\Sprites\GameAssets\Foreground Mountains.png" />
+    <Content Include="Content\Sprites\GameAssets\Forest.png" />
+    <Content Include="Content\Sprites\GameAssets\God Hover STATIC Sprite.png" />
+    <Content Include="Content\Sprites\GameAssets\Mine.png" />
+    <Content Include="Content\Sprites\GameAssets\Town.png" />
     <Content Include="Content\Xml\Entities.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

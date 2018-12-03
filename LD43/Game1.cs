@@ -44,6 +44,7 @@ namespace LD43
         TextureDrawer cursorTex, currentBG, meterTex;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
         TextureDrawer goodEnding, destructionEnding, revoltEnding, starvationEnding, cultEnding;
+        TextureDrawer gameBg, mountains, clouds, endingAnim;
 
         FontDrawer fdrawer;
 
@@ -163,6 +164,11 @@ namespace LD43
             SoundManager.AddSong(Content.Load<Song>("Audio/MenuTrack"), "main");
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/hurty"), "temp1");
             SoundManager.AddEffect(Content.Load<SoundEffect>("Placeholder/jump"), "temp2");
+
+            gameBg = SpriteSheetCollection.GetTex("idle", "buttons", "question");
+            clouds = SpriteSheetCollection.GetTex("idle", "buttons", "question");
+            mountains = SpriteSheetCollection.GetTex("idle", "buttons", "question");
+            endingAnim = SpriteSheetCollection.GetTex("idle", "buttons", "question");
 
             SoundManager.PlaySong("main");
 
@@ -756,15 +762,10 @@ namespace LD43
         }   
         void HandleEnding()
         {
-            if(GameData.attacks == 10)
+            if (GameData.mineLevel == 5 && GameData.villageLevel == 5 && GameData.churchLevel == 5 && GameData.fieldsLevel == 5 && GameData.forestLevel == 5)
             {
                 ToggleState(GameState.Menu, GameSubState.End);
-                ending = GameEnding.villageDestroyed;
-
-                if(GameData.mineLevel == 10 && GameData.villageLevel == 10 && GameData.churchLevel == 10 && GameData.fieldsLevel == 10 && GameData.forestLevel == 10)
-                {
-                    ending = GameEnding.churchWins;
-                }
+                ending = GameEnding.churchWins;
             }
             if (GameData.daysUntilDoom == 0 && GameData.cultExists)
             {

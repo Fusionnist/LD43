@@ -22,6 +22,7 @@ namespace LD43
 
         public static int revolts, attacks;
 
+        public static bool GodAppeared;
 
         public static int madness;
 
@@ -36,7 +37,7 @@ namespace LD43
         public static int Holiness { get { return churchLevel; } }
         public static int VillagerGain { get { return villageLevel; } }
 
-        public static int GodFeed { get { return 10; } }
+        public static int GodFeed { get { return day * 2; } }
         public static int HungerIncrease { get { return day; } }
         public static int MadnessGain { get { return day * TotalCitizens; } }
         public static int MadnessLoss { get { return day; } }
@@ -55,7 +56,7 @@ namespace LD43
         static int VillageOreCost { get { return villageLevel; } }
         static int ForestOreCost { get { return forestLevel; } }
 
-        public static int maxLevel = 10;
+        public static int maxLevel = 5;
 
 
         public static List<LinkedVector> path = new List<LinkedVector>();
@@ -74,6 +75,8 @@ namespace LD43
 
         public static void Initialize()
         {
+            GodAppeared = false;
+
             day = 1;
 
             priests = 1;
@@ -156,8 +159,7 @@ namespace LD43
             madness -= MadnessLoss;
 
             if(godAnger < 0) { godAnger = 0; }
-
-
+           
             food -= TotalCitizens;
 
             godAnger += godHunger;

@@ -342,6 +342,31 @@
 
   </Spritesheet>
 
+  <Spritesheet name="gameBgs" source="Sprites/GameAssets/Background">
+    
+    <Texture name="bg" id="bg">
+      <Frameset amt="1" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+    <Texture name="clouds" id="bg">
+      <Frameset amt="1" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    <Texture name="fg" id="bg">
+      <Frameset amt="1" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0" ></Frameset>
+    </Texture>
+    
+  </Spritesheet>
+
+  <Spritesheet name="endingSheet" source="Sprites/GameAssets/Ending_Destruction_spritesheet">
+
+    <Texture name="bg" id="bg">
+      <Frameset amt="12" x="0" y="0" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="12" x="0" y="180" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+      <Frameset amt="8" x="0" y="360" w="320" h="180" cx="0" cy="0" delay="0"></Frameset>
+    </Texture>
+
+  </Spritesheet>
+
+
   <Spritesheet name="buttons" source="Sprites/buttons">
 
     <Texture name="idle" id="play">
@@ -408,6 +433,6 @@
       <Frameset amt="1" x="64" y="96" w="32" h="16" cx="0" cy="0" delay="0" ></Frameset>
     </Texture>
 
-  </Spritesheet>
-     
+  </Spritesheet>     
+  
 </Spritesheets>
