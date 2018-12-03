@@ -147,6 +147,8 @@ namespace LD43
 
         public static void Tick()
         {
+            day++;
+
             ores += OreGain;
             wood += WoodGain;
             food += FoodGain;
