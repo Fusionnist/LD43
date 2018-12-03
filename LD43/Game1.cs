@@ -41,7 +41,7 @@ namespace LD43
         UISystem currentUI;
         UISystem mainUI, tutorialUI, pauseUI, endgameUI, gameUI;
 
-        TextureDrawer cursorTex, currentBG, meterTex;
+        TextureDrawer cursorTex, currentBG, meterTex, cloudTex;
         TextureDrawer gameBG, mainMenuBG, endBG, tutorialBG, pauseBG, icons;
         TextureDrawer goodEnding, destructionEnding, revoltEnding, starvationEnding, cultEnding;
         TextureDrawer gameBg, mountains, clouds, endingAnim;
@@ -60,6 +60,7 @@ namespace LD43
         bool switchedState, changeTooltipText; // set this to false if you want to have a tooltip triggered in UpdateGame
         string tooltipText;
         Vector2 tooltipPos;
+        float cloudSpeed, cloudTimer;
         
         public Game1()
         {
@@ -101,11 +102,11 @@ namespace LD43
 
             fdrawer = new FontDrawer();
             List<TextureDrawer> font = new List<TextureDrawer>();
-            string junk = "abcdefghijklmnopqrstuvwxyz\".,;:?!'\"][-+/\\^&é0123456789";
+            string junk = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\".,;:?!'\"][-+/\\^&é0123456789";
             Texture2D tex = Content.Load<Texture2D>("Placeholder/font2");
             for (int i = 0; i < junk.Length; i++)
             {
-                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(8 * i, 0, 8, 11), new Point(0, 0)), null, junk[i].ToString(), null, null));
+                font.Add(new TextureDrawer(tex, new TextureFrame(new Rectangle(8 * i, 0, 8, 10), new Point(0, 0)), null, junk[i].ToString(), null, null));
             }
             fdrawer.fonts.Add(new DrawerCollection(font, "font"));
             tooltipText = "";
@@ -114,6 +115,8 @@ namespace LD43
 
             currentUI = mainUI;
             currentBG = mainMenuBG;
+            cloudSpeed = 2;
+            cloudTimer = 0;
         }
         void CreateScenes()
         {
@@ -155,6 +158,7 @@ namespace LD43
             cursorTex = SpriteSheetCollection.GetTex("static", "PlaceholderSheet", "cursor");
             icons = SpriteSheetCollection.GetTex("idle", "buttons", "question");
             meterTex = new TextureDrawer(Content.Load<Texture2D>("Placeholder/meter"));
+            cloudTex = new TextureDrawer(Content.Load<Texture2D>("Sprites/clouds"));
 
             LoadBGs();
             CreateUI();
@@ -838,7 +842,7 @@ namespace LD43
         {
             GraphicsDevice.Clear(Color.CornflowerBlue); 
             DrawScenes();
-            DrawSwitch();
+            DrawSwitch((float)gameTime.ElapsedGameTime.TotalSeconds);
             //draw to buffer
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             GraphicsDevice.SetRenderTarget(null);
@@ -848,7 +852,7 @@ namespace LD43
             spriteBatch.End();
             base.Draw(gameTime);
         } //draw main scene to null target
-        void DrawSwitch()
+        void DrawSwitch(float es_)
         {
             //draw BG
             scenes.SetupScene(spriteBatch, GraphicsDevice, "base");
@@ -863,11 +867,13 @@ namespace LD43
                     switch (currentSubState)
                     {
                         case GameSubState.Game:
+                            DrawClouds(es_);
                             scenes.DrawScene(spriteBatch, "game");
                             scenes.DrawScene(spriteBatch, "menu");
                             break;
 
                         case GameSubState.Pause:
+                            DrawClouds(es_);
                             scenes.DrawScene(spriteBatch, "game");
                             scenes.DrawScene(spriteBatch, "menu");
                             break;
@@ -1013,6 +1019,13 @@ namespace LD43
             {
                 meterTex.Draw(spriteBatch, new Vector2(pos_.X + i, pos_.Y));
             }
+        }
+
+        void DrawClouds(float es_)
+        {
+            cloudTimer += cloudSpeed * es_;
+            cloudTex.Draw(spriteBatch, new Vector2(-320 + cloudTimer, 0));
+            cloudTex.Draw(spriteBatch, new Vector2(cloudTimer, 0));
         }
     }
 }

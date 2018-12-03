@@ -156,6 +156,7 @@
     <Content Include="Content\Screens\endings.png" />
     <Content Include="Content\Sprites\attackanimation.png" />
     <Content Include="Content\Sprites\buttons.png" />
+    <Content Include="Content\Sprites\clouds.png" />
     <Content Include="Content\Sprites\defbuildingsheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
